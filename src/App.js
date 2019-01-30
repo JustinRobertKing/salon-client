@@ -28,7 +28,7 @@ class App extends Component {
     if(token){
       console.log('token found in LS', token);
       // There is a token in localStorage. Try to validate it!
-      axios.post(SERVER_URL + '/auth/me/from/token', {
+      axios.get(SERVER_URL + '/auth/current/user', {
         headers: { 'Authorization': `Bearer ${token}` }
       })
       .then(response => {
@@ -48,7 +48,7 @@ class App extends Component {
     }
     else {
       console.log('No token was found');
-      localStorage.removeItem('mernToken');
+      // localStorage.removeItem('mernToken');
       this.setState({
         user: null
       });
