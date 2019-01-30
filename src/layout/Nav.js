@@ -4,10 +4,8 @@ import logo from '../logo.svg';
 
 class Nav extends Component {
   handleLogout = (e) => {
-    console.log('logging out...');
     e.preventDefault();
-    localStorage.removeItem('mernToken');
-    this.props.updateUser();
+    // TODO: REMOVE LS TOKEN; UPDATE PARENT STATE
   }
 
   render() {
