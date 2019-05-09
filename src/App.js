@@ -27,7 +27,7 @@ class App extends Component {
   }
 
   getUser = () => {
-    // TODO: SEE IF THERE'S A TOKEN
+    // SEE IF THERE'S A TOKEN
     let token = localStorage.getItem('serverToken');
     if (token) {
       axios.post(`${SERVER_URL}/auth/current/user`, {
@@ -57,7 +57,7 @@ class App extends Component {
             <Nav user={this.state.user} resetUser={this.resetUser} />
             <Route exact path="/" component={Home} />
             <Route path="/login" component={
-              () => (<Login user={this.state.user} />)
+              () => (<Login user={this.state.user} getUser={this.getUser} />)
             } />
             <Route path="/signup" component={
               () => (<Signup user={this.state.user} getUser={this.getUser} />)

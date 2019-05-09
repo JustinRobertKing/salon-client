@@ -18,7 +18,17 @@ class Login extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    // TODO: SEND DATA TO SERVER
+    // SEND DATA TO SERVER
+    axios.post(`${SERVER_URL}/auth/login`, this.state)
+    .then(response => {
+      // Take the token from the response and set it in local storage
+      localStorage.setItem('serverToken', response.data.token);
+      // Update the user state info (in App.js)
+      this.props.getUser()
+    })
+    .catch(error => {
+      console.log('error', error)
+    })
   }
 
   render() {

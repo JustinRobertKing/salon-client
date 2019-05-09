@@ -22,10 +22,8 @@ class Signup extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     // SEND DATA TO SERVER
-    console.log(this.state)
     axios.post(`${SERVER_URL}/auth/signup`, this.state)
     .then(response => {
-      console.log('Success', response);
       // Set response.data.token to local storage
       localStorage.setItem('serverToken', response.data.token);
       // Update the user in parent component

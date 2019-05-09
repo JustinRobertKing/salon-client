@@ -5,7 +5,7 @@ import logo from '../logo.svg';
 class Nav extends Component {
   handleLogout = (e) => {
     e.preventDefault();
-    // TODO: REMOVE LS TOKEN; UPDATE PARENT STATE
+    // REMOVE LS TOKEN; UPDATE PARENT STATE
     localStorage.removeItem('serverToken')
     this.props.resetUser()
   }
