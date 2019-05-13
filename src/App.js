@@ -55,16 +55,16 @@ class App extends Component {
         <Router>
           <div className="container">
             <Nav user={this.state.user} resetUser={this.resetUser} />
-            <Route exact path="/" component={Home} />
-            <Route path="/login" component={
-              () => (<Login user={this.state.user} getUser={this.getUser} />)
-            } />
-            <Route path="/signup" component={
-              () => (<Signup user={this.state.user} getUser={this.getUser} />)
-            } />
-            <Route path="/profile" component={
-              () => (<Profile user={this.state.user} />)
-            } />
+	            <Route exact path="/" component={Home} />
+	            <Route path="/login" component={
+	              () => (<Login user={this.state.user} getUser={this.getUser} />)
+	            } />
+	            <Route path="/signup" component={
+	              () => (<Signup user={this.state.user} getUser={this.getUser} />)
+	            } />
+	            <Route path="/profile" component={
+	              () => (<Profile user={this.state.user} />)
+	            } />
           </div>
         </Router>
         <Footer />

@@ -9,19 +9,24 @@ class Signup extends Component {
   constructor(props){
     super(props);
     this.state = {
-      name: '',
+      firstname: '',
+      lastname: '',
       email: '',
-      password: ''
+      password: '',
+      referral: '',
+      phone: '',
+      stylist: false
+
     };
   }
 
-  handleFirstnameChange = (e) => { this.setState({ name: e.target.value }); }
+  handleFirstnameChange = (e) => { this.setState({ firstname: e.target.value }); }
 
-  handleLastnameChange = (e) => { this.setState({ name: e.target.value }); }
+  handleLastnameChange = (e) => { this.setState({ lastname: e.target.value }); }
 
-  handleReferralChange = (e) => { this.setState({ name: e.target.value }); }
+  handleReferralChange = (e) => { this.setState({ referral: e.target.value }); }
 
-  handlePhoneChange = (e) => { this.setState({ name: e.target.value }); }
+  handlePhoneChange = (e) => { this.setState({ phone: e.target.value }); }
 
   handleEmailChange = (e) => { this.setState({ email: e.target.value }); }
 
@@ -49,7 +54,7 @@ class Signup extends Component {
     return(
     	<div>
 	    	<h2>Create Account</h2>
-	    	<Form>
+	    	<Form onSubmit={this.handleSubmit}>
 				{/* referal code */}
 					<FormGroup>
 	        	<Label for="referral">Referral code</Label>
@@ -85,8 +90,8 @@ class Signup extends Component {
 					<FormGroup> 
 	          <Label for="exampleCheckbox">Account type</Label>
 	          <div>
-	            <CustomInput type="radio" id="exampleCustomInline" label="Client" inline />
-	            <CustomInput type="radio" id="exampleCustomInline2" label="Stylist" inline />
+	            <CustomInput type="radio" id="accountType" label="Client" value="false" name="stylist" inline />
+	            <CustomInput type="radio" id="accountType" label="Stylist" value="true" name="stylist" inline />
 	          </div>
 	        </FormGroup>
 				{/* submit button */}
