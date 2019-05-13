@@ -11,6 +11,7 @@ class Profile extends Component {
             <h4>{this.props.user.email}</h4>
             <hr />
             <Client />
+            <hr />
             <Stylist />
           </div>
         );

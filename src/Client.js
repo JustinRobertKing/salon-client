@@ -6,11 +6,11 @@ class Client extends Component {
 		return (
 			<div>
 				Client Profile
+
 				<ConsultationForm />
 			</div>
 		)
 	}
-
 }
 
 export default Client
