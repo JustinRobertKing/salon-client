@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Client from './Client'
 
 class Profile extends Component {
   render() {
@@ -7,6 +8,7 @@ class Profile extends Component {
           <div>
             <h2>Hello again, {this.props.user.name}!</h2>
             <h4>Your email is {this.props.user.email}</h4>
+            <Client />
           </div>
         );
     }
