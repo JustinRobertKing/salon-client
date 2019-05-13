@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { connect } from 'react-redux'
 import axios from 'axios';
 import SERVER_URL from './constants/server';
 import './App.css';
@@ -73,4 +74,12 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    cart: state.cart,
+    wishlist: state.wishlist
+  }
+}
+
+// export default connect(mapStateToProps)(App)
+export default App
