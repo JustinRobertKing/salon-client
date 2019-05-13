@@ -31,7 +31,9 @@ class Nav extends Component {
     return(
         <div>
           <nav className="nav">
-            <Link to="/">Home</Link>
+            <span>
+            	<Link to="/">Home</Link>
+            </span>
             {links}
           </nav>
           <header className="App-header">
