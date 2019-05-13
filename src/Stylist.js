@@ -7,6 +7,7 @@ class Stylist extends Component {
 		return (
 			<div>
 				Stylist Profile
+				<Display />
 			</div>
 		)
 	}
