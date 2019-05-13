@@ -3,10 +3,39 @@ import { Card, Button, CardTitle, CardText  } from 'reactstrap';
 
 class Home extends Component {
   render() {
+	
+	{/*
+    			if statement - 
+    				check if they have an appointment booked.  
+    						If yes
+    							draw the show scheduled appointment component
+    						if no 
+			    				check if they have an approved consultation
+			    						if yes 
+			    							draw component to schedule the appointment
+			    						if no
+			    							check if they have a consultation pending
+			    								if yes
+			    									show the edit consultation box
+			    								if no
+			    									draw start consultation button
+    		*/}
+	  let mainContext
+
+	   if (this.props.user){
+	   	console.log('PROPS USER TRUE DUDE')
+	   		mainContext = (
+	   			
+						<div><h1>THIS WORKED</h1></div>
+					
+	   		)
+	   }
+
     return(
     	<div>
        		<Button color="primary" size="lg" block>Start Consultation</Button>
        		<br />
+       		{mainContext}
        		<h3>Pending:</h3>
        		<Card body inverse style={{ backgroundColor: '#333', borderColor: '#333' }}>
 		        <CardTitle>Your consultation with Catherine:</CardTitle>
@@ -22,8 +51,6 @@ class Home extends Component {
 		      </Card>
        		<br />
        		<br />
-
-
         </div>
       );
   }
