@@ -35,7 +35,7 @@ class Nav extends Component {
             {links}
           </nav>
           <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
+            <h6 className="welcome">Welcome, Firstname </h6>
           </header>
         </div>
       );
