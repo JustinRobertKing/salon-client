@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import SERVER_URL from '../constants/server';
+import { Button, Form, FormGroup, Label, Input, FormText, CustomInput } from 'reactstrap';
+
 
 class Signup extends Component {
   constructor(props){
@@ -13,7 +15,13 @@ class Signup extends Component {
     };
   }
 
-  handleNameChange = (e) => { this.setState({ name: e.target.value }); }
+  handleFirstnameChange = (e) => { this.setState({ name: e.target.value }); }
+
+  handleLastnameChange = (e) => { this.setState({ name: e.target.value }); }
+
+  handleReferralChange = (e) => { this.setState({ name: e.target.value }); }
+
+  handlePhoneChange = (e) => { this.setState({ name: e.target.value }); }
 
   handleEmailChange = (e) => { this.setState({ email: e.target.value }); }
 
@@ -39,22 +47,53 @@ class Signup extends Component {
       return (<Redirect to="/profile" />);
     }
     return(
-        <div>
-          <h2>Signup as a new user</h2>
-          <form onSubmit={this.handleSubmit}>
-            <div>
-              <input name="Name" placeholder="What is your name?" value={this.state.name} onChange={this.handleNameChange} />
-            </div>
-            <div>
-              <input name="Email" placeholder="What is your email?" value={this.state.email} onChange={this.handleEmailChange} />
-            </div>
-            <div>
-              <input name="Password" type="password" value={this.state.password} onChange={this.handlePasswordChange} />
-            </div>
-            <input type="submit" value="Sign Me Up!" className="button" />
-          </form>
-        </div>
-      );
+    	<div>
+	    	<h2>Create Account</h2>
+	    	<Form>
+				{/* referal code */}
+					<FormGroup>
+	        	<Label for="referral">Referral code</Label>
+	        	<Input type="text" name="referral" id="referral" placeholder="" value={this.state.referral} onChange={this.handleReferralChange}/>
+	        </FormGroup>
+	    	{/* first name */}
+		    	<FormGroup>
+	        	<Label for="firstname">First name</Label>
+	        	<Input type="text" name="firstname" id="firstname" placeholder="" value={this.state.firstname} onChange={this.handleFirstnameChange}/>
+	        </FormGroup>
+				{/* last name */}
+					<FormGroup>
+	        	<Label for="lastname">Last name</Label>
+	        	<Input type="text" name="lastname" id="lastname" placeholder="" value={this.state.lastname} onChange={this.handleLastnameChange}/>
+	        </FormGroup>
+	      {/* last name */}
+					<FormGroup>
+	        	<Label for="lastname">Phone number</Label>
+	        	<Input type="text" name="phone" id="phone" placeholder="" value={this.state.phone} onChange={this.handlePhoneChange}/>
+	        </FormGroup>
+		 		{/* email */}
+			    <FormGroup>
+	        	<Label for="exampleEmail">Email</Label>
+	        	<Input type="email" name="email" id="exampleEmail" placeholder="" value={this.state.email} onChange={this.handleEmailChange}/>
+			    </FormGroup>
+				{/* password */}
+			    <FormGroup>
+	        	<Label for="examplePassword">Password</Label>
+	        	<Input type="password" name="password" id="examplePassword" placeholder="" value={this.state.password} onChange={this.handlePasswordChange}/>
+			    </FormGroup>
+				{/* stylist or client  radio */}
+				{/*based on the referal code, hide this, and make the selection for them*/}
+					<FormGroup> 
+	          <Label for="exampleCheckbox">Account type</Label>
+	          <div>
+	            <CustomInput type="radio" id="exampleCustomInline" label="Client" inline />
+	            <CustomInput type="radio" id="exampleCustomInline2" label="Stylist" inline />
+	          </div>
+	        </FormGroup>
+				{/* submit button */}
+		    	<Button>Submit</Button>
+		    </Form>
+      </div>
+    );
   }
 }
 
