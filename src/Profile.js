@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import Client from './Client'
+import Stylist from './Stylist'
 
 class Profile extends Component {
   render() {
     if(this.props.user){
       return (
           <div>
-            <h2>Hello again, {this.props.user.name}!</h2>
-            <h4>Your email is {this.props.user.email}</h4>
+            <h2>{this.props.user.name}</h2>
+            <h4>{this.props.user.email}</h4>
+            <hr />
             <Client />
+            <Stylist />
           </div>
         );
     }

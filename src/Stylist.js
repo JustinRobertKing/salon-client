@@ -5,7 +5,7 @@ class Stylist extends Component {
 	render() {
 		return (
 			<div>
-				<ConsultationForm />
+				Stylist Profile
 			</div>
 		)
 	}

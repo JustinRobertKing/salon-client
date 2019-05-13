@@ -5,6 +5,7 @@ class Client extends Component {
 	render() {
 		return (
 			<div>
+				Client Profile
 				<ConsultationForm />
 			</div>
 		)
