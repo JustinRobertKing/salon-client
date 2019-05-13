@@ -18,6 +18,9 @@ class Profile extends Component {
             <Client />
             <hr />
             <Stylist />
+            <br />
+            <br />
+            <br />
           </div>
         );
     }

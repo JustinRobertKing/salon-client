@@ -2,12 +2,13 @@ import React, { Component } from 'react'
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
 class ConsultationForm extends Component {
+	
 	render() {
 		return (
 			 <Form>
-				<FormGroup>
+				{/*<FormGroup>
           <Label for="exampleFile">File</Label>
-          <Input type="file" name="file" id="exampleFile" />
+          <Input type="file" name="file" id="exampleFile" value />
           <FormText color="muted">
             Current hair photos
           </FormText>
@@ -17,7 +18,7 @@ class ConsultationForm extends Component {
           <FormText color="muted">
             Dream hair photos
           </FormText>
-        </FormGroup>
+        </FormGroup>*/}
         <FormGroup>
           <Label for="exampleText">Text Area</Label>
           <Input type="textarea" name="text" id="exampleText" />
