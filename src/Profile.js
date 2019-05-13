@@ -7,8 +7,13 @@ class Profile extends Component {
     if(this.props.user){
       return (
           <div>
-            <h2>{this.props.user.name}</h2>
-            <h4>{this.props.user.email}</h4>
+            <h4>firstname: {this.props.user.firstname}</h4>
+            <h4>lastname: {this.props.user.lastname}</h4>
+            <h4>referral: {this.props.user.referral}</h4>
+            <h4>phone: {this.props.user.phone}</h4>
+            <h4>email: {this.props.user.email}</h4>
+            <h4>stylist: {this.props.user.stylist}</h4>
+
             <hr />
             <Client />
             <hr />
