@@ -64,3 +64,36 @@ nav a:hover {
 .container {
 	
 }
+.weekContainer{
+	/*max-height:100%;*/
+	height: 82vh;
+	/*border:1px solid blue;*/
+
+}
+.weekRow {
+	/*border:1px solid red;*/
+	height:12vh;
+	/*margin-top:.5vh;*/
+}
+.weekRow .card-header{
+	padding:.1rem 1rem;
+	border-bottom: 0;
+}
+.weekRow .card{
+	border:1px solid green;
+}
+.sideways {
+	transform:rotate(-90deg);
+}
+.row .col {
+	padding:0;
+	/*background-color:blue;*/
+}
+
+.weekRow .card-body{
+	padding: 0;
+}
+.hourCell{
+	background-color: hotpink;
+	height: 4rem;
+}
