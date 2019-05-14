@@ -29,7 +29,6 @@ class Display extends Component {
     e.preventDefault();
     console.log('HERE - handle submit', this.state)
     let token = localStorage.getItem('serverToken');
-    console.log(token)
     // SEND DATA TO SERVER
     axios.post(`${SERVER_URL}/consultation/display`, this.state, {
       headers: {
