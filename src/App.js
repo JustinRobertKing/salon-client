@@ -10,7 +10,7 @@ import Login from './auth/Login';
 import Nav from './layout/Nav';
 import Profile from './Profile';
 import Signup from './auth/Signup';
-import Week from './schedule/Week';
+import Week from './Schedule/Week';
 
 class App extends Component {
   constructor(props){
@@ -22,6 +22,7 @@ class App extends Component {
 
   componentDidMount = () => {
     // GET USER INFO
+    this.getUser()
   }
 
   resetUser = () => {
@@ -32,7 +33,7 @@ class App extends Component {
     // SEE IF THERE'S A TOKEN
     let token = localStorage.getItem('serverToken');
     if (token) {
-      axios.post(`${SERVER_URL}/auth/current/user`, {
+      axios.post(`${SERVER_URL}/auth/current/user`, {}, {
         headers: {
           'Authorization' : `Bearer ${token}`
         }
@@ -61,11 +62,9 @@ class App extends Component {
         		<Route path="/" exact component={
 	              () => (<Home user={this.state.user} getUser={this.getUser} />)
 	            } />
-
 	            <Route path="/schedule"  component={
 	              () => (<Week user={this.state.user} getUser={this.getUser} />)
 	            } />
-
 	            <Route path="/login" component={
 	              () => (<Login user={this.state.user} getUser={this.getUser} />)
 	            } />

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import ConsultationForm from './Consultation/ConsultationForm'
 import Display from './Consultation/Display'
 
 class Stylist extends Component {
@@ -7,6 +6,7 @@ class Stylist extends Component {
 		return (
 			<div>
 				Stylist Profile
+				<Display />
 			</div>
 		)
 	}
