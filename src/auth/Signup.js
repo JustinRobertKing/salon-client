@@ -52,7 +52,7 @@ class Signup extends Component {
       return (<Redirect to="/profile" />);
     }
     return(
-    	<div>
+    	<div className="container">
 	    	<h2>Create Account</h2>
 	    	<Form onSubmit={this.handleSubmit}>
 				{/* referal code */}

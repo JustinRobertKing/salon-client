@@ -25,14 +25,14 @@ class Home extends Component {
 	   if (this.props.user){
 	   	console.log('PROPS USER TRUE DUDE')
 	   		mainContext = (
-	   			
-						<div><h1>THIS WORKED</h1></div>
-					
+					<div><h1>THIS WORKED</h1></div>
 	   		)
 	   }
 
+	   
+
     return(
-    	<div>
+    	<div className="container">
        		<Button color="primary" size="lg" block>Start Consultation</Button>
        		<br />
        		{mainContext}

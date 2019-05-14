@@ -36,7 +36,7 @@ class Login extends Component {
       return (<Redirect to="/profile" />);
     }
     return(
-        <div>
+        <div className="container">
           <h2>Login as an existing user</h2>
           <form onSubmit={this.handleSubmit}>
             <div>

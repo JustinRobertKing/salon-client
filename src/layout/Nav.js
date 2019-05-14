@@ -33,6 +33,7 @@ class Nav extends Component {
           <nav className="nav">
             <span>
             	<Link to="/">Home</Link>
+            	<Link to="/schedule">Schedule</Link>
             </span>
             {links}
           </nav>

@@ -6,7 +6,7 @@ class Profile extends Component {
   render() {
     if(this.props.user){
       return (
-          <div>
+          <div className="container">
             <h4>firstname: {this.props.user.firstname}</h4>
             <h4>lastname: {this.props.user.lastname}</h4>
             <h4>referral: {this.props.user.referral}</h4>

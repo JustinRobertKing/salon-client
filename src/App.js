@@ -10,6 +10,7 @@ import Login from './auth/Login';
 import Nav from './layout/Nav';
 import Profile from './Profile';
 import Signup from './auth/Signup';
+import Week from './schedule/Week';
 
 class App extends Component {
   constructor(props){
@@ -56,22 +57,25 @@ class App extends Component {
         <Router>
           <div >
             <Nav user={this.state.user} resetUser={this.resetUser} />
-            	<div className="container">
-		            
-            		<Route path="/" exact component={
-		              () => (<Home user={this.state.user} getUser={this.getUser} />)
-		            } />
+        	<div className="container1">
+        		<Route path="/" exact component={
+	              () => (<Home user={this.state.user} getUser={this.getUser} />)
+	            } />
 
-		            <Route path="/login" component={
-		              () => (<Login user={this.state.user} getUser={this.getUser} />)
-		            } />
-		            <Route path="/signup" component={
-		              () => (<Signup user={this.state.user} getUser={this.getUser} />)
-		            } />
-		            <Route path="/profile" component={
-		              () => (<Profile user={this.state.user} />)
-		            } />
-	            </div>
+	            <Route path="/schedule"  component={
+	              () => (<Week user={this.state.user} getUser={this.getUser} />)
+	            } />
+
+	            <Route path="/login" component={
+	              () => (<Login user={this.state.user} getUser={this.getUser} />)
+	            } />
+	            <Route path="/signup" component={
+	              () => (<Signup user={this.state.user} getUser={this.getUser} />)
+	            } />
+	            <Route path="/profile" component={
+	              () => (<Profile user={this.state.user} />)
+	            } />
+            </div>
           </div>
         </Router>
         <Footer />
