@@ -69,7 +69,7 @@ class App extends Component {
 		              () => (<Signup user={this.state.user} getUser={this.getUser} />)
 		            } />
 		            <Route path="/profile" component={
-		              () => (<Profile user={this.state.user} />)
+		              () => (<Profile user={this.state.user} getUser={this.getUser} />)
 		            } />
 	            </div>
           </div>

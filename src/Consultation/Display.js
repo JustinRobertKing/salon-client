@@ -24,13 +24,14 @@ class Display extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    console.log(this.state)
     // SEND DATA TO SERVER
     axios.post(`${SERVER_URL}/consultation/display`, this.state)
     .then(response => {
-      // Set response.data.token to local storage
-      localStorage.setItem('serverToken', response.data.token);
-      // Update the user in parent component
-      this.props.getUser()
+    	console.log('consultation response', response)
+    	// localStorage.getItem('serverToken')
+     //  // Update the user in parent component
+     //  this.props.getUser()
     })
     .catch(error => {
       console.log('error', error)
@@ -38,6 +39,7 @@ class Display extends Component {
   }
 
 	render() {
+		console.log(this.state)
 		return (
 			<div>
 				<h3>Before photos carousel goes here</h3>
@@ -59,7 +61,7 @@ class Display extends Component {
 	          <Label for="cost">Estimated Cost</Label>
 	          <Input type="text" name="cost" id="cost" value={this.state.cost} onChange={this.handleCostChange}/>
 	        </FormGroup>
-	        <FormGroup check>
+	       {/* <FormGroup check>
 	          <Label check>
 	            <Input type="checkbox" name="cut" value="cut"/>{' '}
 	            Cut
@@ -70,7 +72,7 @@ class Display extends Component {
 	            <Input type="checkbox" name="color" value="color"/>{' '}
 	            Color
 	          </Label>
-	        </FormGroup>
+	        </FormGroup>*/}
 	        <FormGroup>
 	          <Label for="stylistComment">Process Description</Label>
 	          <Input type="textarea" name="stylistComment" id="stylistComment" value={this.state.stylistComment} onChange={this.handleStylistCommentChange}/>

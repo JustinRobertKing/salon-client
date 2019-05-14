@@ -6,23 +6,23 @@ class Profile extends Component {
   render() {
     if(this.props.user){
       return (
-          <div>
-            <h4>firstname: {this.props.user.firstname}</h4>
-            <h4>lastname: {this.props.user.lastname}</h4>
-            <h4>referral: {this.props.user.referral}</h4>
-            <h4>phone: {this.props.user.phone}</h4>
-            <h4>email: {this.props.user.email}</h4>
-            <h4>stylist: {this.props.user.stylist}</h4>
+        <div>
+          <h4>firstname: {this.props.user.firstname}</h4>
+          <h4>lastname: {this.props.user.lastname}</h4>
+          <h4>referral: {this.props.user.referral}</h4>
+          <h4>phone: {this.props.user.phone}</h4>
+          <h4>email: {this.props.user.email}</h4>
+          <h4>stylist: {this.props.user.stylist}</h4>
 
-            <hr />
-            <Client />
-            <hr />
-            <Stylist />
-            <br />
-            <br />
-            <br />
-          </div>
-        );
+          <hr />
+          <Client />
+          <hr />
+          <Stylist />
+          <br />
+          <br />
+          <br />
+        </div>
+      );
     }
     return(
       <div>
