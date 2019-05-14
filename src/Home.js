@@ -4,7 +4,7 @@ import { Card, Button, CardTitle, CardText  } from 'reactstrap';
 class Home extends Component {
   render() {
 	
-	{/*
+		/*
     			if statement - 
     				check if they have an appointment booked.  
     						If yes
@@ -19,7 +19,8 @@ class Home extends Component {
 			    									show the edit consultation box
 			    								if no
 			    									draw start consultation button
-    		*/}
+		*/
+
 	  let mainContext
 
 	   if (this.props.user){
@@ -28,8 +29,6 @@ class Home extends Component {
 					<div><h1>THIS WORKED</h1></div>
 	   		)
 	   }
-
-	   
 
     return(
     	<div className="container">

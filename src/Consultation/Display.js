@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import SERVER_URL from '../constants/server';
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import ReactDOM from 'react-dom';
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+// import ReactDOM from 'react-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 

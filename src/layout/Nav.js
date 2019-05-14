@@ -14,7 +14,7 @@ class Nav extends Component {
     if(this.props.user){
       links = (
           <span>
-            <a onClick={this.handleLogout}>Logout</a>
+            <a href='/logout' onClick={this.handleLogout}>Logout</a>
             <Link to="/profile">Profile</Link>
           </span>
         );

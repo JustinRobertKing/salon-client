@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import { Image } from 'cloudinary-react';
 
 class ConsultationForm extends Component {
 	
