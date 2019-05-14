@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import SERVER_URL from '../constants/server';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import ReactDOM from 'react-dom';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
 
 class Display extends Component {
 	constructor(props){
@@ -42,9 +45,36 @@ class Display extends Component {
 		console.log(this.state)
 		return (
 			<div>
-				<h3>Before photos carousel goes here</h3>
+			<hr />
+				<Carousel>
+          <div>
+            <img src="https://thecentraltrend.com/wp-content/uploads/2019/02/caramel-melt.jpg" />
+            <p className="legend">Before 1</p>
+          </div>
+          <div>
+            <img src="https://thecentraltrend.com/wp-content/uploads/2019/02/caramel-melt.jpg" />
+            <p className="legend">Before 2</p>
+          </div>
+          <div>
+            <img src="https://thecentraltrend.com/wp-content/uploads/2019/02/caramel-melt.jpg" />
+            <p className="legend">Before 3</p>
+          </div>
+        </Carousel>
 				<hr />
-				<h3>Dream photos carousel goes here</h3>
+				<Carousel>
+          <div>
+            <img src="https://thecentraltrend.com/wp-content/uploads/2019/02/caramel-melt.jpg" />
+            <p className="legend">Dream 1</p>
+          </div>
+          <div>
+            <img src="https://thecentraltrend.com/wp-content/uploads/2019/02/caramel-melt.jpg" />
+            <p className="legend">Dream 2</p>
+          </div>
+          <div>
+            <img src="https://thecentraltrend.com/wp-content/uploads/2019/02/caramel-melt.jpg" />
+            <p className="legend">Dream 3</p>
+          </div>
+        </Carousel>
 				<hr />
 				<p>Kevin pork chop meatloaf ball tip, pork loin ham bacon. Ground round andouille jowl landjaeger meatloaf frankfurter doner swine cow chuck prosciutto. Chicken ham hamburger sausage, fatback cow sirloin rump meatball ham hock pork loin kevin porchetta flank. Burgdoggen venison hamburger short ribs, sausage ham jerky tongue beef ribs rump doner filet mignon. Venison ribeye bresaola tri-tip, biltong pastrami prosciutto kielbasa pork loin swine capicola brisket hamburger doner.
 				</p>
