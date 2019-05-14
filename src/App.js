@@ -10,7 +10,7 @@ import Login from './auth/Login';
 import Nav from './layout/Nav';
 import Profile from './Profile';
 import Signup from './auth/Signup';
-import Week from './Schedule/Week';
+import Week from './schedule/Week';
 
 class App extends Component {
   constructor(props){
