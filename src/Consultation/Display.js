@@ -88,6 +88,44 @@ class Display extends Component {
 	          <Label for="time">Time Required</Label>
 	          <Input type="text" name="time" id="time" value={this.state.time} onChange={this.handleTimeChange}/>
 	        </FormGroup>
+	        <FormGroup>
+          <Label for="time">Time Required</Label>
+          <Input type="select" name="time" id="time">
+            <option>-:--</option>
+            <option>0:15</option>
+            <option>0:30</option>
+            <option>0:45</option>
+            <option>1:00</option>
+            <option>1:15</option>
+            <option>1:30</option>
+            <option>1:45</option>
+            <option>2:00</option>
+            <option>2:15</option>
+            <option>2:30</option>
+            <option>2:45</option>
+            <option>3:00</option>
+            <option>3:15</option>
+            <option>3:30</option>
+            <option>3:45</option>
+            <option>4:00</option>
+            <option>4:15</option>
+            <option>4:30</option>
+            <option>4:45</option>
+            <option>5:00</option>
+            <option>5:15</option>
+            <option>5:30</option>
+            <option>5:45</option>
+            <option>6:00</option>
+            <option>6:15</option>
+            <option>6:30</option>
+            <option>6:45</option>
+            <option>7:00</option>
+            <option>7:15</option>
+            <option>7:30</option>
+            <option>7:45</option>
+            <option>8:00</option>
+          </Input>
+        </FormGroup>
  					<FormGroup>
 	          <Label for="cost">Estimated Cost</Label>
 	          <Input type="text" name="cost" id="cost" value={this.state.cost} onChange={this.handleCostChange}/>
