@@ -19,7 +19,11 @@ class Display extends Component {
 
   handleProductsChange = (e) => { this.setState({ products: e.target.value }); }
 
-  handleTimeChange = (e) => { this.setState({ time: e.target.value }); }
+  handleTimeChange = (e) => { 
+  	let timeArr = e.target.value.split(':')
+  	let seconds = (timeArr[0] * 3600) + (timeArr[1] * 60)
+  	this.setState({ time: seconds }); 
+  }
 
   handleCostChange = (e) => { this.setState({ cost: e.target.value }); }
 
@@ -49,30 +53,30 @@ class Display extends Component {
 				<hr />
 				<Carousel>
           <div>
-            <img src="https://thecentraltrend.com/wp-content/uploads/2019/02/caramel-melt.jpg" />
+            <img src="https://thecentraltrend.com/wp-content/uploads/2019/02/caramel-melt.jpg" alt="Before Hair" />
             <p className="legend">Before 1</p>
           </div>
           <div>
-            <img src="https://thecentraltrend.com/wp-content/uploads/2019/02/caramel-melt.jpg" />
+            <img src="https://thecentraltrend.com/wp-content/uploads/2019/02/caramel-melt.jpg" alt="Before Hair" />
             <p className="legend">Before 2</p>
           </div>
           <div>
-            <img src="https://thecentraltrend.com/wp-content/uploads/2019/02/caramel-melt.jpg" />
+            <img src="https://thecentraltrend.com/wp-content/uploads/2019/02/caramel-melt.jpg" alt="Before Hair" />
             <p className="legend">Before 3</p>
           </div>
         </Carousel>
 				<hr />
 				<Carousel>
           <div>
-            <img src="https://thecentraltrend.com/wp-content/uploads/2019/02/caramel-melt.jpg" />
+            <img src="https://thecentraltrend.com/wp-content/uploads/2019/02/caramel-melt.jpg" alt="Dream Hair" />
             <p className="legend">Dream 1</p>
           </div>
           <div>
-            <img src="https://thecentraltrend.com/wp-content/uploads/2019/02/caramel-melt.jpg" />
+            <img src="https://thecentraltrend.com/wp-content/uploads/2019/02/caramel-melt.jpg" alt="Dream Hair" />
             <p className="legend">Dream 2</p>
           </div>
           <div>
-            <img src="https://thecentraltrend.com/wp-content/uploads/2019/02/caramel-melt.jpg" />
+            <img src="https://thecentraltrend.com/wp-content/uploads/2019/02/caramel-melt.jpg" alt="Dream Hair" />
             <p className="legend">Dream 3</p>
           </div>
         </Carousel>
@@ -85,12 +89,8 @@ class Display extends Component {
 	          <Input type="text" name="products" id="products" value={this.state.products} onChange={this.handleProductsChange}/>
 	        </FormGroup>
 	        <FormGroup>
-	          <Label for="time">Time Required</Label>
-	          <Input type="text" name="time" id="time" value={this.state.time} onChange={this.handleTimeChange}/>
-	        </FormGroup>
-	        <FormGroup>
           <Label for="time">Time Required</Label>
-          <Input type="select" name="time" id="time">
+          <Input type="select" name="time" id="time" onChange={this.handleTimeChange}>
             <option>-:--</option>
             <option>0:15</option>
             <option>0:30</option>
