@@ -13,13 +13,15 @@ class Profile extends Component {
             <h4>phone: {this.props.user.phone}</h4>
             <h4>email: {this.props.user.email}</h4>
             <h4>stylist: {this.props.user.stylist}</h4>
-
-            <hr />
-            <Client />
-            <hr />
-            <Stylist />
-          </div>
-        );
+          <hr />
+          <Client />
+          <hr />
+          <Stylist />
+          <br />
+          <br />
+          <br />
+        </div>
+      );
     }
     return(
       <div>

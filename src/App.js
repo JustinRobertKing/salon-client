@@ -22,6 +22,7 @@ class App extends Component {
 
   componentDidMount = () => {
     // GET USER INFO
+    this.getUser()
   }
 
   resetUser = () => {
@@ -32,7 +33,7 @@ class App extends Component {
     // SEE IF THERE'S A TOKEN
     let token = localStorage.getItem('serverToken');
     if (token) {
-      axios.post(`${SERVER_URL}/auth/current/user`, {
+      axios.post(`${SERVER_URL}/auth/current/user`, {}, {
         headers: {
           'Authorization' : `Bearer ${token}`
         }
