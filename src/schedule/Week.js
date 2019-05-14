@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Card, CardHeader, CardTitle, CardText, Button, CardBody } from 'reactstrap';
+import { Row, Col, Card, CardHeader, CardBody } from 'reactstrap';
 
 class Week extends Component {
   render() {
