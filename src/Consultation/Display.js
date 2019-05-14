@@ -27,14 +27,17 @@ class Display extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state)
+    console.log('HERE - handle submit', this.state)
+    let token = localStorage.getItem('serverToken');
+    console.log(token)
     // SEND DATA TO SERVER
-    axios.post(`${SERVER_URL}/consultation/display`, this.state)
+    axios.post(`${SERVER_URL}/consultation/display`, this.state, {
+      headers: {
+        'Authorization' : `Bearer ${token}`
+      }
+    })
     .then(response => {
     	console.log('consultation response', response)
-    	// localStorage.getItem('serverToken')
-     //  // Update the user in parent component
-     //  this.props.getUser()
     })
     .catch(error => {
       console.log('error', error)
@@ -42,10 +45,9 @@ class Display extends Component {
   }
 
 	render() {
-		console.log(this.state)
 		return (
 			<div>
-			<hr />
+				<hr />
 				<Carousel>
           <div>
             <img src="https://thecentraltrend.com/wp-content/uploads/2019/02/caramel-melt.jpg" />
@@ -78,7 +80,7 @@ class Display extends Component {
 				<hr />
 				<p>Kevin pork chop meatloaf ball tip, pork loin ham bacon. Ground round andouille jowl landjaeger meatloaf frankfurter doner swine cow chuck prosciutto. Chicken ham hamburger sausage, fatback cow sirloin rump meatball ham hock pork loin kevin porchetta flank. Burgdoggen venison hamburger short ribs, sausage ham jerky tongue beef ribs rump doner filet mignon. Venison ribeye bresaola tri-tip, biltong pastrami prosciutto kielbasa pork loin swine capicola brisket hamburger doner.
 				</p>
-				<Form>
+				<Form onSubmit={this.handleSubmit}>
 	        <FormGroup>
 	          <Label for="products">Products</Label>
 	          <Input type="text" name="products" id="products" value={this.state.products} onChange={this.handleProductsChange}/>
@@ -107,7 +109,7 @@ class Display extends Component {
 	          <Label for="stylistComment">Process Description</Label>
 	          <Input type="textarea" name="stylistComment" id="stylistComment" value={this.state.stylistComment} onChange={this.handleStylistCommentChange}/>
 	        </FormGroup>
-	        <Button>Submit</Button>
+	        <Button type="submit">Submit</Button>
 	      </Form>
 			</div>
 		)

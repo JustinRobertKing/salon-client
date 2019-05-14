@@ -21,6 +21,7 @@ class App extends Component {
 
   componentDidMount = () => {
     // GET USER INFO
+    this.getUser()
   }
 
   resetUser = () => {
@@ -31,7 +32,7 @@ class App extends Component {
     // SEE IF THERE'S A TOKEN
     let token = localStorage.getItem('serverToken');
     if (token) {
-      axios.post(`${SERVER_URL}/auth/current/user`, {
+      axios.post(`${SERVER_URL}/auth/current/user`, {}, {
         headers: {
           'Authorization' : `Bearer ${token}`
         }
@@ -69,7 +70,7 @@ class App extends Component {
 		              () => (<Signup user={this.state.user} getUser={this.getUser} />)
 		            } />
 		            <Route path="/profile" component={
-		              () => (<Profile user={this.state.user} getUser={this.getUser} />)
+		              () => (<Profile user={this.state.user} />)
 		            } />
 	            </div>
           </div>
