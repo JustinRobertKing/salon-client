@@ -1,9 +1,22 @@
 import React, { Component } from 'react';
 import { Card, Button, CardTitle, CardText  } from 'reactstrap';
+import Stylist from './Stylist';
+import Client from './Client'
+import axios from 'axios';
+import SERVER_URL from './constants/server';
 
 class Home extends Component {
   render() {
-	
+	if (this.props.user && this.props.user.stylist) {
+		return(<Stylist />)
+	} else if (this.props.user) {
+		return(<Client />)
+	}
+
+
+
+
+
 		/*
     			if statement - 
     				check if they have an appointment booked.  
@@ -20,38 +33,13 @@ class Home extends Component {
 			    								if no
 			    									draw start consultation button
 		*/
-
-	  let mainContext
-
-	   if (this.props.user){
-	   	console.log('PROPS USER TRUE DUDE')
-	   		mainContext = (
-					<div><h1>THIS WORKED</h1></div>
-	   		)
-	   }
-
-    return(
-    	<div className="container">
-       		<Button color="primary" size="lg" block>Start Consultation</Button>
-       		<br />
-       		{mainContext}
-       		<h3>Pending:</h3>
-       		<Card body inverse style={{ backgroundColor: '#333', borderColor: '#333' }}>
-		        <CardTitle>Your consultation with Catherine:</CardTitle>
-		        <CardText>Consultation is currently being reviewed.  You'll be notified when completed by your stylist, Catherine.</CardText>
-		        <Button>Edit</Button>
-		      </Card>
-		      <br />
-       		<h3>Upcoming:</h3>
-		      <Card body outline color="primary">
-		        <CardTitle>Special Title Treatment</CardTitle>
-		        <CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-		        <Button color="secondary">Button</Button>
-		      </Card>
-       		<br />
-       		<br />
-        </div>
-      );
+return(
+      <div className="container">
+        <p>This is a profile page. You must be logged in to see it.</p>
+        <p>Would you like to <a href="/login">Log In</a> or <a href="/signup">Sign up</a>?</p>
+      </div>
+    );
+	  
   }
 }
 
