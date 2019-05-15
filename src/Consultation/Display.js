@@ -11,9 +11,10 @@ class Display extends Component {
     super(props);
     this.state = {
       products: '',
-      time: '',
-      cost: '',
-      stylistComment: ''
+      apptLength: '',
+      estimate: '',
+      stylistComment: '',
+      consultationID: this.props.consultation._id
     };
   }
 
@@ -22,10 +23,10 @@ class Display extends Component {
   handleTimeChange = (e) => { 
   	let timeArr = e.target.value.split(':')
   	let seconds = (timeArr[0] * 3600) + (timeArr[1] * 60)
-  	this.setState({ time: seconds }); 
+  	this.setState({ apptLength: seconds }); 
   }
 
-  handleCostChange = (e) => { this.setState({ cost: e.target.value }); }
+  handleCostChange = (e) => { this.setState({ estimate: e.target.value }); }
 
   handleStylistCommentChange = (e) => { this.setState({ stylistComment: e.target.value }); }
 
@@ -34,7 +35,7 @@ class Display extends Component {
     console.log('HERE - handle submit', this.state)
     let token = localStorage.getItem('serverToken');
     // SEND DATA TO SERVER
-    axios.post(`${SERVER_URL}/consultation/display`, this.state, {
+    axios.put(`${SERVER_URL}/consultation/display`, this.state, {
       headers: {
         'Authorization' : `Bearer ${token}`
       }
@@ -82,8 +83,8 @@ class Display extends Component {
 	          <Input type="text" name="products" id="products" value={this.state.products} onChange={this.handleProductsChange}/>
 	        </FormGroup>
 	        <FormGroup>
-          <Label for="time">Time Required</Label>
-          <Input type="select" name="time" id="time" onChange={this.handleTimeChange}>
+          <Label for="apptLength">Time Required</Label>
+          <Input type="select" name="apptLength" id="apptLength" onChange={this.handleTimeChange}>
             <option>-:--</option>
             <option>0:15</option>
             <option>0:30</option>
@@ -120,8 +121,8 @@ class Display extends Component {
           </Input>
         </FormGroup>
  					<FormGroup>
-	          <Label for="cost">Estimated Cost</Label>
-	          <Input type="text" name="cost" id="cost" value={this.state.cost} onChange={this.handleCostChange}/>
+	          <Label for="estimate">Estimated Cost</Label>
+	          <Input type="text" name="estimate" id="estimate" value={this.state.estimate} onChange={this.handleCostChange}/>
 	        </FormGroup>
 	       {/* <FormGroup check>
 	          <Label check>
