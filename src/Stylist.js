@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Display from './Consultation/Display'
-import { UncontrolledCollapse, Button, CardBody, Card } from 'reactstrap';
+import { UncontrolledCollapse, Button } from 'reactstrap';
 import axios from 'axios';
 import SERVER_URL from './constants/server';
 
@@ -17,7 +17,7 @@ class Stylist extends Component {
   getConsultations = () => {
     let token = localStorage.getItem('serverToken');
     // SEND DATA TO SERVER
-    axios.get(`${SERVER_URL}/profile`, {
+    axios.get(`${SERVER_URL}/landing`, {
       headers: {
         'Authorization' : `Bearer ${token}`
       }
@@ -38,8 +38,8 @@ class Stylist extends Component {
 		let requests = this.state.consultations.map((consultation, index) => {
         return (
           <div key={index}>
-            <Button color="primary" id={'toggler' + index} block style={{ marginBottom: '.5rem' }}>
-              Toggle
+            <Button color="primary" id={'toggler' + index} block style={{ border: '1px solid white', borderRadius: 0 }}>
+              Client Name - Service
             </Button>
             <UncontrolledCollapse toggler={'#toggler' + index}>
               <Display 
@@ -54,13 +54,12 @@ class Stylist extends Component {
       })
       return(
         <div className="container">
-          <h4>Stylist Page</h4>
+          <h2>Stylist Page</h2>
           <hr />
           <h4>Pending Consultations</h4>
           {requests}
           <hr />
-{/*          <Stylist />
-*/}          <br />
+          <h4>Appointment Requests</h4>
           <br />
           <br />
         </div>

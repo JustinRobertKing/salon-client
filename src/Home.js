@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import { Card, Button, CardTitle, CardText  } from 'reactstrap';
 import Stylist from './Stylist';
 import Client from './Client'
-import axios from 'axios';
-import SERVER_URL from './constants/server';
 
 class Home extends Component {
   render() {
