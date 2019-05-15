@@ -38,7 +38,8 @@ class Profile extends Component {
   }
   render() {
     console.log(this.state.consultations)
-    if (this.props.user.stylist) {
+    
+    if (this.props.users && this.props.user.stylist) {
       let requests = this.state.consultations.map((consultation, index) => {
         return (
           <div key={index}>
@@ -87,7 +88,7 @@ class Profile extends Component {
       );
     }
     return(
-      <div>
+      <div className="container">
         <p>This is a profile page. You must be logged in to see it.</p>
         <p>Would you like to <a href="/login">Log In</a> or <a href="/signup">Sign up</a>?</p>
       </div>
