@@ -39,12 +39,14 @@ class Stylist extends Component {
   }
 	render() {
 		let requests = this.state.consultations.map((consultation, index) => {
-        return (
+        
+    // console.log("HEY",consultation.client.user.email)
+
+				return (
+
           <div key={index}>
             <Button color="primary" id={'toggler' + index} block style={{ border: '1px solid white', borderRadius: 0 }}>
-              {console.log("HEY",this.state.consultations[index])}
-              {this.state.consultation}Client Name - Service
-              
+              hey
             </Button>
             <UncontrolledCollapse toggler={'#toggler' + index}>
               <Display 
