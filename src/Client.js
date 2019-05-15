@@ -7,7 +7,7 @@ class Client extends Component {
 			<div>
 				Client Profile
 
-				<ConsultationForm />
+				{/*<ConsultationForm />*/}
 			</div>
 		)
 	}

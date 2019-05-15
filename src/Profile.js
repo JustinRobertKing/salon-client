@@ -39,7 +39,7 @@ class Profile extends Component {
   render() {
     console.log(this.state.consultations)
     
-    if (this.props.users && this.props.user.stylist) {
+    if (this.props.user && this.props.user.stylist) {
       let requests = this.state.consultations.map((consultation, index) => {
         return (
           <div key={index}>
