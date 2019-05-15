@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Card, Button, CardTitle, CardText  } from 'reactstrap';
 import Stylist from './Stylist';
 import Client from './Client'
 
