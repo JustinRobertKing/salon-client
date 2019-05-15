@@ -11,6 +11,7 @@ import Nav from './layout/Nav';
 import Profile from './Profile';
 import Signup from './auth/Signup';
 import Week from './schedule/Week';
+import Display from './Consultation/Display';
 
 class App extends Component {
   constructor(props){
@@ -74,6 +75,9 @@ class App extends Component {
 	            <Route path="/profile" component={
 	              () => (<Profile user={this.state.user} />)
 	            } />
+              <Route path="/consultation/display" component={
+                () => (<Display user={this.state.user} getUser={this.getUser} />)
+              } />
             </div>
           </div>
         </Router>

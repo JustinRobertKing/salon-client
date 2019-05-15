@@ -148,6 +148,8 @@ class Display extends Component {
 	        </FormGroup>
 	        <Button type="submit">Submit</Button>
 	      </Form>
+	      <br />
+	      <br />
 			</div>
 		)
 	}
