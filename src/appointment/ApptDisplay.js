@@ -5,28 +5,22 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 // import ReactDOM from 'react-dom';
 
 class Display extends Component {
-	constructor(props){
+  constructor(props){
     super(props);
     this.state = {
-      products: '',
+      apptTime: '',
       apptLength: '',
-      estimate: '',
-      stylistComment: '',
+      client: '',
+      service: '',
       appointmentID: this.props.appointment._id
     };
   }
 
-  handleProductsChange = (e) => { this.setState({ products: e.target.value }); }
-
   handleTimeChange = (e) => { 
-  	let timeArr = e.target.value.split(':')
-  	let seconds = (timeArr[0] * 3600) + (timeArr[1] * 60)
-  	this.setState({ apptLength: seconds }); 
+    let timeArr = e.target.value.split(':')
+    let seconds = (timeArr[0] * 3600) + (timeArr[1] * 60)
+    this.setState({ apptLength: seconds }); 
   }
-
-  handleCostChange = (e) => { this.setState({ estimate: e.target.value }); }
-
-  handleStylistCommentChange = (e) => { this.setState({ stylistComment: e.target.value }); }
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -39,20 +33,25 @@ class Display extends Component {
       }
     })
     .then(response => {
-    	console.log('consultation response', response)
+      console.log('consultation response', response)
     })
     .catch(error => {
       console.log('error', error)
     })
   }
 
-	render() {
-		return (
-			<div>
-				This is an appointment detail stub
-			</div>
-		)
-	}
+  render() {
+    let lengthStamp = this.props.appointment.length
+
+    return (
+      <div>
+        This is an appointment detail stub
+        <h4>*** POPULATE NAME ***</h4>
+        <h4>{this.props.appointment.start}</h4>
+        <h4>Butts</h4>
+      </div>
+    )
+  }
 }
 
 export default Display
