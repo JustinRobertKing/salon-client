@@ -5,9 +5,15 @@ import Client from './Client'
 class Home extends Component {
   render() {
 	if (this.props.user && this.props.user.stylist) {
-		return(<Stylist />)
+		return(
+			<Stylist 
+				user={this.props.user}
+			/>)
 	} else if (this.props.user) {
-		return(<Client />)
+		return(
+			<Client 
+				user={this.props.user}
+			/>)
 	}
 
 		/*

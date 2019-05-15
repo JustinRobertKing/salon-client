@@ -11,16 +11,14 @@ class Client extends Component {
 		return (
 			<div className="container">
 				<h1>Client Home</h1>
-				
 				<div id="consultations">
 					<Button color="primary" block id="toggler" style={{ marginBottom: '1rem' }}>
 	     			START CONSULTATION
 	    		</Button>
 			    <UncontrolledCollapse toggler="#toggler">
-			         <ConsultationForm />
+			         <ConsultationForm user={this.props.user}/>
 			    </UncontrolledCollapse>
 		    </div>
-
 			</div>
 		)
 	}
