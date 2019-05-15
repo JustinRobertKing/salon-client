@@ -10,10 +10,6 @@ class Home extends Component {
 		return(<Client />)
 	}
 
-
-
-
-
 		/*
     			if statement - 
     				check if they have an appointment booked.  
@@ -30,6 +26,8 @@ class Home extends Component {
 			    								if no
 			    									draw start consultation button
 		*/
+
+		
 return(
       <div className="container">
         <p>This is a profile page. You must be logged in to see it.</p>
