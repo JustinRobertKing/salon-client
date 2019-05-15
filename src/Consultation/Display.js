@@ -48,37 +48,30 @@ class Display extends Component {
   }
 
 	render() {
+		let currentPhotos = this.props.consultation.currentHair.map((c, i) => {
+			return (
+				<div key={i}>
+	        <img src={c} alt="Before Hair" />
+	        <p className="legend">Before {i}</p>
+	      </div>
+	    )
+		})
+		let dreamPhotos = this.props.consultation.dreamHair.map((d, i) => {
+			return (
+				<div key={i}>
+	        <img src={d} alt="Dream Hair" />
+	        <p className="legend">Dream {i}</p>
+	      </div>
+      )
+		})
 		return (
 			<div>
-				<hr />
 				<Carousel>
-          <div>
-            <img src="https://thecentraltrend.com/wp-content/uploads/2019/02/caramel-melt.jpg" alt="Before Hair" />
-            <p className="legend">Before 1</p>
-          </div>
-          <div>
-            <img src="https://thecentraltrend.com/wp-content/uploads/2019/02/caramel-melt.jpg" alt="Before Hair" />
-            <p className="legend">Before 2</p>
-          </div>
-          <div>
-            <img src="https://thecentraltrend.com/wp-content/uploads/2019/02/caramel-melt.jpg" alt="Before Hair" />
-            <p className="legend">Before 3</p>
-          </div>
+          {currentPhotos}
         </Carousel>
 				<hr />
 				<Carousel>
-          <div>
-            <img src="https://thecentraltrend.com/wp-content/uploads/2019/02/caramel-melt.jpg" alt="Dream Hair" />
-            <p className="legend">Dream 1</p>
-          </div>
-          <div>
-            <img src="https://thecentraltrend.com/wp-content/uploads/2019/02/caramel-melt.jpg" alt="Dream Hair" />
-            <p className="legend">Dream 2</p>
-          </div>
-          <div>
-            <img src="https://thecentraltrend.com/wp-content/uploads/2019/02/caramel-melt.jpg" alt="Dream Hair" />
-            <p className="legend">Dream 3</p>
-          </div>
+          {dreamPhotos}
         </Carousel>
 				<hr />
 				<p>Kevin pork chop meatloaf ball tip, pork loin ham bacon. Ground round andouille jowl landjaeger meatloaf frankfurter doner swine cow chuck prosciutto. Chicken ham hamburger sausage, fatback cow sirloin rump meatball ham hock pork loin kevin porchetta flank. Burgdoggen venison hamburger short ribs, sausage ham jerky tongue beef ribs rump doner filet mignon. Venison ribeye bresaola tri-tip, biltong pastrami prosciutto kielbasa pork loin swine capicola brisket hamburger doner.
