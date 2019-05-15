@@ -32,8 +32,12 @@ class Signup extends Component {
 
   handlePasswordChange = (e) => { this.setState({ password: e.target.value }); }
 
+  handleStylistChange = (e) => { this.setState({ stylist: e.target.value }); }
+
+
   handleSubmit = (e) => {
     e.preventDefault();
+
     // SEND DATA TO SERVER
     axios.post(`${SERVER_URL}/auth/signup`, this.state)
     .then(response => {
@@ -42,7 +46,7 @@ class Signup extends Component {
       localStorage.setItem('serverToken', response.data.token);
       // Update the user in parent component
       this.props.getUser()
-    })
+    }) 
     .catch(error => {
       console.log('error', error)
     })
@@ -91,13 +95,15 @@ class Signup extends Component {
 					<FormGroup> 
 	          <Label for="exampleCheckbox">Account type</Label>
 	          <div>
-	            <CustomInput type="radio" id="accountType" label="Client" value="false" name="stylist" inline />
-	            <CustomInput type="radio" id="accountType" label="Stylist" value="true" name="stylist" inline />
+	            <CustomInput type="radio" id="accountTypeF" label="Client" value='false' onChange={this.handleStylistChange} name="stylist" inline />
+	            <CustomInput type="radio" id="accountTypeT" label="Stylist" value='true' onChange={this.handleStylistChange} name="stylist" inline />
 	          </div>
 	        </FormGroup>
 				{/* submit button */}
 		    	<Button>Submit</Button>
+
 		    </Form>
+		    <br /><br /><br />
       </div>
     );
   }
