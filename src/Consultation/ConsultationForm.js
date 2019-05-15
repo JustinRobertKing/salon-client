@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import axios from 'axios';
+import SERVER_URL from '../constants/server';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 
@@ -9,11 +11,51 @@ componentDidMount(){
 	// let items = ''
 	// console.log('items', items)
 	// let imgArr=[]
+	console.log('')
+	console.log('')
+	console.log('hey')
+	console.log('')
+	console.log('')
+	console.log(this.props.user.id)
+	console.log('')
+	console.log('')
+	this.getClient()
+
+
 }
 
+  getClient = () => {
+    let token = localStorage.getItem('serverToken');
+    // SEND DATA TO SERVER
+    axios.get(`${SERVER_URL}/landing/client`, {
+      headers: {
+        'Authorization' : `Bearer ${token}`
+      },
+    })
+    .then(response => {
+      console.log('Client response:', response)
+
+      console.log('Client response: stylist', response.data.stylist)
+      this.setState({ stylist: response.data.stylist})
+    })
+    .catch(error => {
+      console.log('error', error)
+    })
+  }
+
+
+
 state ={
+	client: this.props.user.id,
+	stylist: this.props.user.stylist,
 	currentHair: [],
 	dreamHair: [],
+	clientComment: '',
+	stylistComment: '',
+	approved: false,
+	products: [],
+	apptLength: 0,
+	estimate: 0
 }
 
 
@@ -50,6 +92,29 @@ showWidget2 = (widget) => {
 		  (error, result) => {this.checkUploadResult2(result)}
 		)
 }
+
+  handleClientComment = (e) => { this.setState({ clientComment: e.target.value }); }
+
+
+//axios call function
+postConsultation = (e) => {
+e.preventDefault()
+console.log('submitting consultation', this.state)
+    let token = localStorage.getItem('serverToken');
+    // SEND DATA TO SERVER
+    axios.post(`${SERVER_URL}/consultation`, this.state, {
+      headers: {
+        'Authorization' : `Bearer ${token}`
+      }
+    })
+    .then(response => {
+    	console.log('consultation response', response)
+    })
+    .catch(error => {
+      console.log('error', error)
+    })
+  }
+
 	render() {
 
  	let items = this.state.currentHair.map((item, i) => <div key={i}><img src={item} alt="Before Hair" key={ i } /></div>)
@@ -61,7 +126,7 @@ showWidget2 = (widget) => {
 	
 		return (
 			 <div className="container">
-				 <Form>
+				 <Form onSubmit={this.postConsultation} >
 					<FormGroup>
 	          <FormText color="muted">
 	            Current hair photos
@@ -90,7 +155,13 @@ showWidget2 = (widget) => {
 	        </FormGroup>
 	        <FormGroup>
 	          <Label for="exampleText">Text Area</Label>
-	          <Input type="textarea" name="text" id="exampleText" />
+	          <Input 
+	          	type="textarea" 
+	          	name="text" 
+	          	id="exampleText" 
+	          	value={this.state.clientComment} 
+	          	onChange={this.handleClientComment} 
+	          />
 	        </FormGroup>
 	        <Button>Submit</Button>
 	      </Form>

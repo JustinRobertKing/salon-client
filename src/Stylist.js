@@ -15,13 +15,16 @@ class Stylist extends Component {
   }
 
   getConsultations = () => {
+  	
     let token = localStorage.getItem('serverToken');
     // SEND DATA TO SERVER
-    axios.get(`${SERVER_URL}/landing`, {
-      headers: {
-        'Authorization' : `Bearer ${token}`
+    axios.post(`${SERVER_URL}/landing`, {userId:this.props.user},
+    	{
+      	headers: {
+        	'Authorization' : `Bearer ${token}`}
       }
-    })
+      
+    )
     .then(response => {
       console.log('consultation response', response)
       this.setState({ consultations: response.data})
@@ -39,7 +42,9 @@ class Stylist extends Component {
         return (
           <div key={index}>
             <Button color="primary" id={'toggler' + index} block style={{ border: '1px solid white', borderRadius: 0 }}>
-              Client Name - Service
+              {console.log("HEY",this.state.consultations[index])}
+              {this.state.consultation}Client Name - Service
+              
             </Button>
             <UncontrolledCollapse toggler={'#toggler' + index}>
               <Display 
