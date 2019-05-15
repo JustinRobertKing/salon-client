@@ -5,6 +5,7 @@ import Stylist from './Stylist'
 import Display from './Consultation/Display'
 import SERVER_URL from './constants/server';
 import { UncontrolledCollapse, Button, CardBody, Card } from 'reactstrap';
+import ConsultationForm from './Consultation/ConsultationForm'
 
 class Profile extends Component {
   state = {
@@ -72,7 +73,9 @@ class Profile extends Component {
       );
     } else if (this.props.user) {
       return(
+
         <div className="container">
+        
           <h4>firstname: {this.props.user.firstname}</h4>
           <h4>lastname: {this.props.user.lastname}</h4>
           <h4>referral: {this.props.user.referral}</h4>
@@ -80,7 +83,7 @@ class Profile extends Component {
           <h4>email: {this.props.user.email}</h4>
           <h4>stylist: {this.props.user.stylist}</h4>
           <hr />
-          <Client />
+          
           <br />
           <br />
           <br />
