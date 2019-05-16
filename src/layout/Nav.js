@@ -12,21 +12,8 @@ class Nav extends Component {
   render() {
     let links = '';
     if(this.props.user){
-      links = (
-          <span>
-            <a href='/logout' onClick={this.handleLogout}>Logout</a>
-            <Link to="/profile">Profile</Link>
-          </span>
-        );
-    }
-    else {
-      links = (
-          <span>
-            <Link to="/login">Log In</Link>
-            <Link to="/signup">Sign Up</Link>
-          </span>
-        );
-    }
+      
+    
     return(
         <div>
           <nav className="nav">
@@ -34,14 +21,20 @@ class Nav extends Component {
             	<Link to="/">Home</Link>
             	<Link to="/schedule">Schedule</Link>
             </span>
-            {links}
+            <span>
+            <Link to="/profile">Me</Link>
+          </span>
           </nav>
           <header className="App-header">
             <h6 className="welcome">Welcome, test </h6>
           </header>
         </div>
       );
+    }
+    return(<div></div>)
+
+    }
   }
-}
+
 
 export default Nav;

@@ -73,7 +73,7 @@ class App extends Component {
 	              () => (<Signup user={this.state.user} getUser={this.getUser} />)
 	            } />
 	            <Route path="/profile" component={
-	              () => (<Profile user={this.state.user} />)
+	              () => (<Profile user={this.state.user} resetUser={this.resetUser} />)
 	            } />
               <Route path="/consultation/display" component={
                 () => (<Display user={this.state.user} getUser={this.getUser} />)
