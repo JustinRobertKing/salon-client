@@ -9,7 +9,7 @@ class Stylist extends Component {
 	 state = {
     consultations: [],
     current: {},
-    appointments: null,
+    appointments: [],
     currentAppt: {}
 
   }
@@ -77,7 +77,7 @@ class Stylist extends Component {
         </div>
       )
     })
-    appointmentRequests = this.state.appointments.map((appointment, index) => {
+    let appointmentRequests = this.state.appointments.map((appointment, index) => {
       return (
         <div key={index}>
           <Button color="primary" id={'togglerA' + index} block style={{ border: '1px solid white', borderRadius: 0 }}>
