@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import Stylist from './Stylist';
 import Client from './Client'
-import Login from './auth/Login'
-import { Row, Col, Card, CardHeader, CardBody } from 'reactstrap';
-import axios from 'axios';
-import SERVER_URL from './constants/server';
 import { Redirect } from 'react-router-dom';
 
 
@@ -48,7 +44,6 @@ class Home extends Component {
 
 		//not logged in, render login component
 		return (<Redirect to="/login" />);
-
   }
 }
 

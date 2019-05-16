@@ -22,11 +22,11 @@ class Nav extends Component {
             	<Link to="/schedule">Schedule</Link>
             </span>
             <span>
-            <Link to="/profile">Me</Link>
-          </span>
+              <Link to="/profile">Me</Link>
+            </span>
           </nav>
           <header className="App-header">
-            <h6 className="welcome">Welcome, test </h6>
+            <h6 className="welcome">Welcome, {this.props.user.firstname} </h6>
           </header>
         </div>
       );
