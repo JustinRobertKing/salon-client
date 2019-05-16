@@ -108,3 +108,6 @@ h1, h2, h3, h4, h5, h6, a, button, p, div{
 	font-family: 'Quicksand', sans-serif;
 
 }
+.center {
+	text-align: center;;
+}
