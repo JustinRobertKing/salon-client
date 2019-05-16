@@ -9,7 +9,7 @@ class Stylist extends Component {
 	 state = {
     consultations: [],
     current: {},
-    appointments: [],
+    appointments: null,
     currentAppt: {}
 
   }
@@ -56,6 +56,7 @@ class Stylist extends Component {
   }
 
 	render() {
+    let appointmentRequests = 'Nothing Pending'
 		let consultationRequests = this.state.consultations.map((consultation, index) => {
       
             	{console.log('hey',consultation)}
@@ -76,25 +77,27 @@ class Stylist extends Component {
         </div>
       )
     })
-    let appointmentRequests = this.state.appointments.map((appointment, index) => {
-      return (
-        <div key={index}>
-          <Button color="primary" id={'togglerA' + index} block style={{ border: '1px solid white', borderRadius: 0 }}>
-          {/*  {console.log("HEY",this.state.appointments[index])}
-            {this.state.appointment}*/}
-            Client Name - Appointment
-          </Button>
-          <UncontrolledCollapse toggler={'#togglerA' + index}>
-            <ApptDisplay 
-              appointment={appointment}
-              rerender={this.getAppointments}
-              setCurrentAppointment={this.setCurrentAppointment}
-              currentId={this.state.current._id}
-            />
-          </UncontrolledCollapse>
-        </div>
-      )
-    })
+    if (this.state.appointments){
+      appointmentRequests = this.state.appointments.map((appointment, index) => {
+        return (
+          <div key={index}>
+            <Button color="primary" id={'togglerA' + index} block style={{ border: '1px solid white', borderRadius: 0 }}>
+            {/*  {console.log("HEY",this.state.appointments[index])}
+              {this.state.appointment}*/}
+              Client Name - Appointment
+            </Button>
+            <UncontrolledCollapse toggler={'#togglerA' + index}>
+              <ApptDisplay 
+                appointment={appointment}
+                rerender={this.getAppointments}
+                setCurrentAppointment={this.setCurrentAppointment}
+                currentId={this.state.current._id}
+              />
+            </UncontrolledCollapse>
+          </div>
+        )
+      })
+    }
     return(
       <div className="container">
         <h2>Stylist Page</h2>
