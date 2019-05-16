@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import SERVER_URL from '../constants/server';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 // import ReactDOM from 'react-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
@@ -53,7 +53,6 @@ class Display extends Component {
 			return (
 				<div key={i}>
 	        <img src={c} alt="Before Hair" />
-	        <p className="legend">Before {i}</p>
 	      </div>
 	    )
 		})
@@ -61,22 +60,34 @@ class Display extends Component {
 			return (
 				<div key={i}>
 	        <img src={d} alt="Dream Hair" />
-	        <p className="legend">Dream {i}</p>
 	      </div>
       )
 		})
 		return (
 			<div>
-				<Carousel>
+				<FormText color="muted">
+          Current hair photos
+        </FormText>
+        <Carousel>
           {currentPhotos}
         </Carousel>
 				<hr />
-				<Carousel>
+				<FormText color="muted">
+          Dream hair photos
+        </FormText>
+        <Carousel>
           {dreamPhotos}
         </Carousel>
 				<hr />
+				<FormText color="muted">
+          Client Comments
+        </FormText>
 				<p>Kevin pork chop meatloaf ball tip, pork loin ham bacon. Ground round andouille jowl landjaeger meatloaf frankfurter doner swine cow chuck prosciutto. Chicken ham hamburger sausage, fatback cow sirloin rump meatball ham hock pork loin kevin porchetta flank. Burgdoggen venison hamburger short ribs, sausage ham jerky tongue beef ribs rump doner filet mignon. Venison ribeye bresaola tri-tip, biltong pastrami prosciutto kielbasa pork loin swine capicola brisket hamburger doner.
 				</p>
+				<hr />
+				<FormText color="muted">
+          Your Reply
+        </FormText>
 				<Form onSubmit={this.handleSubmit}>
 	        <FormGroup>
 	          <Label for="products">Products</Label>
@@ -140,7 +151,7 @@ class Display extends Component {
 	          <Label for="stylistComment">Process Description</Label>
 	          <Input type="textarea" name="stylistComment" id="stylistComment" value={this.state.stylistComment} onChange={this.handleStylistCommentChange}/>
 	        </FormGroup>
-	        <Button type="submit">Submit</Button>
+	        <Button color="success" type="submit" >Approve and Send</Button>
 	      </Form>
 	      <br />
 	      <br />

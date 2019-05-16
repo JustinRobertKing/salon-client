@@ -101,3 +101,10 @@ nav a:hover {
 	height: 50px;
 	border:1px solid grey;
 }
+h1, h2, h3, h4, h5, h6, a, button, p, div{
+	
+	/*font-family: 'Raleway', sans-serif;*/
+	/*font-family: 'Open Sans Condensed', sans-serif;*/
+	font-family: 'Quicksand', sans-serif;
+
+}

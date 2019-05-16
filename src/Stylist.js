@@ -11,6 +11,7 @@ class Stylist extends Component {
     current: {},
     appointments: [],
     currentAppt: {}
+
   }
 
   componentDidMount() {
@@ -56,11 +57,13 @@ class Stylist extends Component {
 
 	render() {
 		let consultationRequests = this.state.consultations.map((consultation, index) => {
-      // console.log("HEY",consultation.client.user.email)
+      
+            	{console.log('hey',consultation)}
+
       return (
         <div key={index}>
-          <Button color="primary" id={'toggler' + index} block style={{ border: '1px solid white', borderRadius: 0 }}>
-            hey
+          <Button color="secondary" id={'toggler' + index} block style={{ border: '1px solid white', borderRadius: 0 }}>
+           		{consultation.client.user.firstname} {consultation.client.user.lastname} 
           </Button>
           <UncontrolledCollapse toggler={'#toggler' + index}>
             <Display 
