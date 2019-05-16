@@ -56,6 +56,7 @@ class Stylist extends Component {
   }
 
 	render() {
+		// make into it's own component when refactoring.  can re-use with client
 		let consultationRequests = this.state.consultations.map((consultation, index) => {
       
             	{console.log('hey',consultation)}

@@ -11,16 +11,15 @@ componentDidMount(){
 	// let items = ''
 	// console.log('items', items)
 	// let imgArr=[]
-	console.log('')
-	console.log('')
-	console.log('hey')
-	console.log('')
-	console.log('')
-	console.log(this.props.user.id)
-	console.log('')
-	console.log('')
+	// console.log('')
+	// console.log('')
+	// console.log('hey')
+	// console.log('')
+	// console.log('')
+	// console.log(this.props.user.id)
+	// console.log('')
+	// console.log('')
 	this.getClient()
-
 
 }
 
@@ -35,8 +34,10 @@ componentDidMount(){
     .then(response => {
       console.log('Client response:', response)
 
-      console.log('Client response: stylist', response.data.stylist)
+      console.log('Client response: stylist', response.data)
       this.setState({ stylist: response.data.stylist})
+      this.setState({ client: response.data._id })
+      console.log('client state is now:', this.state.client)
     })
     .catch(error => {
       console.log('error', error)
@@ -75,9 +76,6 @@ checkUploadResult2 = (resultEvent) => {
 
 }
 
-
-
-
 showWidget = (widget) => {
 			window.cloudinary.openUploadWidget({
 		  cloudName: 'dttbrg8ur', 
@@ -109,6 +107,8 @@ console.log('submitting consultation', this.state)
     })
     .then(response => {
     	console.log('consultation response', response)
+    	this.props.formDone()
+
     })
     .catch(error => {
       console.log('error', error)
@@ -123,7 +123,6 @@ console.log('submitting consultation', this.state)
 	let items2 = this.state.dreamHair.map((item, i) => <div key={i}><img src={item} alt="Before Hair" key={ i } /></div>)
  	console.log('in the render---->',this.state.dreamHair)
 
-	
 		return (
 			 <div className="container">
 				 <Form onSubmit={this.postConsultation} >
@@ -163,12 +162,8 @@ console.log('submitting consultation', this.state)
 	          	onChange={this.handleClientComment} 
 	          />
 	        </FormGroup>
-	        <Button>Submit</Button>
+	        <Button >Submit</Button>
 	      </Form>
-	      
-
-
-
 			</div>
 		)
 	}
