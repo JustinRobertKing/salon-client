@@ -14,7 +14,8 @@ class Display extends Component {
       apptLength: '',
       estimate: '',
       stylistComment: '',
-      consultationID: this.props.consultation._id
+      consultationID: this.props.consultation._id,
+      approved:true
     };
   }
 
@@ -31,6 +32,7 @@ class Display extends Component {
   handleStylistCommentChange = (e) => { this.setState({ stylistComment: e.target.value }); }
 
   handleSubmit = (e) => {
+  	// this.setState({approved:true})
     e.preventDefault();
     console.log('HERE - handle submit', this.state)
     let token = localStorage.getItem('serverToken');
@@ -148,6 +150,7 @@ class Display extends Component {
 	        </FormGroup>*/}
 	        <FormGroup>
 	          <Label for="stylistComment">Process Description</Label>
+	          <Input type="hidden" name="approved" value="true" id="approved" />
 	          <Input type="textarea" name="stylistComment" id="stylistComment" value={this.state.stylistComment} onChange={this.handleStylistCommentChange}/>
 	        </FormGroup>
 	        <Button color="success" type="submit" >Approve and Send</Button>

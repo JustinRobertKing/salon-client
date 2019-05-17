@@ -10,7 +10,7 @@ class Nav extends Component {
   }
 
   render() {
-    let links = '';
+    // let links = '';
     if(this.props.user){
       
     
