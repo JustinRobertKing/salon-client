@@ -4,20 +4,28 @@ import Client from './Client'
 import Stylist from './Stylist';
 import { Redirect } from 'react-router-dom';
 
+let today = new Date()
+today.setHours(0,0,0,0)
 
 class Home extends Component {
 	constructor(props){
     super(props);
     this.state = {
+    	todayStamp: Date.parse(today)/1000,
+    	todayDisplay: today.toLocaleDateString(),
       user: null
     }
 	}
 
   render() {
+  	console.log(this.state)
 		if (this.props.user && this.props.user.stylist) {
 			return(
 				<div>
-	        <AppointmentForm user={this.props.user} />
+	        <AppointmentForm 
+	        	user={this.props.user}
+	        	today={this.state.todayStamp}
+	        />
 					<Stylist 
 						user={this.props.user}
 					/>
