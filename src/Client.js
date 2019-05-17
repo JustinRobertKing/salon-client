@@ -3,6 +3,7 @@ import ConsultationForm from './Consultation/ConsultationForm'
 import { UncontrolledCollapse, Button, CardBody, Card } from 'reactstrap';
 import ApptDisplay from './appointment/ApptDisplay'
 import Display from './Consultation/Display'
+import DisplayClient from './Consultation/DisplayClient'
 import axios from 'axios';
 import SERVER_URL from './constants/server';
 
@@ -15,21 +16,29 @@ class Client extends Component {
     appointments: [],
     currentAppt: {},
     consultButtonStatus: {process:'start',color:'primary', text:'START CONSULTATION'},
-    consultProcess: 'start'
+    consultProcess: '',
+    isOpen: ''
 
   }
 
   componentDidMount() {
     this.getConsultations()
     this.getAppointments()
+     
   }
 
+ 
 
 //TODO: Create callback function to change / reset the button
-formDone =() =>{
+formDone = () => {
 	console.log('this works')
-	this.setState({consultButtonStatus:{process:'pending',color:'success',text:'Review Consultation'}})
-	this.setState({consultProcess: 'submitted'})
+	this.getConsultations()
+	// this.setState({isOpen:false})
+	window.scrollTo(0, 0)
+
+	// this.setState({consultButtonStatus:{process:'pending',color:'success',text:'Review Consultation'}})
+	// this.setState({consultProcess: 'submitted'})
+
 
 }
 
@@ -46,7 +55,20 @@ formDone =() =>{
     .then(response => {
       console.log('YO consultation response: ', response)
       this.setState({ consultations: response.data})
-      console.log('YO - STATE DATA', this.state)
+
+      //check if there is a consultation
+      if (response.data.length == 0){
+      	//if no consultation, show the button as such, with the form
+	      this.setState({consultProcess:'start'})
+	      console.log('YO - STATE DATA', this.state)
+    	} else {
+    		// else if there is a consultation, grab that and show the review
+    		 this.setState({consultProcess:'submitted'})
+    		 this.setState({consultButtonStatus:{process:'pending',color:'success',text:'Review Consultation'}})
+
+
+	      console.log('YO - STATE DATA', this.state)
+    	}
     })
     .catch(error => {
       console.log('error', error)
@@ -71,28 +93,10 @@ formDone =() =>{
     })
   }
 
+
 	render() {
 		// make into it's own component when refactoring.  can re-use with client
-		let consultationRequests = this.state.consultations.map((consultation, index) => {
-      
-            	{console.log('hey',consultation)}
-
-      return (
-        <div key={index}>
-          <Button color="secondary" id={'toggler' + index} block style={{ border: '1px solid white', borderRadius: 0 }}>
-           		{consultation.stylist.user.firstname} {consultation.stylist.user.lastname} 
-          </Button>
-          <UncontrolledCollapse toggler={'#toggler' + index}>
-            <Display 
-              consultation={consultation}
-              rerender={this.getConsultations}
-              setCurrentConsultation={this.setCurrentConsultation}
-              currentId={this.state.current._id}
-            />
-          </UncontrolledCollapse>
-        </div>
-      )
-    })
+		
     let appointmentRequests = this.state.appointments.map((appointment, index) => {
       return (
         <div key={index}>
@@ -112,6 +116,9 @@ formDone =() =>{
         </div>
       )
     })
+
+
+
 let consultationForm
     if (this.state.consultProcess == 'start'){
    		consultationForm = (
@@ -122,13 +129,20 @@ let consultationForm
 
    		)
 		} else if (this.state.consultProcess == 'submitted'){ 
+			//consultation found
+
+			console.log('WOWWWWW ->>>>>>>>> ',this.state.consultations)
 			consultationForm = (
-
-
-				<p> Your consultation has been sent to ____. Thank you!</p>
-
-
-			)
+			
+            <DisplayClient 
+            	getConsultations={this.getConsultations}
+            	formDone={this.formDone}
+              consultation={this.state.consultations}
+              rerender={this.getConsultations}
+              setCurrentConsultation={this.setCurrentConsultation}
+              currentId={this.state.current._id}
+            />
+   		 )
 		}
 
     return(
@@ -139,16 +153,13 @@ let consultationForm
 		 			<Button color={this.state.consultButtonStatus.color} block id="toggler" style={{ marginBottom: '1rem' }}>
 	     			{this.state.consultButtonStatus.text}
 	    		</Button>
-		 	    <UncontrolledCollapse toggler="#toggler">
+		 	    <UncontrolledCollapse  toggler="#toggler">
 		 	   
 		 	    {consultationForm}
 		 	    
 		 	    </UncontrolledCollapse>
 		     </div>
 			<hr />
-        <h4>Pending Consultations</h4>
-        {consultationRequests}
-        <hr />
         <h4>Appointment Requests</h4>
         {appointmentRequests}
         <br />

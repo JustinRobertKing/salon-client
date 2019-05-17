@@ -35,6 +35,8 @@ componentDidMount(){
       console.log('Client response:', response)
 
       console.log('Client response: stylist', response.data)
+  // set the consultations state
+	this.setState({consultations:response.data})
       this.setState({ stylist: response.data.stylist})
       this.setState({ client: response.data._id })
       console.log('client state is now:', this.state.client)
@@ -47,8 +49,8 @@ componentDidMount(){
 
 
 state ={
-	client: this.props.user.id,
-	stylist: this.props.user.stylist,
+	client: '',
+	stylist: '',
 	currentHair: [],
 	dreamHair: [],
 	clientComment: '',
@@ -96,24 +98,24 @@ showWidget2 = (widget) => {
 
 //axios call function
 postConsultation = (e) => {
-e.preventDefault()
-console.log('submitting consultation', this.state)
-    let token = localStorage.getItem('serverToken');
-    // SEND DATA TO SERVER
-    axios.post(`${SERVER_URL}/consultation`, this.state, {
-      headers: {
-        'Authorization' : `Bearer ${token}`
-      }
-    })
-    .then(response => {
-    	console.log('consultation response', response)
-    	this.props.formDone()
+	e.preventDefault()
+	console.log('submitting consultation', this.state)
+  let token = localStorage.getItem('serverToken');
+  // SEND DATA TO SERVER
+  axios.post(`${SERVER_URL}/consultation`, this.state, {
+    headers: {
+      'Authorization' : `Bearer ${token}`
+    }
+  })
+  .then(response => {
+  	console.log('consultation response', response)
+  	this.props.formDone()
 
-    })
-    .catch(error => {
-      console.log('error', error)
-    })
-  }
+  })
+  .catch(error => {
+    console.log('error', error)
+  })
+ }
 
 	render() {
 
