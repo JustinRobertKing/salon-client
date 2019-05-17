@@ -30,7 +30,7 @@ class AppointmentForm extends Component {
 	  .then(response => {
 	  	let clientsArr = []
 	    response.data.client.forEach((c, i) => {
-	    	clientsArr.push(c.user.firstname)
+	    	clientsArr.push(c.user.lastname + ', ' + c.user.firstname)
 	    })
 	    console.log('Stylist response: stylist', response.data)
 	    this.setState({ clients: clientsArr.sort()})
@@ -80,10 +80,16 @@ class AppointmentForm extends Component {
     })
   }
 
+  toTitleCase = (str) => {
+    return str.replace(/\w\S*/g, (txt) => {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    })
+  }
+
 	render() {
 		let clients = this.state.clients.map((c, i) => {
 			return(
-				<option>{c}</option>
+				<option>{this.toTitleCase(c)}</option>
 			)
 		})
 		return (
