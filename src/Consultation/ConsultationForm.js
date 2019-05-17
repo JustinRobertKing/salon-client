@@ -47,8 +47,8 @@ componentDidMount(){
 
 
 state ={
-	client: this.props.user.id,
-	stylist: this.props.user.stylist,
+	client: '',
+	stylist: '',
 	currentHair: [],
 	dreamHair: [],
 	clientComment: '',
