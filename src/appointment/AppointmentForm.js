@@ -28,10 +28,12 @@ class AppointmentForm extends Component {
 	    },
 	  })
 	  .then(response => {
-	    console.log('Stylist response:', response)
-
+	  	let clientsArr = []
+	    response.data.client.forEach((c, i) => {
+	    	clientsArr.push(c.user.firstname)
+	    })
 	    console.log('Stylist response: stylist', response.data)
-	    this.setState({ client: response.data.client})
+	    this.setState({ clients: clientsArr.sort()})
 	    this.setState({ stylist: response.data._id })
 	    console.log('stylist state is now:', this.state.stylist)
 	  })
@@ -42,11 +44,16 @@ class AppointmentForm extends Component {
 
 	state ={
 		stylist: '',
+		clients: ['asdfglaj','asldhfa'],
 		client: '',
 		date: 1558767600,
 		duration: 9900,
 		start: 0,
 		end: 0,
+	}
+
+	handleClientChange = (e) => { 
+		this.setState({ client: e.target.value })
 	}
 
 	handleStartChange = (e) => { 
@@ -74,9 +81,21 @@ class AppointmentForm extends Component {
   }
 
 	render() {
+		let clients = this.state.clients.map((c, i) => {
+			return(
+				<option>{c}</option>
+			)
+		})
 		return (
 			 <div>
 				<Form onSubmit={this.handleSubmit}>
+					<FormGroup>
+	          <Label for="client">Client</Label>
+	          <Input type="select" name="client" id="client" onChange={this.handleClientChange}>
+	            <option>-:--</option>
+	            {clients}
+	          </Input>
+	        </FormGroup>
 	        <FormGroup>
 	          <Label for="start">Start Time</Label>
 	          <Input type="select" name="start" id="start" onChange={this.handleStartChange}>
@@ -139,7 +158,7 @@ class AppointmentForm extends Component {
 	          <Label for="stylistComment">Process Description</Label>
 	          <Input type="textarea" name="stylistComment" id="stylistComment" value={this.state.stylistComment} onChange={this.handleStylistCommentChange}/>
 	        </FormGroup>
-	        <Button color="success" type="submit" onClick={this.handleSubmit}>Approve and Send</Button>
+	        <Button color="success" type="submit" onClick={this.handleSubmit}>Create Appointment</Button>
 	      </Form>
 	      <br />
 	      <br />
