@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import SERVER_URL from '../constants/server';
-import { Row, Col, Card, CardHeader, CardBody } from 'reactstrap';
+import { Card, CardHeader, CardBody } from 'reactstrap';
 import logo from './../chopchop.png';
 
 class Login extends Component {

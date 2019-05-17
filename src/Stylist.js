@@ -10,13 +10,14 @@ class Stylist extends Component {
     consultations: [],
     current: {},
     appointments: [],
-    currentAppt: {}
-
+    currentAppt: {},
+    consultationsApproved:[]
   }
 
   componentDidMount() {
     this.getConsultations()
     this.getAppointments()
+    this.getConsultationsApproved()
   }
 
   getConsultations = () => {
@@ -36,7 +37,23 @@ class Stylist extends Component {
       console.log('error', error)
     })
   }
-
+getConsultationsApproved = () => {
+    let token = localStorage.getItem('serverToken');
+    // SEND DATA TO SERVER
+    axios.post(`${SERVER_URL}/landing/consultationsApproved`, { userId: this.props.user },
+    	{
+      	headers: {
+        	'Authorization' : `Bearer ${token}`}
+      }
+    )
+    .then(response => {
+      console.log('consultation response', response)
+      this.setState({ consultationsApproved: response.data})
+    })
+    .catch(error => {
+      console.log('error', error)
+    })
+  }
   getAppointments = () => {
     let token = localStorage.getItem('serverToken');
     // SEND DATA TO SERVER
@@ -58,7 +75,7 @@ class Stylist extends Component {
 	render() {
 		// make into it's own component when refactoring.  can re-use with client
 		let consultationRequests = this.state.consultations.map((consultation, index) => {
-      {console.log('hey',consultation)}
+      console.log('hey',consultation)
       return (
         <div key={index}>
           <Button color="secondary" id={'toggler' + index} block style={{ border: '1px solid white', borderRadius: 0 }}>
@@ -76,6 +93,25 @@ class Stylist extends Component {
       )
     })
     
+		let consultationRequestsApproved = this.state.consultationsApproved.map((consultation, index) => {
+      console.log('hey',consultation)
+      return (
+        <div key={index}>
+          <Button color="secondary" id={'toggler' + index} block style={{ border: '1px solid white', borderRadius: 0 }}>
+           		{consultation.client.user.firstname} {consultation.client.user.lastname} 
+          </Button>
+          <UncontrolledCollapse toggler={'#toggler' + index}>
+            <Display 
+              consultation={consultation}
+              rerender={this.getConsultations}
+              setCurrentConsultation={this.setCurrentConsultation}
+              currentId={this.state.current._id}
+            />
+          </UncontrolledCollapse>
+        </div>
+      )
+    })
+
     let appointmentRequests = this.state.appointments.map((appointment, index) => {
       return (
         <div key={index}>
@@ -102,6 +138,9 @@ class Stylist extends Component {
         <hr />
         <h4>Pending Consultations</h4>
         {consultationRequests}
+        <hr />
+        <h4>Approved Consultations</h4>
+        {consultationRequestsApproved}
         <hr />
         <h4>Appointment Request</h4>
         {appointmentRequests}

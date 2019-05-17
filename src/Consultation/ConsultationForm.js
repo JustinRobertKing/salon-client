@@ -110,10 +110,8 @@ class ConsultationForm extends Component {
 
 	render() {
     let items = this.state.currentHair.map((item, i) => <div key={i}><img src={item} alt="Before Hair" key={ i } /></div>)
-    console.log('in the render---->',this.state.currentHair)
 
     let items2 = this.state.dreamHair.map((item, i) => <div key={i}><img src={item} alt="Before Hair" key={ i } /></div>)
-    console.log('in the render---->',this.state.dreamHair)
 
 		return (
 			 <div className="container">

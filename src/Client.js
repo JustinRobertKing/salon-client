@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import ConsultationForm from './Consultation/ConsultationForm'
-import { UncontrolledCollapse, Button, CardBody, Card } from 'reactstrap';
+import { UncontrolledCollapse, Button } from 'reactstrap';
 import ApptDisplay from './appointment/ApptDisplay'
-import Display from './Consultation/Display'
 import DisplayClient from './Consultation/DisplayClient'
 import axios from 'axios';
 import SERVER_URL from './constants/server';
@@ -57,17 +56,25 @@ formDone = () => {
       this.setState({ consultations: response.data})
 
       //check if there is a consultation
-      if (response.data.length == 0){
+      if (response.data.length === 0){
       	//if no consultation, show the button as such, with the form
 	      this.setState({consultProcess:'start'})
-	      console.log('YO - STATE DATA', this.state)
-    	} else {
+	      console.log('LENGTH IS ZERO')
+	      
+
+    	} else if(response.data[0].approved === false){
     		// else if there is a consultation, grab that and show the review
     		 this.setState({consultProcess:'submitted'})
     		 this.setState({consultButtonStatus:{process:'pending',color:'success',text:'Review Consultation'}})
+	      
 
 
-	      console.log('YO - STATE DATA', this.state)
+    	} else if(response.data[0].approved === true){
+    		// else if there is a consultation, grab that and show the review
+    		 this.setState({consultProcess:'approved'})
+    		 this.setState({consultButtonStatus:{process:'pending',color:'success',text:'Review & Schedule'}})
+
+
     	}
     })
     .catch(error => {
@@ -100,6 +107,7 @@ formDone = () => {
     let appointmentRequests = this.state.appointments.map((appointment, index) => {
       return (
         <div key={index}>
+
           <Button color="primary" id={'togglerA' + index} block style={{ border: '1px solid white', borderRadius: 0 }}>
           {/*  {console.log("HEY",this.state.appointments[index])}
             {this.state.appointment}*/}
@@ -118,23 +126,29 @@ formDone = () => {
     })
 
 
-
+let consultationProcessTitle
+let consultationProcessText  
 let consultationForm
-    if (this.state.consultProcess == 'start'){
+    if (this.state.consultProcess === 'start'){
+    	consultationProcessTitle=(<h4>Ready for a new you? </h4>)
+			consultationProcessText =( <p>Start the consultation process now.</p>)
+
    		consultationForm = (
 
-
-   		 	<ConsultationForm formDone={this.formDone} user={this.props.user}/>
+   		 	<ConsultationForm formDone={this.formDone} user={this.props.user} />
    		
 
    		)
-		} else if (this.state.consultProcess == 'submitted'){ 
+		} else if (this.state.consultProcess === 'submitted'){ 
 			//consultation found
+			consultationProcessTitle=(<h4>Your stylist is still reviewing your consultation.</h4>)
+			consultationProcessText =( <p></p>)
 
 			console.log('WOWWWWW ->>>>>>>>> ',this.state.consultations)
 			consultationForm = (
-			
+			//add props to display client based on how much to review
             <DisplayClient 
+            	stylistNotes = {false}
             	getConsultations={this.getConsultations}
             	formDone={this.formDone}
               consultation={this.state.consultations}
@@ -143,6 +157,23 @@ let consultationForm
               currentId={this.state.current._id}
             />
    		 )
+		} else if(this.state.consultProcess === 'approved'){
+			//displayclient form with all the fields
+			consultationForm = (
+			//add props to display client based on how much to review
+            <DisplayClient 
+            	stylistNotes = {true}
+            	getConsultations={this.getConsultations}
+            	formDone={this.formDone}
+              consultation={this.state.consultations}
+              rerender={this.getConsultations}
+              setCurrentConsultation={this.setCurrentConsultation}
+              currentId={this.state.current._id}
+            />
+            )
+			consultationProcessTitle = ( <h4>Your consultation has been approved!</h4> )
+			consultationProcessText = ( <p>Please read your stylist notes, and schedule an appointment.</p>)
+			
 		}
 
     return(
@@ -150,9 +181,11 @@ let consultationForm
 		 		<h2>Client Page</h2>
         <hr />
 				<div id="consultations">
+				{consultationProcessTitle}
 		 			<Button color={this.state.consultButtonStatus.color} block id="toggler" style={{ marginBottom: '1rem' }}>
 	     			{this.state.consultButtonStatus.text}
 	    		</Button>
+	    		{consultationProcessText}
 		 	    <UncontrolledCollapse  toggler="#toggler">
 		 	   
 		 	    {consultationForm}
@@ -160,10 +193,7 @@ let consultationForm
 		 	    </UncontrolledCollapse>
 		     </div>
 			<hr />
-        <h4>Appointment Requests</h4>
-        {appointmentRequests}
-        <br />
-        <br />
+       
       </div>
     );
   }
