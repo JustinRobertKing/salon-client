@@ -12,7 +12,6 @@ class Stylist extends Component {
     appointments: [],
     currentAppt: {},
     consultationsApproved:[]
-
   }
 
   componentDidMount() {
@@ -76,9 +75,7 @@ getConsultationsApproved = () => {
 	render() {
 		// make into it's own component when refactoring.  can re-use with client
 		let consultationRequests = this.state.consultations.map((consultation, index) => {
-      
-            	console.log('hey',consultation)
-
+      console.log('hey',consultation)
       return (
         <div key={index}>
           <Button color="secondary" id={'toggler' + index} block style={{ border: '1px solid white', borderRadius: 0 }}>
@@ -97,9 +94,7 @@ getConsultationsApproved = () => {
     })
     
 		let consultationRequestsApproved = this.state.consultationsApproved.map((consultation, index) => {
-      
-            	console.log('hey',consultation)
-
+      console.log('hey',consultation)
       return (
         <div key={index}>
           <Button color="secondary" id={'toggler' + index} block style={{ border: '1px solid white', borderRadius: 0 }}>
@@ -116,29 +111,25 @@ getConsultationsApproved = () => {
         </div>
       )
     })
+
     let appointmentRequests = this.state.appointments.map((appointment, index) => {
-
-     
-	      return (
-
-	        <div key={index}>
-	          <Button color="primary" id={'togglerA' + index} block style={{ border: '1px solid white', borderRadius: 0 }}>
-	          {/*  {console.log("HEY",this.state.appointments[index])}
-	            {this.state.appointment}*/}
-	            Client Name - Appointment
-	          </Button>
-	          <UncontrolledCollapse toggler={'#togglerA' + index}>
-	            <ApptDisplay 
-	              appointment={appointment}
-	              rerender={this.getAppointments}
-	              setCurrentAppointment={this.setCurrentAppointment}
-	              currentId={this.state.current._id}
-	            />
-	          </UncontrolledCollapse>
-	        </div>
-	      )
-    
-    	
+      return (
+        <div key={index}>
+          <Button color="primary" id={'togglerA' + index} block style={{ border: '1px solid white', borderRadius: 0 }}>
+          {/*  {console.log("HEY",this.state.appointments[index])}
+            {this.state.appointment}*/}
+            Client Name - Appointment
+          </Button>
+          <UncontrolledCollapse toggler={'#togglerA' + index}>
+            <ApptDisplay 
+              appointment={appointment}
+              rerender={this.getAppointments}
+              setCurrentAppointment={this.setCurrentAppointment}
+              currentId={this.state.current._id}
+            />
+          </UncontrolledCollapse>
+        </div>
+      )
     })
 
     return(
