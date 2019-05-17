@@ -82,8 +82,7 @@ class Display extends Component {
 				<FormText color="muted">
           Client Comments
         </FormText>
-				<p>Kevin pork chop meatloaf ball tip, pork loin ham bacon. Ground round andouille jowl landjaeger meatloaf frankfurter doner swine cow chuck prosciutto. Chicken ham hamburger sausage, fatback cow sirloin rump meatball ham hock pork loin kevin porchetta flank. Burgdoggen venison hamburger short ribs, sausage ham jerky tongue beef ribs rump doner filet mignon. Venison ribeye bresaola tri-tip, biltong pastrami prosciutto kielbasa pork loin swine capicola brisket hamburger doner.
-				</p>
+          {this.props.consultation.clientComment}
 				<hr />
 				<FormText color="muted">
           Your Reply
