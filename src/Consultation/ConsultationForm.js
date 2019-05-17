@@ -20,7 +20,6 @@ class ConsultationForm extends Component {
 		// console.log('')
 		// console.log('')
 		this.getClient()
-
 	}
 
 	getClient = () => {
@@ -33,7 +32,6 @@ class ConsultationForm extends Component {
 	  })
 	  .then(response => {
 	    console.log('Client response:', response)
-
 	    console.log('Client response: stylist', response.data)
 	    this.setState({ stylist: response.data.stylist})
 	    this.setState({ client: response.data._id })
@@ -57,13 +55,11 @@ class ConsultationForm extends Component {
 		estimate: 0
 	}
 
-
 	checkUploadResult = (resultEvent) => {
 		if (resultEvent.event === 'success') {
 			console.log('resultEvent:',resultEvent.info.secure_url)
 			this.setState({ currentHair: [...this.state.currentHair, resultEvent.info.secure_url] })
 		}
-
 	}
 
 	checkUploadResult2 = (resultEvent) => {
@@ -71,7 +67,6 @@ class ConsultationForm extends Component {
 			console.log('resultEvent:',resultEvent.info.secure_url)
 			this.setState({ dreamHair: [...this.state.dreamHair, resultEvent.info.secure_url] })
 		}
-
 	}
 
 	showWidget = (widget) => {
@@ -81,6 +76,7 @@ class ConsultationForm extends Component {
 		  (error, result) => {this.checkUploadResult(result)}
 		)
 	}
+  
 	showWidget2 = (widget) => {
 			window.cloudinary.openUploadWidget({
 		  cloudName: 'dttbrg8ur', 
@@ -113,12 +109,11 @@ class ConsultationForm extends Component {
   }
 
 	render() {
+    let items = this.state.currentHair.map((item, i) => <div key={i}><img src={item} alt="Before Hair" key={ i } /></div>)
+    console.log('in the render---->',this.state.currentHair)
 
- 	let items = this.state.currentHair.map((item, i) => <div key={i}><img src={item} alt="Before Hair" key={ i } /></div>)
- 	console.log('in the render---->',this.state.currentHair)
-	
-	let items2 = this.state.dreamHair.map((item, i) => <div key={i}><img src={item} alt="Before Hair" key={ i } /></div>)
- 	console.log('in the render---->',this.state.dreamHair)
+    let items2 = this.state.dreamHair.map((item, i) => <div key={i}><img src={item} alt="Before Hair" key={ i } /></div>)
+    console.log('in the render---->',this.state.dreamHair)
 
 		return (
 			 <div className="container">
@@ -164,7 +159,6 @@ class ConsultationForm extends Component {
 			</div>
 		)
 	}
-
 }
 
 export default ConsultationForm
