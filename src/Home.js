@@ -1,23 +1,28 @@
 import React, { Component } from 'react';
-import Stylist from './Stylist';
+import AppointmentForm from './appointment/AppointmentForm'
 import Client from './Client'
+import Stylist from './Stylist';
 import { Redirect } from 'react-router-dom';
 
 
 class Home extends Component {
 	constructor(props){
-	    super(props);
-	    this.state = {
-	      user: null
-	    }
+    super(props);
+    this.state = {
+      user: null
+    }
 	}
 
   render() {
 		if (this.props.user && this.props.user.stylist) {
 			return(
-				<Stylist 
-					user={this.props.user}
-				/>)
+				<div>
+	        <AppointmentForm user={this.props.user} />
+					<Stylist 
+						user={this.props.user}
+					/>
+				</div>
+			)
 		} else if (this.props.user) {
 			return(
 				<Client 
