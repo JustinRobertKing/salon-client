@@ -7,123 +7,113 @@ import { Carousel } from 'react-responsive-carousel';
 
 class ConsultationForm extends Component {
 
-componentDidMount(){
-	// let items = ''
-	// console.log('items', items)
-	// let imgArr=[]
-	// console.log('')
-	// console.log('')
-	// console.log('hey')
-	// console.log('')
-	// console.log('')
-	// console.log(this.props.user.id)
-	// console.log('')
-	// console.log('')
-	this.getClient()
+	componentDidMount(){
+		// let items = ''
+		// console.log('items', items)
+		// let imgArr=[]
+		// console.log('')
+		// console.log('')
+		// console.log('hey')
+		// console.log('')
+		// console.log('')
+		// console.log(this.props.user.id)
+		// console.log('')
+		// console.log('')
+		this.getClient()
+	}
 
-}
+	getClient = () => {
+	  let token = localStorage.getItem('serverToken');
+	  // SEND DATA TO SERVER
+	  axios.get(`${SERVER_URL}/landing/client`, {
+	    headers: {
+	      'Authorization' : `Bearer ${token}`
+	    },
+	  })
+	  .then(response => {
+	    console.log('Client response:', response)
+	    console.log('Client response: stylist', response.data)
+	    this.setState({ stylist: response.data.stylist})
+	    this.setState({ client: response.data._id })
+	    console.log('client state is now:', this.state.client)
+	  })
+	  .catch(error => {
+	    console.log('error', error)
+	  })
+	}
 
-  getClient = () => {
+	state ={
+		client: '',
+		stylist: '',
+		currentHair: [],
+		dreamHair: [],
+		clientComment: '',
+		stylistComment: '',
+		approved: false,
+		products: [],
+		apptLength: 0,
+		estimate: 0
+	}
+
+	checkUploadResult = (resultEvent) => {
+		if (resultEvent.event === 'success') {
+			console.log('resultEvent:',resultEvent.info.secure_url)
+			this.setState({ currentHair: [...this.state.currentHair, resultEvent.info.secure_url] })
+		}
+	}
+
+	checkUploadResult2 = (resultEvent) => {
+		if (resultEvent.event === 'success') {
+			console.log('resultEvent:',resultEvent.info.secure_url)
+			this.setState({ dreamHair: [...this.state.dreamHair, resultEvent.info.secure_url] })
+		}
+	}
+
+	showWidget = (widget) => {
+			window.cloudinary.openUploadWidget({
+		  cloudName: 'dttbrg8ur', 
+		  uploadPreset: 'mj03dwg3'}, 
+		  (error, result) => {this.checkUploadResult(result)}
+		)
+	}
+  
+	showWidget2 = (widget) => {
+			window.cloudinary.openUploadWidget({
+		  cloudName: 'dttbrg8ur', 
+		  uploadPreset: 'mj03dwg3'}, 
+		  (error, result) => {this.checkUploadResult2(result)}
+		)
+	}
+
+	handleClientComment = (e) => { this.setState({ clientComment: e.target.value }); }
+
+	//axios call function
+	postConsultation = (e) => {
+		e.preventDefault()
+		console.log('submitting consultation', this.state)
     let token = localStorage.getItem('serverToken');
     // SEND DATA TO SERVER
-    axios.get(`${SERVER_URL}/landing/client`, {
+    axios.post(`${SERVER_URL}/consultation`, this.state, {
       headers: {
         'Authorization' : `Bearer ${token}`
-      },
+      }
     })
     .then(response => {
-      console.log('Client response:', response)
+    	console.log('consultation response', response)
+    	this.props.formDone()
 
-      console.log('Client response: stylist', response.data)
-  // set the consultations state
-	this.setState({consultations:response.data})
-      this.setState({ stylist: response.data.stylist})
-      this.setState({ client: response.data._id })
-      console.log('client state is now:', this.state.client)
     })
     .catch(error => {
       console.log('error', error)
     })
   }
 
-
-
-state ={
-	client: '',
-	stylist: '',
-	currentHair: [],
-	dreamHair: [],
-	clientComment: '',
-	stylistComment: '',
-	approved: false,
-	products: [],
-	apptLength: 0,
-	estimate: 0
-}
-
-
-checkUploadResult = (resultEvent) => {
-	if (resultEvent.event === 'success') {
-		console.log('resultEvent:',resultEvent.info.secure_url)
-		this.setState({ currentHair: [...this.state.currentHair, resultEvent.info.secure_url] })
-	}
-
-}
-
-checkUploadResult2 = (resultEvent) => {
-	if (resultEvent.event === 'success') {
-		console.log('resultEvent:',resultEvent.info.secure_url)
-		this.setState({ dreamHair: [...this.state.dreamHair, resultEvent.info.secure_url] })
-	}
-
-}
-
-showWidget = (widget) => {
-			window.cloudinary.openUploadWidget({
-		  cloudName: 'dttbrg8ur', 
-		  uploadPreset: 'mj03dwg3'}, 
-		  (error, result) => {this.checkUploadResult(result)}
-		)
-}
-showWidget2 = (widget) => {
-			window.cloudinary.openUploadWidget({
-		  cloudName: 'dttbrg8ur', 
-		  uploadPreset: 'mj03dwg3'}, 
-		  (error, result) => {this.checkUploadResult2(result)}
-		)
-}
-
-  handleClientComment = (e) => { this.setState({ clientComment: e.target.value }); }
-
-
-//axios call function
-postConsultation = (e) => {
-	e.preventDefault()
-	console.log('submitting consultation', this.state)
-  let token = localStorage.getItem('serverToken');
-  // SEND DATA TO SERVER
-  axios.post(`${SERVER_URL}/consultation`, this.state, {
-    headers: {
-      'Authorization' : `Bearer ${token}`
-    }
-  })
-  .then(response => {
-  	console.log('consultation response', response)
-  	this.props.formDone()
-
-  })
-  .catch(error => {
-    console.log('error', error)
-  })
- }
-
 	render() {
+    let items = this.state.currentHair.map((item, i) => <div key={i}><img src={item} alt="Before Hair" key={ i } /></div>)
+    console.log('in the render---->',this.state.currentHair)
 
- 	let items = this.state.currentHair.map((item, i) => <div key={i}><img src={item} alt="Before Hair" key={ i } /></div>)
- 	console.log('in the render---->',this.state.currentHair)
-	
-	let items2 = this.state.dreamHair.map((item, i) => <div key={i}><img src={item} alt="Before Hair" key={ i } /></div>)
- 	console.log('in the render---->',this.state.dreamHair)
+    let items2 = this.state.dreamHair.map((item, i) => <div key={i}><img src={item} alt="Before Hair" key={ i } /></div>)
+    console.log('in the render---->',this.state.dreamHair)
 
 		return (
 			 <div className="container">
@@ -169,7 +159,6 @@ postConsultation = (e) => {
 			</div>
 		)
 	}
-
 }
 
 export default ConsultationForm

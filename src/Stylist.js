@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Display from './Consultation/Display'
 import ApptDisplay from './appointment/ApptDisplay'
+import AppointmentForm from './appointment/AppointmentForm'
 import { UncontrolledCollapse, Button } from 'reactstrap';
 import axios from 'axios';
 import SERVER_URL from './constants/server';
@@ -107,6 +108,7 @@ class Stylist extends Component {
     return(
       <div className="container">
         <h2>Stylist Page</h2>
+        <AppointmentForm />
         <hr />
         <h4>Pending Consultations</h4>
         {consultationRequests}
