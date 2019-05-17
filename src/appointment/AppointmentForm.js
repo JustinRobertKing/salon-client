@@ -11,7 +11,7 @@ class AppointmentForm extends Component {
 		clients: ['asdfglaj','asldhfa'],
 		client: '',
 		notes: '',
-		date: 1558767600,
+		date: this.props.today,
 		apptLength: 9900,
 		start: 0,
 		end: 0,
