@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import SERVER_URL from '../constants/server';
 import { Row, Col, Card, CardHeader, CardBody } from 'reactstrap';
+import logo from './../chopchop.png';
 
 class Login extends Component {
   constructor(props){
@@ -37,10 +38,9 @@ class Login extends Component {
       return (<Redirect to="/" />);
     }
     return( 
-			<div className="container">
-      	<Row>
-      		<Col xs={{ size: 8, offset: 2 }}>
-      			<Card>
+			<div className="loginCenter">
+      		<img src={logo} className="App-logo" alt="logo" />
+      			<Card className="loginCard">
 	      			<CardHeader>
 	      			Login
 	      			</CardHeader>
@@ -56,9 +56,8 @@ class Login extends Component {
 		          </form>
 							</CardBody>
        		  </Card>
-      	  </Col>
-   		  </Row>
-        <p className="center">New here? <a href="/signup">Sign up</a></p>
+      	  
+        <p className="center loginSingUp">New here? <a href="/signup">Sign up</a></p>
       </div>       
       );
   }
