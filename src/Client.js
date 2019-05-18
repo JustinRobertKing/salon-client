@@ -247,7 +247,7 @@ let consultationForm
 		 	    
 		 	    {consultationForm}
 		 	    
-		 	    </Collapse>
+  	 	    </Collapse>
 		  	</div>
 				<hr />
 	      {pastHeader}
@@ -255,7 +255,6 @@ let consultationForm
       </div>
     );
   }
-
 }
 
 export default Client

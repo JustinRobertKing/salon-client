@@ -11,8 +11,8 @@ class AppointmentForm extends Component {
 		clients: ['asdfglaj','asldhfa'],
 		client: '',
 		notes: '',
-		date: 1558767600,
-		apptLength: 9900,
+		date: this.props.date,
+		apptLength: 9900000,
 		start: 0,
 		end: 0,
 		approved: true
@@ -54,7 +54,7 @@ class AppointmentForm extends Component {
 
 	handleStartChange = (e) => { 
 		let timeArr = e.target.value.split(':')
-		let startOffset = (timeArr[0] * 3600) + (timeArr[1] * 60)
+		let startOffset = (timeArr[0] * 3600000) + (timeArr[1] * 60000)
 		this.setState({ 
 			start: this.state.date + startOffset, 
 			end: this.state.date + startOffset + this.state.apptLength 
@@ -63,7 +63,7 @@ class AppointmentForm extends Component {
 
 	handleApptLengthChange = (e) => {
 		let timeArr = e.target.value.split(':')
-		let seconds = (timeArr[0] * 3600) + (timeArr[1] * 60)
+		let seconds = (timeArr[0] * 3600000) + (timeArr[1] * 60000)
 		this.setState({ 
 			apptLength: seconds,
 			end: this.state.start + seconds
@@ -106,7 +106,7 @@ class AppointmentForm extends Component {
 				)
 			})
 			return (
-				 <div className="container">
+				<div className="container">
 					<Form onSubmit={this.handleSubmit}>
 						<FormGroup>
 		          <Label for="client">Client</Label>
