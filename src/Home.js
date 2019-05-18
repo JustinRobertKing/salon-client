@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import AppointmentForm from './appointment/AppointmentForm'
 import Client from './Client'
 import Stylist from './Stylist';
 import { Redirect } from 'react-router-dom';
@@ -22,10 +21,6 @@ class Home extends Component {
 		if (this.props.user && this.props.user.stylist) {
 			return(
 				<div>
-	        <AppointmentForm 
-	        	user={this.props.user}
-	        	today={this.state.todayStamp}
-	        />
 					<Stylist 
 						user={this.props.user}
 					/>
