@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import SERVER_URL from '../constants/server';
-import { Button, FormText } from 'reactstrap';
+import { Card, CardBody, Button, FormText } from 'reactstrap';
 // import ReactDOM from 'react-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
@@ -15,11 +15,12 @@ class Display extends Component {
       estimate: '',
       stylistComment: '',
       consultationID: this.props.consultation._id,
-      stylistNotes: this.props.stylistNotes
+      stylistNotes: this.props.stylistNotes,
+      noCancel: this.props.noCancel
     };
   }
  	delete = () =>{
-  	console.log('DELETING consultation-----', this.props.consultation[0]._id)
+  	console.log('DELETING consultation-----', this.props.currentId)
 	  let token = localStorage.getItem('serverToken');
 
 	  // SEND DATA TO SERVER
@@ -27,10 +28,9 @@ class Display extends Component {
 
 	  axios.delete(`${SERVER_URL}/consultation`, {data:{_id:this.props.consultation[0]._id,}, headers: {'Authorization' : `Bearer ${token}`}})
 	  
-	  // this.props.getConsultations()
+	  this.props.getConsultations()
 
   }
-
 
 	render() {
 		console.log("this is on displayclient, checking props.consultation------>",this.props.consultation)
@@ -50,10 +50,15 @@ class Display extends Component {
 		})
 		let stylistNotes 
 		if (this.props.stylistNotes === true){
+			
+			// re-factor this into a component that takes props based on 
+			// user type- then re-use on stylist.js
+			
 			stylistNotes=(
 				//show the rest of the consultation record
-				<div>
-				<hr />
+				
+			<Card className="stylistCard">
+	    	<CardBody>
 					<h4> Stylist Notes </h4>
 					<FormText color="muted">
 	        	Stylist Comment
@@ -74,41 +79,48 @@ class Display extends Component {
 						{this.props.consultation[0].apptLength} (RUN THIS THROUGH A CONVERSION FUNCTION)
 					</p>
 					{/*schedule link*/}
-				</div>
+					{/*check if this is a past booking, draw the booking button if false*/}
+					{!this.props.noCancel ? <Button className="hotPink" block id="yes" onClick={()=>{console.log('LETS BOOK THIS SHIT')}}>Yes! Let's book it!</Button> : ''}
+				</CardBody>
+			</Card>
+
 
 				)
 		}
 
 		return (
-			<div>
-			{stylistNotes}
-			<Button block id="yes" onClick={()=>{console.log('LETS BOOK THIS SHIT')}}>Yes! Let's book it!</Button>
-			{/*approve and schedule button*/}
-			{}
-			<hr />
-			<h4>Your Notes</h4>
-				<FormText color="muted">
-          Current hair photos
-        </FormText>
-        <Carousel>
-          {currentPhotos}
-        </Carousel>
 			
-				<FormText color="muted">
-          Dream hair photos
-        </FormText>
-        <Carousel>
-          {dreamPhotos}
-        </Carousel>
-				
-				<FormText color="muted">
-          Your comments
-        </FormText>
-				<p>
-					{this.props.consultation[0].clientComment}
-				</p>
-					<Button block onClick={()=>{this.delete()}} color="danger"> Cancel Consultation </Button>
+
+			<div>
+				{stylistNotes}
+				<Card className="clientCard">
+		      <CardBody>
+						<h4>Your Notes</h4>
+						<FormText color="muted">
+		          Current hair photos
+		        </FormText>
+		        <Carousel>
+		          {currentPhotos}
+		        </Carousel>
+					
+						<FormText color="muted">
+		          Dream hair photos
+		        </FormText>
+		        <Carousel>
+		          {dreamPhotos}
+		        </Carousel>
+						<FormText color="muted">
+		          Your comments
+		        </FormText>
+						<p>
+							{this.props.consultation[0].clientComment}
+						</p>
+						{/*draw cancel button if appropriate*/}
+							{!this.props.noCancel ? <Button block onClick={()=>{this.delete()}} color="danger"> Cancel Consultation </Button> : ''}
+					</CardBody>
+				</Card>
 			</div>
+			
 		)
 	}
 }

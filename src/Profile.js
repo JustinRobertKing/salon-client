@@ -13,6 +13,7 @@ class Profile extends Component {
 
   }
   render() {
+
     if (this.props.user) {
       return(
 
@@ -35,9 +36,7 @@ class Profile extends Component {
           <div>
           	<h5 className="inlineStuff thin">E-mail: </h5><h4 className="inlineStuff">{this.props.user.email}</h4>
           </div>
-          <div>
-          	<h5 className="inlineStuff thin">Stylist: </h5><h4 className="inlineStuff">{this.props.user.stylist}</h4>
-          </div>
+          {this.props.user && !this.props.user.stylist ? <div><h5 className="inlineStuff thin">Stylist: </h5><h4 className="inlineStuff">{this.props.user.stylist}</h4></div> : ''}
                     <hr />
 
           <a href='/logout' className="tall" onClick={this.handleLogout}>Logout</a>
