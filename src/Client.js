@@ -192,12 +192,11 @@ let consultationForm
 		 	    
 		 	    </UncontrolledCollapse>
 		     </div>
-			<hr />
+      <hr />
        
       </div>
     );
   }
-
 }
 
 export default Client

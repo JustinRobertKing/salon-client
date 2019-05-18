@@ -28,14 +28,14 @@ class DayView extends Component {
 		return (
 			<div>
 			<Card className="weekRow" onClick={this.toggleCollapse}>
-	      <CardHeader>{this.state.dateDisplay + ' - ' + weekday[this.state.day]}</CardHeader>
+	      <CardHeader>{weekday[this.state.day] + ' - ' + this.state.dateDisplay}</CardHeader>
 	        <CardBody>
 	        </CardBody>
       	</Card>
 			<Collapse isOpen={this.state.collapse}>
 				<h1 onClick={this.toggleModal}>BUTTS</h1>
 				<Modal isOpen={this.state.modal}>
-					<ModalHeader toggle={this.toggleModal}>New Appointment</ModalHeader>
+					<ModalHeader toggle={this.toggleModal}>Book Appointment - {this.state.dateDisplay}</ModalHeader>
         <ModalBody>
 					<AppointmentForm date={this.state.dateStamp} user={this.props.user} />
         </ModalBody>

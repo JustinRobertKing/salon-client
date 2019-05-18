@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Display from './Consultation/Display'
 import ApptDisplay from './appointment/ApptDisplay'
+import { Link } from 'react-router-dom';
 import { UncontrolledCollapse, Button } from 'reactstrap';
 import axios from 'axios';
 import SERVER_URL from './constants/server';
@@ -144,6 +145,12 @@ getConsultationsApproved = () => {
         <hr />
         <h4>Appointment Request</h4>
         {appointmentRequests}
+        <hr />
+        <Link to="/schedule">
+          <Button color="primary" block style={{ border: '1px solid white', borderRadius: 0 }}>
+            VIEW MY SCHEDULE
+          </Button>
+        </Link>
         <br />
         <br />
       </div>
