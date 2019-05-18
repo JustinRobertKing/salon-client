@@ -10,8 +10,17 @@ class Login extends Component {
     super(props);
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      error:'',
+      normalLogin:'Login'
     };
+  }
+
+  loginError = () => {
+  	console.log("FAILED BITCH")
+  	this.setState({error: 'Login failed'})
+  	this.setState({normalLogin: ''})
+
   }
 
   handleEmailChange = (e) => { this.setState({ email: e.target.value }); }
@@ -30,8 +39,12 @@ class Login extends Component {
       console.log('hey')
     })
     .catch(error => {
-      console.log('error', error)
+      
+      if (error == "Error: Request failed with status code 406" || error == "Error: Request failed with status code 404"){
+      	this.loginError()
+    	}
     })
+
   }
   render() {
     if(this.props.user){
@@ -42,7 +55,7 @@ class Login extends Component {
       		<img src={logo} className="App-logo" alt="logo" />
       			<Card className="loginCard">
 	      			<CardHeader>
-	      			Login
+	      				<span className="normalLogin">{this.state.normalLogin}</span>	<span className="failedLogin">{this.state.error}</span>
 	      			</CardHeader>
 	      			<CardBody>
 		      			<form onSubmit={this.handleSubmit}>
@@ -50,7 +63,7 @@ class Login extends Component {
 		              <input name="Email" placeholder="What is your email?" value={this.state.email} onChange={this.handleEmailChange} />
 		            </div>
 		            <div>
-		              <input name="Password" type="password" value={this.state.password} onChange={this.handlePasswordChange} />
+		              <input name="Password" placeholder="Enter your password." type="password" value={this.state.password} onChange={this.handlePasswordChange} />
 		            </div>
 		            <input type="submit" value="Log Me In!" className="button" />
 		          </form>

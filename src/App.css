@@ -57,8 +57,9 @@ nav a:hover {
 
 .App-logo {
   /*animation: App-logo-spin infinite 20s linear;*/
-  height: 40vmin;
+  height: 20vmin;
   pointer-events: none;
+  margin: .5em;
 }
 
 @keyframes App-logo-spin {
@@ -130,9 +131,14 @@ h1, h2, h3, h4, h5, h6, a, button, p, div{
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: #333;
+  padding:0;
 } 
 .loginCard {
-	margin-top: -1.6em;
+/*	margin-top: -1.6em;*/
+}
+.signUpCard {
+/*	margin-top: -1.6em;*/
+	width:90%;
 }
 .loginSingUp {
 	color:#555;
@@ -150,4 +156,30 @@ color: #61dafb;
 }
 .tall{
 	line-height: 2.5em;
+}
+.failedLogin{
+	color:red;
+	margin:0;
+	line-height: 1em;
+	text-align: right;
+}
+.normalLogin{
+
+}
+.clientCard{
+
+}
+.stylistCard {
+	/*background-color: #ffefff;*/
+	background-color: white;
+}
+.hotPink{
+	background-color: hotpink;
+	color: white;
+}
+.backLogin{
+	margin-bottom: 2em;
+	font-size: .8em;
+	color:hotpink;
+	
 }

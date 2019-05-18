@@ -2,12 +2,17 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import SERVER_URL from '../constants/server';
-import { Button, Form, FormGroup, Label, Input, CustomInput } from 'reactstrap';
+import { Card, CardBody, Tooltip, Button, Form, FormGroup, Label, Input, CustomInput } from 'reactstrap';
+import logo from './../chopchop.png';
+import { Link } from 'react-router-dom';
+
 
 
 class Signup extends Component {
   constructor(props){
     super(props);
+    this.toggle = this.toggle.bind(this);
+
     this.state = {
       firstname: '',
       lastname: '',
@@ -15,9 +20,15 @@ class Signup extends Component {
       password: '',
       referral: '',
       phone: '',
-      stylist: false
+      stylist: false,
+      tooltipOpen: false
 
     };
+  }
+ toggle() {
+    this.setState({
+      tooltipOpen: !this.state.tooltipOpen
+    });
   }
 
   handleFirstnameChange = (e) => { this.setState({ firstname: e.target.value }); }
@@ -58,13 +69,19 @@ class Signup extends Component {
     }
     return(
     	<div className="container">
+
+
+        <div className="loginCenter">
+      		<img src={logo} className="App-logo" alt="logo" />
+      			<Card  className="signUpCard">
+	      			<CardBody>
+
+
 	    	<h2>Create Account</h2>
+	    	<Link className="backLogin" to="/login">Back to login</Link>
+	    	<br />
+	    	<br />
 	    	<Form onSubmit={this.handleSubmit}>
-				{/* referal code */}
-					<FormGroup>
-	        	<Label for="referral">Referral code</Label>
-	        	<Input type="text" name="referral" id="referral" placeholder="" value={this.state.referral} onChange={this.handleReferralChange}/>
-	        </FormGroup>
 	    	{/* first name */}
 		    	<FormGroup>
 	        	<Label for="firstname">First name</Label>
@@ -79,6 +96,16 @@ class Signup extends Component {
 					<FormGroup>
 	        	<Label for="lastname">Phone number</Label>
 	        	<Input type="text" name="phone" id="phone" placeholder="" value={this.state.phone} onChange={this.handlePhoneChange}/>
+	        </FormGroup>
+	      {/* referal code */}
+					<FormGroup>
+	        	<Label for="referral">
+	        		Referral code (<span id="TooltipExample">optional</span>)
+	        		<Tooltip placement="right" isOpen={this.state.tooltipOpen} target="TooltipExample" toggle={this.toggle}>
+			          This is how we connect you with your stylist, or your salon.  Make sure to ask your stylist or salon for their code, you can enter it on your profile later, if you wish.
+			        </Tooltip>
+	        	</Label>
+	        	<Input type="text" name="referral" id="referral" placeholder="" value={this.state.referral} onChange={this.handleReferralChange}/>
 	        </FormGroup>
 		 		{/* email */}
 			    <FormGroup>
@@ -103,7 +130,11 @@ class Signup extends Component {
 		    	<Button>Submit</Button>
 
 		    </Form>
-		    <br /><br /><br />
+
+		    </CardBody>
+		    </Card>
+		    <br />
+		    </div>
       </div>
     );
   }
