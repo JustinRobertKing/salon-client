@@ -5,7 +5,6 @@ import SERVER_URL from '../constants/server';
 import { Card, CardBody, Tooltip, Button, Form, FormGroup, Label, Input, CustomInput } from 'reactstrap';
 import logo from './../chopchop.png';
 import { Link } from 'react-router-dom';
-// import GenerateRandomCode from 'GenerateRandomCode';
 
 
 class Signup extends Component {
@@ -22,27 +21,27 @@ class Signup extends Component {
       phone: '',
       stylist: false,
       tooltipOpen: false,
-      code: ''
+      referralLink: ''
+
 
     };
   }
+
+
+
  toggle() {
     this.setState({
       tooltipOpen: !this.state.tooltipOpen
     });
   }
 
-	genetrateCode(){
-		// let myCode = GenerateRandomCode.NumCode(4);
 
-		// this.setState({code: this.myCode}) 
-	}
 
   handleFirstnameChange = (e) => { this.setState({ firstname: e.target.value }); }
 
   handleLastnameChange = (e) => { this.setState({ lastname: e.target.value }); }
 
-  handleReferralChange = (e) => { this.setState({ referral: e.target.value }); }
+  handleReferralLinkChange = (e) => { this.setState({ referralLink: e.target.value }); }
 
   handlePhoneChange = (e) => { this.setState({ phone: e.target.value }); }
 
@@ -106,13 +105,13 @@ class Signup extends Component {
 	        </FormGroup>
 	      {/* referal code */}
 					<FormGroup>
-	        	<Label for="referral">
+	        	<Label for="referralLink">
 	        		Referral code (<span id="TooltipExample">optional</span>)
 	        		<Tooltip placement="right" isOpen={this.state.tooltipOpen} target="TooltipExample" toggle={this.toggle}>
 			          This is how we connect you with your stylist, or your salon.  Make sure to ask your stylist or salon for their code, you can enter it on your profile later, if you wish.
 			        </Tooltip>
 	        	</Label>
-	        	<Input type="text" name="referral" id="referral" placeholder="" value={this.state.referral} onChange={this.handleReferralChange}/>
+	        	<Input type="text" name="referralLink" id="referralLink" placeholder="" value={this.state.referralLink} onChange={this.handleReferralLinkChange}/>
 	        </FormGroup>
 		 		{/* email */}
 			    <FormGroup>
@@ -133,7 +132,6 @@ class Signup extends Component {
 	            <CustomInput type="radio" id="accountTypeT" label="Stylist" value='true' onChange={this.handleStylistChange} name="stylist" inline />
 	          </div>
 	        </FormGroup>
-	        <Input type="hidden" value="" id="" />
 				{/* submit button */}
 		    	<Button>Submit</Button>
 
