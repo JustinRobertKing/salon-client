@@ -9,6 +9,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-moment": "^0.9.2",
+    "react-random-code-generator": "^1.0.2",
     "react-redux": "^7.0.3",
     "react-responsive-carousel": "^3.1.49",
     "react-router-dom": "^4.2.2",

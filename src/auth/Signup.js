@@ -5,7 +5,7 @@ import SERVER_URL from '../constants/server';
 import { Card, CardBody, Tooltip, Button, Form, FormGroup, Label, Input, CustomInput } from 'reactstrap';
 import logo from './../chopchop.png';
 import { Link } from 'react-router-dom';
-
+// import GenerateRandomCode from 'GenerateRandomCode';
 
 
 class Signup extends Component {
@@ -21,7 +21,8 @@ class Signup extends Component {
       referral: '',
       phone: '',
       stylist: false,
-      tooltipOpen: false
+      tooltipOpen: false,
+      code: ''
 
     };
   }
@@ -30,6 +31,12 @@ class Signup extends Component {
       tooltipOpen: !this.state.tooltipOpen
     });
   }
+
+	genetrateCode(){
+		// let myCode = GenerateRandomCode.NumCode(4);
+
+		// this.setState({code: this.myCode}) 
+	}
 
   handleFirstnameChange = (e) => { this.setState({ firstname: e.target.value }); }
 
@@ -126,6 +133,7 @@ class Signup extends Component {
 	            <CustomInput type="radio" id="accountTypeT" label="Stylist" value='true' onChange={this.handleStylistChange} name="stylist" inline />
 	          </div>
 	        </FormGroup>
+	        <Input type="hidden" value="" id="" />
 				{/* submit button */}
 		    	<Button>Submit</Button>
 
