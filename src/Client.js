@@ -25,7 +25,7 @@ class Client extends Component {
     appointments: [],
     currentAppt: {},
     consultButtonStatus: {process:'start',color:'primary', text:'START CONSULTATION'},
-    consultProcess: '',
+    consultProcess: 'start',
     isOpen: '',
     collapse: false 
 
@@ -70,32 +70,37 @@ formDone = () => {
       
       this.setState({ consultations: response.data})
       let currentConsultation = response.data.length - 1
-      console.log('------>',response.data[currentConsultation])
+      console.log('------>',this.state.consultations)
       //check if there is a consultation
-      if (response.data.length === currentConsultation || response.data[currentConsultation].scheduled === true){
-      	//if no consultation, show the button as such, with the form
-	      this.setState({consultProcess:'start'})
-	      console.log('LENGTH IS ZERO')
-	      
+      if (this.state.consultations ==[]){
+      	this.setState({consultProcess:'start'})
+			      console.log('NO CONSULTATION')
+      }else{
+		      if (response.data.length === currentConsultation || response.data[currentConsultation].scheduled === true){
+		      	//if no consultation, show the button as such, with the form
+			      this.setState({consultProcess:'start'})
+			      console.log('LENGTH IS ZERO')
+			      
 
-    	} else if(response.data[currentConsultation].approved === false){
-    		// else if there is a consultation, grab that and show the review
-    		console.log('NOT APPROVED')
-    		 this.setState({consultProcess:'submitted'})
-    		 this.setState({consultButtonStatus:{process:'pending',color:'success',text:'Review Consultation'}})
-	      
-
-
-    	} else if(response.data[currentConsultation].approved === true && response.data[currentConsultation].scheduled === false){
-    		// else if there is a consultation, grab that and show the review
-    		console.log('APPROVED BUT NOT SCHEDULED')
-    		 this.setState({consultProcess:'approved'})
-    		 this.setState({consultButtonStatus:{process:'pending',color:'success',text:'Review & Schedule'}})
+		    	} else if(response.data[currentConsultation].approved === false){
+		    		// else if there is a consultation, grab that and show the review
+		    		console.log('NOT APPROVED')
+		    		 this.setState({consultProcess:'submitted'})
+		    		 this.setState({consultButtonStatus:{process:'pending',color:'success',text:'Review Consultation'}})
+			      
 
 
-    	} else {
-    		console.log('ELSE CAUGHt THIS')
-    	}
+		    	} else if(response.data[currentConsultation].approved === true && response.data[currentConsultation].scheduled === false){
+		    		// else if there is a consultation, grab that and show the review
+		    		console.log('APPROVED BUT NOT SCHEDULED')
+		    		 this.setState({consultProcess:'approved'})
+		    		 this.setState({consultButtonStatus:{process:'pending',color:'success',text:'Review & Schedule'}})
+
+
+		    	} else {
+		    		console.log('ELSE CAUGHt THIS')
+		    	}
+		    }
     })
     .catch(error => {
       console.log('error', error)
