@@ -72,10 +72,7 @@ formDone = () => {
       let currentConsultation = response.data.length - 1
       console.log('------>',this.state.consultations)
       //check if there is a consultation
-      if (this.state.consultations ==[]){
-      	this.setState({consultProcess:'start'})
-			      console.log('NO CONSULTATION')
-      }else{
+      
 		      if (response.data.length === currentConsultation || response.data[currentConsultation].scheduled === true){
 		      	//if no consultation, show the button as such, with the form
 			      this.setState({consultProcess:'start'})
@@ -100,7 +97,7 @@ formDone = () => {
 		    	} else {
 		    		console.log('ELSE CAUGHt THIS')
 		    	}
-		    }
+		    
     })
     .catch(error => {
       console.log('error', error)
