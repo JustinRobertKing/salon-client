@@ -5,13 +5,14 @@ import ApptDisplay from './appointment/ApptDisplay'
 import DisplayClient from './Consultation/DisplayClient'
 import axios from 'axios';
 import SERVER_URL from './constants/server';
+import profilePic from './catherineTemp.png';
+
 
 class Client extends Component {
 
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
-    
   }
 
   toggle() {
@@ -24,7 +25,7 @@ class Client extends Component {
     current: {},
     appointments: [],
     currentAppt: {},
-    consultButtonStatus: {process:'start',color:'primary', text:'START CONSULTATION'},
+    consultButtonStatus: {process:'start',color:'primary', text:'Start Consultation'},
     consultProcess: 'start',
     isOpen: '',
     collapse: false 
@@ -36,17 +37,15 @@ class Client extends Component {
     this.getAppointments()
   }
 
-  //TODO: Create callback function to change / reset the button
-  formDone = () => {
+  componentReload = () => {
+  	console.log('client componentreload')
   	this.getConsultations()
-  	// this.setState({isOpen:false})
-  	window.scrollTo(0, 0)
+    this.getAppointments()
+    window.scrollTo(0, 0)
   	this.toggle()
-
-  	// this.setState({consultButtonStatus:{process:'pending',color:'success',text:'Review Consultation'}})
-  	// this.setState({consultProcess: 'submitted'})
-
   }
+
+
 
   getConsultations = () => {
     let token = localStorage.getItem('serverToken');
@@ -58,15 +57,17 @@ class Client extends Component {
       }
     )
     .then(response => {
-    	
-      
       this.setState({ consultations: response.data})
       let currentConsultation = response.data.length - 1
       //check if there is a consultation
       
 		      if (response.data.length === currentConsultation || response.data[currentConsultation].scheduled === true){
 		      	//if no consultation, show the button as such, with the form
+			      
+			      //i think this is redundant 
 			      this.setState({consultProcess:'start'})
+	    		  this.setState({consultButtonStatus:{process:'start',color:'primary',text:'Start Consultation'}})
+
 			      console.log('LENGTH IS ZERO')
 			      
 		    	} else if(response.data[currentConsultation].approved === false){
@@ -122,6 +123,7 @@ class Client extends Component {
           </Button>
           <UncontrolledCollapse toggler={'#togglerA' + index}>
             <ApptDisplay 
+            	componentReload={this.componentReload}
               appointment={appointment}
               rerender={this.getAppointments}
               setCurrentAppointment={this.setCurrentAppointment}
@@ -143,7 +145,11 @@ let consultationForm
 
    		consultationForm = (
 
-   		 	<ConsultationForm formDone={this.formDone} user={this.props.user} />
+   		 	<ConsultationForm 
+   		 		componentReload={this.componentReload} 
+   		 		user={this.props.user} 
+
+   		 	/>
    		
 
    		)
@@ -165,6 +171,7 @@ let consultationForm
               rerender={this.getConsultations}
               setCurrentConsultation={this.setCurrentConsultation}
               currentId={this.state.current._id}
+              componentReload={this.componentReload}
             />
    		 )
 		} else if(this.state.consultProcess === 'approved'){
@@ -182,6 +189,7 @@ let consultationForm
               rerender={this.getConsultations}
               setCurrentConsultation={this.setCurrentConsultation}
               currentId={this.state.current._id}
+              componentReload={this.componentReload}
             />
             )
 			consultationProcessTitle = ( <h4>Your consultation has been approved!</h4> )
@@ -190,14 +198,14 @@ let consultationForm
 		}
 		let pastHeader 
 //past consultations
-		let consultationPast = this.state.consultations.map((consultation, index) => {
+		let consultationPast = this.state.consultations.slice(0).reverse().map((consultation, index) => {
 
       //do logic to make sure it's a past one
       if (consultation.scheduled === true){
       	pastHeader=(<h4>Past consultations</h4>)
 	      return (
 	        <div key={index}>
-	          <Button color="secondary" id={'toggler' + index} block style={{ border: '1px solid white', borderRadius: 0 }}>
+	          <Button color="secondary" id={'toggler' + index} block style={{ margin: '2px',}}>
 	           		{consultation.stylist.user.firstname} {consultation.stylist.user.lastname} 
 	          </Button>
 
@@ -212,6 +220,7 @@ let consultationForm
 	              rerender={this.getConsultations}
 	              setCurrentConsultation={this.setCurrentConsultation}
 	              currentId={this.state.current._id}
+	              componentReload={this.componentReload}
 	            />
 	          </UncontrolledCollapse>
 	        </div>
@@ -222,7 +231,8 @@ let consultationForm
 
     return(
     	<div className="container">
-		 		<h2>Client Page</h2>
+		 		<h4>Your Stylist; Catherine</h4>
+		 		<img className='profilePic'  src={profilePic} />
         <hr />
 				<div id="consultations">
 					{consultationProcessTitle}

@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import SERVER_URL from '../constants/server';
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Card, CardBody, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 // import ReactDOM from 'react-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
+import { Link } from 'react-router-dom'
 
 class Display extends Component {
 	constructor(props){
@@ -15,6 +16,7 @@ class Display extends Component {
       estimate: '',
       stylistComment: '',
       consultationID: this.props.consultation._id,
+      stylistNotes: this.props.stylistNotes,
       approved:true
     };
   }
@@ -42,6 +44,8 @@ class Display extends Component {
       }
     })
     .then(response => {
+    	//success, reload function call here
+			this.props.componentReload()
     })
     .catch(error => {
     })
@@ -62,30 +66,12 @@ class Display extends Component {
 	      </div>
       )
 		})
-		return (
-			<div>
-				<FormText color="muted">
-          Current hair photos
-        </FormText>
-        <Carousel>
-          {currentPhotos}
-        </Carousel>
-				<hr />
-				<FormText color="muted">
-          Dream hair photos
-        </FormText>
-        <Carousel>
-          {dreamPhotos}
-        </Carousel>
-				<hr />
-				<FormText color="muted">
-          Client Comments
-        </FormText>
-          {this.props.consultation.clientComment}
-				<hr />
-				<FormText color="muted">
-          Your Reply
-        </FormText>
+
+		let stylistForm
+		if (this.props.consultation.approved == false){
+		//approve a consultation			
+			stylistForm =(
+						
 				<Form onSubmit={this.handleSubmit}>
 	        <FormGroup>
 	          <Label for="products">Products</Label>
@@ -152,8 +138,68 @@ class Display extends Component {
 	        </FormGroup>
 	        <Button color="success" type="submit" >Approve and Send</Button>
 	      </Form>
-	      <br />
-	      <br />
+
+			)
+
+		} else {
+			stylistForm = (
+				<Card className="stylistCard">
+		    	<CardBody>
+						<h4> Stylist Notes </h4>
+						<FormText color="muted">
+		        	Stylist Comment
+		        </FormText>
+						<p>
+							{this.props.consultation.stylistComment}
+						</p>
+						<FormText color="muted">
+		        	Estimate
+		        </FormText>
+						<p>
+							${this.props.consultation.estimate}
+						</p>
+						<FormText color="muted">
+		        	Appointment Length
+		        </FormText>
+						<p>
+							{this.state.apptLength[0] + ' hr ' + this.state.apptLength[1] + ' min'}
+						</p>
+					</CardBody>
+				</Card>
+			)
+		}
+
+		return (
+
+			//client notes
+
+			<div>
+        {stylistForm}
+
+				<Card className="clientCard">
+			      <CardBody>
+							<h4>Client Notes</h4>
+							<FormText color="muted">
+			          Current hair photos
+			        </FormText>
+			        <Carousel>
+			          {currentPhotos}
+			        </Carousel>
+							<FormText color="muted">
+			          Dream hair photos
+			        </FormText>
+			        <Carousel>
+			          {dreamPhotos}
+			        </Carousel>
+							<FormText color="muted">
+			          Your comments
+			        </FormText>
+							<p>
+          			{this.props.consultation.clientComment}
+							</p>
+						</CardBody>
+					</Card>
+	    
 			</div>
 		)
 	}

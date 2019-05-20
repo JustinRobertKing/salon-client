@@ -138,6 +138,15 @@ class AppointmentForm extends Component {
     })
     .then(response => {
     	console.log('consultation response', response)
+    	
+    	//close the modal
+    	this.props.toggleModal()
+    	
+    	// OR should we display a message?
+    	
+    	// OR should we redirect to home?
+    	
+    	
     })
     .catch(error => {
       console.log('error', error)

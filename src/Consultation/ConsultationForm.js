@@ -100,7 +100,7 @@ class ConsultationForm extends Component {
     })
     .then(response => {
     	console.log('consultation response', response)
-    	this.props.formDone()
+    	this.props.componentReload()
 
     })
     .catch(error => {

@@ -245,7 +245,8 @@ color: #61dafb;
 }
 
 
-
-
+.profilePic {
+	max-width:100%;
+}
 
 

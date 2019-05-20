@@ -19,7 +19,7 @@ class Nav extends Component {
           <nav className="nav">
             <span>
             	<Link to="/">Home</Link>
-            	<Link to="/schedule">Schedule</Link>
+            	{this.props.user.stylist ?<Link to="/schedule">Schedule</Link>:'' }
             </span>
             <span>
               <Link to="/profile">Me</Link>

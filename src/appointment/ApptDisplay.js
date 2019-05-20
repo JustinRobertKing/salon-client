@@ -35,6 +35,12 @@ class Display extends Component {
     })
     .then(response => {
       console.log('consultation response', response)
+
+      // close this / redraw stylist.js
+      console.log('reload from apptdisply')
+      this.props.componentReload()
+
+
     })
     .catch(error => {
       console.log('error', error)

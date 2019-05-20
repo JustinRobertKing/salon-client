@@ -29,7 +29,8 @@ class Display extends Component {
 	  // SEND DATA TO SERVER
 	  axios.delete(`${SERVER_URL}/consultation`, {data:{_id:this.props.consultation[i]._id,}, headers: {'Authorization' : `Bearer ${token}`}})
 	  .then (response=>{
-	  	  this.props.getConsultations()
+	  	console.log('delete .then')
+	  	  this.props.componentReload()
 	  })
 	
 
