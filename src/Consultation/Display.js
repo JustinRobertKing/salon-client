@@ -23,7 +23,7 @@ class Display extends Component {
 
   handleTimeChange = (e) => { 
   	let timeArr = e.target.value.split(':')
-  	let seconds = (timeArr[0] * 3600) + (timeArr[1] * 60)
+  	let seconds = (timeArr[0] * 3600000) + (timeArr[1] * 60000)
   	this.setState({ apptLength: seconds }); 
   }
 

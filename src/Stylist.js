@@ -38,7 +38,7 @@ class Stylist extends Component {
       console.log('error', error)
     })
   }
-getConsultationsApproved = () => {
+  getConsultationsApproved = () => {
     let token = localStorage.getItem('serverToken');
     // SEND DATA TO SERVER
     axios.post(`${SERVER_URL}/landing/consultationsApproved`, { userId: this.props.user },

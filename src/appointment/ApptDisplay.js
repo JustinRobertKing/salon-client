@@ -27,7 +27,7 @@ class Display extends Component {
     console.log('HERE - handle submit', this.state)
     let token = localStorage.getItem('serverToken');
     // SEND DATA TO SERVER
-    axios.put(`${SERVER_URL}/consultation/display`, this.state, {
+    axios.put(`${SERVER_URL}/appointment/apptdisplay`, this.state, {
       headers: {
         'Authorization' : `Bearer ${token}`
       }
