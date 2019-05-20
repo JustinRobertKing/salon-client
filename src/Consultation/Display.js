@@ -34,7 +34,6 @@ class Display extends Component {
   handleSubmit = (e) => {
   	// this.setState({approved:true})
     e.preventDefault();
-    console.log('HERE - handle submit', this.state)
     let token = localStorage.getItem('serverToken');
     // SEND DATA TO SERVER
     axios.put(`${SERVER_URL}/consultation/display`, this.state, {
@@ -43,10 +42,8 @@ class Display extends Component {
       }
     })
     .then(response => {
-    	console.log('consultation response', response)
     })
     .catch(error => {
-      console.log('error', error)
     })
   }
 

@@ -10,35 +10,36 @@ import { Link } from 'react-router-dom'
 class Display extends Component {
 	constructor(props){
     super(props);
+
     this.state = {
+    	index: this.props.index,
       products: '',
-      apptLength: this.props.consultation[0].apptLength ? new Date(this.props.consultation[0].apptLength).toISOString().substr(11, 8).split(':') : '',
+      apptLength: this.props.consultation[this.props.consultation.length -1].apptLength ? new Date(this.props.consultation[this.props.consultation.length -1].apptLength).toISOString().substr(11, 8).split(':') : '',
       estimate: '',
       stylistComment: '',
       consultationID: this.props.consultation._id,
       stylistNotes: this.props.stylistNotes,
-      noCancel: this.props.noCancel,
-      index: this.props.index
+      noCancel: this.props.noCancel
+      
     };
   }
  	delete = (i) =>{
-  	console.log('DELETING consultation-----', this.props.currentId)
 	  let token = localStorage.getItem('serverToken');
 
 	  // SEND DATA TO SERVER
-	  // axios.delete(url, {data:{username:"user", password:"pass"}, headers:{Authorization: "token"}})
-
 	  axios.delete(`${SERVER_URL}/consultation`, {data:{_id:this.props.consultation[i]._id,}, headers: {'Authorization' : `Bearer ${token}`}})
-	  
-	  this.props.getConsultations()
-
+	  .then (response=>{
+	  	  this.props.getConsultations()
+	  })
+	
 
   }
 
 	render() {
 		console.log('HEEEEEEEEEEEYYYYYYYY INDEX',this.state.index)
-		console.log("this is on displayclient, checking props.consultation------>",this.props.consultation[this.state.index])
-		
+		//make sure there is a consultation
+		if (this.props.consultation){
+		console.log('HEEEEEEEEEEEYYYYYYYY WHATS THE PROPS.COSULTATION??',this.props.consultation)
 			let currentPhotos = this.props.consultation[this.state.index].currentHair.map((c, i) => {
 				return (
 					<div key={i}>
@@ -54,84 +55,46 @@ class Display extends Component {
 	      )
 			})
 			let stylistNotes 
+
 			if (this.props.stylistNotes === true){
-				
 
 				// re-factor this into a component that takes props based on 
 				// user type- then re-use on stylist.js
 				
 				stylistNotes=(
 					//show the rest of the consultation record
-			<Card className="stylistCard">
-	    	<CardBody>
-					<h4> Stylist Notes </h4>
-					<FormText color="muted">
-	        	Stylist Comment
-	        </FormText>
-					<p>
-						{this.props.consultation[0].stylistComment}
-					</p>
-					<FormText color="muted">
-	        	Estimate
-	        </FormText>
-					<p>
-						${this.props.consultation[0].estimate}
-					</p>
-					<FormText color="muted">
-	        	Appointment Length
-	        </FormText>
-					<p>
-						{this.state.apptLength[0] + ' hr ' + this.state.apptLength[1] + ' min'}
-					</p>
-					{/*schedule link*/}
-					{/*check if this is a past booking, draw the booking button if false*/}
-					{!this.props.noCancel ? <Link to="/schedule"><Button className="hotPink" block id="yes" onClick={()=>{console.log('LETS BOOK THIS SHIT')}}>Yes! Let's book it!</Button></Link> : ''}
-				</CardBody>
-			</Card>
-
-
+					<Card className="stylistCard">
+			    	<CardBody>
+							<h4> Stylist Notes </h4>
+							<FormText color="muted">
+			        	Stylist Comment
+			        </FormText>
+							<p>
+								{this.props.consultation[this.state.index].stylistComment}
+							</p>
+							<FormText color="muted">
+			        	Estimate
+			        </FormText>
+							<p>
+								${this.props.consultation[this.state.index].estimate}
+							</p>
+							<FormText color="muted">
+			        	Appointment Length
+			        </FormText>
+							<p>
+								{this.state.apptLength[this.state.index] + ' hr ' + this.state.apptLength[1] + ' min'}
+							</p>
+							{/*schedule link*/}
+							{/*check if this is a past booking, draw the booking button if false*/}
+							{!this.props.noCancel ? <Link to="/schedule"><Button className="hotPink" block id="yes" onClick={()=>{console.log('LETS BOOK THIS SHIT')}}>Yes! Let's book it!</Button></Link> : ''}
+						</CardBody>
+					</Card>
 				)
-		}
+					
 
-		return (
-			
-
-			<div>
-				{stylistNotes}
-				<Card className="clientCard">
-		      <CardBody>
-						<h4>Your Notes</h4>
-						<FormText color="muted">
-		        	Stylist Comment
-		        </FormText>
-						<p>
-							{this.props.consultation[this.state.index].stylistComment}
-						</p>
-						<FormText color="muted">
-		        	Estimate
-		        </FormText>
-						<p>
-							${this.props.consultation[this.state.index].estimate}
-						</p>
-						<FormText color="muted">
-		        	Appointment Length
-		        </FormText>
-						<p>
-							{this.props.consultation[this.state.index].apptLength} (RUN THIS THROUGH A CONVERSION FUNCTION)
-						</p>
-						{/*schedule link*/}
-						{/*check if this is a past booking, draw the booking button if false*/}
-						{!this.props.noCancel ? <Button className="hotPink" block id="yes" onClick={()=>{console.log('LETS BOOK THIS SHIT')}}>Yes! Let's book it!</Button> : ''}
-					</CardBody>
-				</Card>
-
-
-					)
-			}
-
-			return (
 				
-
+					return (
+				
 				<div>
 					{stylistNotes}
 					<Card className="clientCard">
@@ -163,8 +126,44 @@ class Display extends Component {
 				</div>
 				
 			)
-		}
-		
-}
+			
+			//closes if statement  if(this.props.stylistnotes)
+			}
 
+			return (
+				<div>
+					{stylistNotes}
+					<Card className="clientCard">
+			      <CardBody>
+							<h4>Your Notes</h4>
+							<FormText color="muted">
+			          Current hair photos
+			        </FormText>
+			        <Carousel>
+			          {currentPhotos}
+			        </Carousel>
+							<FormText color="muted">
+			          Dream hair photos
+			        </FormText>
+			        <Carousel>
+			          {dreamPhotos}
+			        </Carousel>
+							<FormText color="muted">
+			          Your comments
+			        </FormText>
+							<p>
+								{this.props.consultation[this.state.index].clientComment}
+							</p>
+							{/*draw cancel button if appropriate*/}
+								{!this.props.noCancel ? <Button block onClick={()=>{this.delete(this.state.index)}} color="danger"> Cancel Consultation </Button> : ''}
+						</CardBody>
+					</Card>
+				</div>	
+			)
+		//closes if that checks for a consultation
+		}
+	//closes render	
+	}
+// closes component
+}
 export default Display

@@ -38,7 +38,6 @@ class Client extends Component {
 
   //TODO: Create callback function to change / reset the button
   formDone = () => {
-  	console.log('this works')
   	this.getConsultations()
   	// this.setState({isOpen:false})
   	window.scrollTo(0, 0)
@@ -50,7 +49,6 @@ class Client extends Component {
   }
 
   getConsultations = () => {
-  	console.log('getting consultations for: ',this.props.user)
     let token = localStorage.getItem('serverToken');
     // SEND DATA TO SERVER
     axios.post(`${SERVER_URL}/landing/client`, { userId: this.props.user },
@@ -61,11 +59,9 @@ class Client extends Component {
     )
     .then(response => {
     	
-      console.log('YO consultation response: ', response)
       
       this.setState({ consultations: response.data})
       let currentConsultation = response.data.length - 1
-      console.log('------>',this.state.consultations)
       //check if there is a consultation
       
 		      if (response.data.length === currentConsultation || response.data[currentConsultation].scheduled === true){
@@ -105,7 +101,6 @@ class Client extends Component {
       }
     )
     .then(response => {
-      console.log('appointment response', response)
       this.setState({ appointments: response.data})
     })
     .catch(error => {
@@ -196,7 +191,6 @@ let consultationForm
 		let pastHeader 
 //past consultations
 		let consultationPast = this.state.consultations.map((consultation, index) => {
-      console.log('heyasdjfajk -----',consultation)
 
       //do logic to make sure it's a past one
       if (consultation.scheduled === true){
