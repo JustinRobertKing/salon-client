@@ -17,7 +17,7 @@ class AppointmentForm extends Component {
 		apptLengthClient: '',
 		start: 0,
 		end: 0,
-		approved: true,
+		approved: this.props.user.stylist ? true : false,
 		consultationID: ''
 	}
 

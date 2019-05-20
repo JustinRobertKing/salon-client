@@ -8,8 +8,9 @@ class Display extends Component {
   constructor(props){
     super(props);
     this.state = {
-      apptTime: '',
-      apptLength: '',
+      apptDate: new Date(this.props.appointment.date).toLocaleDateString(),
+      apptStart: new Date(this.props.appointment.start).toLocaleString(),
+      apptLength: new Date(this.props.appointment.apptLength).toISOString().substr(11, 8).split(':'),
       client: '',
       service: '',
       appointmentID: this.props.appointment._id
@@ -18,7 +19,7 @@ class Display extends Component {
 
   handleTimeChange = (e) => { 
     let timeArr = e.target.value.split(':')
-    let seconds = (timeArr[0] * 3600) + (timeArr[1] * 60)
+    let seconds = (timeArr[0] * 3600000) + (timeArr[1] * 60000)
     this.setState({ apptLength: seconds }); 
   }
 
@@ -42,13 +43,13 @@ class Display extends Component {
 
   render() {
     let lengthStamp = this.props.appointment.length
-
     return (
       <div>
         This is an appointment detail stub
-        <h4>*** POPULATE NAME ***</h4>
-        <h4>{this.props.appointment.start}</h4>
-        <h4>Butts</h4>
+        <h4>{this.props.appointment.client.user.firstname + ' ' + this.props.appointment.client.user.lastname}</h4>
+        <h4>{this.state.apptStart}</h4>
+        <h4>{this.state.apptLength[0] + ' hr ' + this.state.apptLength[1] + ' min'}</h4>
+        <Button color="success" block onClick={this.handleSubmit}>Accept</Button>
       </div>
     )
   }
