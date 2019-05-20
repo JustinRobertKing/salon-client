@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Row, Col, Card, CardHeader, CardBody, Collapse, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import AppointmentForm from '../appointment/AppointmentForm'
 import Moment from 'react-moment'
+import axios from 'axios'
+import SERVER_URL from '../constants/server';
 
 let weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 let slotTime = 900000
@@ -13,8 +15,40 @@ class DayView extends Component {
 		dateStamp: this.props.todayStamp + (86400000 * parseInt(this.props.day)),
 		dateDisplay: new Date(this.props.todayStamp + (86400000 * parseInt(this.props.day))).toLocaleDateString(),
 		day: new Date(this.props.todayStamp + (86400000 * parseInt(this.props.day))).getDay(),
-		slotTime: 900000
+		slotTime: 900000,
+		appointments: [['butts', 'balls']]
 	}
+
+	componentDidMount() {
+		this.getAppointments()
+	}
+
+	getAppointments = () => {
+    let token = localStorage.getItem('serverToken');
+    // SEND DATA TO SERVER
+    axios.post(`${SERVER_URL}/appointment/day/stylist`, { userId: this.props.user, date: this.state.dateStamp },
+      {
+        headers: {
+          'Authorization' : `Bearer ${token}`}
+      }
+    )
+    .then(response => {
+      console.log('appointment response', response.data)
+      let appointmentsArr = []
+			response.data.forEach((a, i) => {
+				appointmentsArr.push([
+					a.start, 
+					a.apptLength, 
+					a.end, 
+					a.client.user.firstname + ' ' + a.client.user.lastname
+				])
+			})
+      this.setState({ appointments: appointmentsArr})
+    })
+    .catch(error => {
+      console.log('error', error)
+    })
+  }
 
 	toggleCollapse = (e) => {
     this.setState({ collapse: !this.state.collapse })
@@ -27,27 +61,77 @@ class DayView extends Component {
 
 	render() {
 		console.log(this.state.dateStamp)
-		// let hours = []
-		// for (let i = 0; i < 24; i++) {
-		// 	let timeSlots = [] 
-		// 	for (let i = 0; i < 4; i++) {
-		// 		timeSlots.push(
-		// 			<div className="timeSlot" id={this.state.dateStamp + (this.state.slotTime * 0)></div>
-		// 		)
-		// 	}
-		// 	[...hours, timeSlots]
-		// }
-
+		console.log(this.state.appointments)
+		let display = []
+		let hour = []
+		let offset = 0
+		let ampm = 'am'
+		let nameDisplayed = []
+		for (let i = 0; i < 1000; i++) {
+			nameDisplayed.push(false)
+		}
+		for (let i = 0; i < 96; i++) {
+			if (this.state.appointments) {
+				let color = 'timeSlot'
+				let appointmentInfo = ''			
+				this.state.appointments.forEach((a, j) => {
+					if (this.state.dateStamp + (this.state.slotTime * i) >= a[0] && 
+						this.state.dateStamp + (this.state.slotTime * i) < a[2]) {
+						console.log('hey dickhead', a[0])
+						let timeArr = new Date(a[0]).toISOString().substr(11, 8).split(':')
+						color = "booked"
+						if (!nameDisplayed[j]) {
+							appointmentInfo = a[3] 
+							// + ' - ' + timeArr[0] + ':' + timeArr[1]
+							nameDisplayed[j] = true
+						} else {
+							appointmentInfo = ''
+						}
+					}
+				})
+				hour.push(
+					<div className={color}><span>{appointmentInfo}</span></div>
+				)
+			} else {
+				hour.push(
+					<div className="timeSlot"></div>
+				)
+			}
+			if ((i + 1) % 4 === 0) {
+				display.push(
+					<div className="slotBlock">
+						<div className="time">
+							<div className="hour">
+								<div className="hourSlot">
+								{offset === 0 ? 12 : offset}:00 {ampm}
+								</div>
+							</div>
+						</div>
+						<div className="slots">
+							{hour}
+						</div>
+					</div>
+				)
+				hour = []
+				if (offset >= 11) {
+					ampm = 'pm'
+					offset = 0
+				} else {
+					offset += 1
+				}
+			} 
+		}
 		return (
 			<div>
 			<Card className="weekRow" onClick={this.toggleCollapse}>
 	      <CardHeader>{weekday[this.state.day] + ' - ' + this.state.dateDisplay}</CardHeader>
-	        <CardBody>
-	        </CardBody>
-      	</Card>
+        <CardBody>
+        </CardBody>
+    	</Card>
 			<Collapse isOpen={this.state.collapse}>
 				<div className="day" onClick={this.toggleModal}>
-					<div className="time">
+					{display}
+					{/*<div className="time">
 						<div className="hour">
 							<div className="hourSlot">
 							8:00 am
@@ -254,7 +338,7 @@ class DayView extends Component {
 						<div className="timeSlot" id={this.state.dateStamp + (this.state.slotTime * 93)}></div>
 						<div className="timeSlot" id={this.state.dateStamp + (this.state.slotTime * 94)}></div>
 						<div className="timeSlot" id={this.state.dateStamp + (this.state.slotTime * 95)}></div>
-					</div>
+					</div>*/}
 				</div>
 				<Modal isOpen={this.state.modal}>
 					<ModalHeader toggle={this.toggleModal}>Book Appointment - {this.state.dateDisplay}</ModalHeader>

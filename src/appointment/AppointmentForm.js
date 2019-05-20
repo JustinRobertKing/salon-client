@@ -38,7 +38,7 @@ class AppointmentForm extends Component {
 	  	let clientsArr = []
 	    response.data.client.forEach((c, i) => {
 	    	let clientObj = {
-	    		name: c.user.lastname + ', ' + c.user.firstname,
+	    		name: c.user.firstname + ' ' + c.user.lastname,
 	    		_id: c._id
 	    	}
 	    	clientsArr.push(clientObj)
