@@ -1,4 +1,4 @@
 // export default 'http://localhost:3000';
 
-export default 'http://cut-color-db.herokuapp.com';
+export default 'https://cut-color-db.herokuapp.com';
 
