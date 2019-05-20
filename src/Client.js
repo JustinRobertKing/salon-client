@@ -163,13 +163,14 @@ let consultationForm
    		)
 		} else if (this.state.consultProcess === 'submitted'){ 
 			//consultation found
-			consultationProcessTitle=(<h4>Your stylist is still reviewing your consultation.</h4>)
+			consultationProcessTitle=(<h4>Your stylist is reviewing your consultation.</h4>)
 			consultationProcessText =( <p></p>)
 
 			console.log('WOWWWWW ->>>>>>>>> ',this.state.consultations)
 			consultationForm = (
 			//add props to display client based on how much to review
             <DisplayClient 
+            	index = {this.state.consultations.length - 1}
             	stylistNotes = {false}
             	noCancel = {false}
             	getConsultations={this.getConsultations}
@@ -181,11 +182,12 @@ let consultationForm
             />
    		 )
 		} else if(this.state.consultProcess === 'approved'){
+//This has been approved, but not scheduled
 			//displayclient form with all the fields
 			consultationForm = (
 			//add props to display client based on how much to review
             <DisplayClient 
-            	
+            	index = {this.state.consultations.length - 1}
             	stylistNotes = {true}
             	noCancel = {false}
             	getConsultations={this.getConsultations}
@@ -214,10 +216,9 @@ let consultationForm
 	           		{consultation.stylist.user.firstname} {consultation.stylist.user.lastname} 
 	          </Button>
 
-{/*HEREHERHEHRERHHRE*/}
-
 	          <UncontrolledCollapse toggler={'#toggler' + index}>
 		          <DisplayClient 
+		          	index = {index}
 	            	stylistNotes = {true}
 	            	noCancel = {true}
 	            	getConsultations={this.getConsultations}
