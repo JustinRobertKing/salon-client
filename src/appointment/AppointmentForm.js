@@ -66,12 +66,12 @@ class AppointmentForm extends Component {
       if (response.data.length) {
       	console.log('YO consultation response: ', response)
       	this.setState({ 
-      		consultationID: response.data[0]._id, 
-      		client: response.data[0].client._id,
-      		stylist: response.data[0].stylist._id,
-      		stylistName: response.data[0].stylist.user.firstname + ' ' + response.data[0].stylist.user.lastname,
-      		apptLength: response.data[0].apptLength,
-      		apptLengthClient: new Date(response.data[0].apptLength).toISOString().substr(11, 8).split(':')
+      		consultationID: response.data[response.data.length -1]._id, 
+      		client: response.data[response.data.length -1].client._id,
+      		stylist: response.data[response.data.length -1].stylist._id,
+      		stylistName: response.data[response.data.length -1].stylist.user.firstname + ' ' + response.data[response.data.length -1].stylist.user.lastname,
+      		apptLength: response.data[response.data.length -1].apptLength,
+      		apptLengthClient: new Date(response.data[response.data.length -1].apptLength).toISOString().substr(11, 8).split(':')
       	})
     	} else {
     		console.log('ELSE CAUGHt THIS')
