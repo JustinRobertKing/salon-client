@@ -259,7 +259,11 @@ class DayView extends Component {
 				<Modal isOpen={this.state.modal}>
 					<ModalHeader toggle={this.toggleModal}>Book Appointment - {this.state.dateDisplay}</ModalHeader>
         <ModalBody>
-					<AppointmentForm date={this.state.dateStamp} user={this.props.user} />
+					<AppointmentForm 
+						date={this.state.dateStamp} 
+						user={this.props.user} 
+						toggleModal={this.toggleModal}
+					/>
         </ModalBody>
         <ModalFooter>
           <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>

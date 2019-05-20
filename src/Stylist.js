@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Display from './Consultation/Display'
+import DisplayClient from './Consultation/DisplayClient'
 import ApptDisplay from './appointment/ApptDisplay'
 import { Link } from 'react-router-dom';
 import { UncontrolledCollapse, Button } from 'reactstrap';
@@ -7,31 +8,49 @@ import axios from 'axios';
 import SERVER_URL from './constants/server';
 
 class Stylist extends Component {
-	 state = {
+	constructor(props) {
+    super(props);
+    this.toggle = this.toggle.bind(this);
+  }
+  
+  toggle() {
+    this.setState(state => ({ collapse: !state.collapse }));
+  }
+
+	state = {
     consultations: [],
     current: {},
     appointments: [],
     currentAppt: {},
     consultationsApproved:[]
   }
-
+  
   componentDidMount() {
     this.getConsultations()
     this.getAppointments()
     this.getConsultationsApproved()
   }
 
+  componentReload = () => {
+  	console.log('stylist componentreload')
+  	this.getConsultations()
+    this.getAppointments()
+    this.getConsultationsApproved()
+    window.scrollTo(0, 0)
+  	this.toggle()
+  }
+
   getConsultations = () => {
     let token = localStorage.getItem('serverToken');
     // SEND DATA TO SERVER
-    axios.post(`${SERVER_URL}/landing`, { userId: this.props.user },
+    axios.post(`${SERVER_URL}/landing/stylist`, { userId: this.props.user },
     	{
       	headers: {
         	'Authorization' : `Bearer ${token}`}
       }
     )
     .then(response => {
-      console.log('consultation response', response)
+      console.log('$$$$ consultation response', response)
       this.setState({ consultations: response.data})
     })
     .catch(error => {
@@ -75,11 +94,11 @@ class Stylist extends Component {
 
 	render() {
 		// make into it's own component when refactoring.  can re-use with client
-		let consultationRequests = this.state.consultations.map((consultation, index) => {
+		let consultationRequests = this.state.consultations.slice(0).reverse().map((consultation, index) => {
       console.log('hey',consultation)
       return (
         <div key={index}>
-          <Button color="secondary" id={'toggler' + index} block style={{ border: '1px solid white', borderRadius: 0 }}>
+          <Button color="secondary" id={'toggler' + index} block style={{  margin: '2px', }}>
            		{consultation.client.user.firstname} {consultation.client.user.lastname} 
           </Button>
           <UncontrolledCollapse toggler={'#toggler' + index}>
@@ -88,36 +107,51 @@ class Stylist extends Component {
               rerender={this.getConsultations}
               setCurrentConsultation={this.setCurrentConsultation}
               currentId={this.state.current._id}
+              componentReload={this.componentReload}
             />
           </UncontrolledCollapse>
         </div>
       )
     })
     
-		let consultationRequestsApproved = this.state.consultationsApproved.map((consultation, index) => {
+		let consultationRequestsApproved = this.state.consultationsApproved.slice(0).reverse().map((consultation, index) => {
       console.log('hey',consultation)
       return (
         <div key={index}>
-          <Button color="secondary" id={'toggler' + index} block style={{ border: '1px solid white', borderRadius: 0 }}>
+          <Button color="secondary" id={'toggler' + index} block style={{ margin: '2px',}}>
            		{consultation.client.user.firstname} {consultation.client.user.lastname} 
           </Button>
           <UncontrolledCollapse toggler={'#toggler' + index}>
-            <Display 
+          {/* <DisplayClient 
+            	index = {this.state.consultations.length - 1}
+            	stylistNotes = {true}
+            	noCancel = {false}
+            	getConsultations={this.consultationsApproved}
+            	formDone={this.formDone}
+              consultation={this.state.consultations}
+              rerender={this.getConsultations}
+              setCurrentConsultation={this.setCurrentConsultation}
+              currentId={this.state.current._id}
+              componentReload={this.componentReload}
+            />*/}
+{/*try displayclient*/}
+          <Display 	
               consultation={consultation}
               rerender={this.getConsultations}
               setCurrentConsultation={this.setCurrentConsultation}
               currentId={this.state.current._id}
+              componentReload={this.componentReload}
             />
           </UncontrolledCollapse>
         </div>
       )
     })
 
-    let appointmentRequests = this.state.appointments.map((appointment, index) => {
+    let appointmentRequests = this.state.appointments.slice(0).reverse().map((appointment, index) => {
       if (!appointment.approved) {
         return (
           <div key={index}>
-            <Button color="primary" id={'togglerA' + index} block style={{ border: '1px solid white', borderRadius: 0 }}>
+            <Button color="primary" id={'togglerA' + index} block style={{  margin: '2px', }}>
               {appointment.client.user.firstname} {appointment.client.user.lastname}
             </Button>
             <UncontrolledCollapse toggler={'#togglerA' + index}>
@@ -126,6 +160,7 @@ class Stylist extends Component {
                 rerender={this.getAppointments}
                 setCurrentAppointment={this.setCurrentAppointment}
                 currentId={this.state.current._id}
+                componentReload={this.componentReload}
               />
             </UncontrolledCollapse>
           </div>
@@ -147,7 +182,7 @@ class Stylist extends Component {
         {consultationRequestsApproved}
         <hr />
         <Link to="/schedule">
-          <Button color="primary" block style={{ border: '1px solid white', borderRadius: 0 }}>
+          <Button color="primary" block style={{  margin: '2px',}}>
             VIEW MY SCHEDULE
           </Button>
         </Link>
