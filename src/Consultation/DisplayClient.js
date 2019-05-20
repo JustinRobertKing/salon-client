@@ -12,7 +12,7 @@ class Display extends Component {
     super(props);
     this.state = {
       products: '',
-      apptLength: new Date(this.props.consultation[0].apptLength).toISOString().substr(11, 8).split(':'),
+      apptLength: this.props.consultation[0].apptLength ? new Date(this.props.consultation[0].apptLength).toISOString().substr(11, 8).split(':') : '',
       estimate: '',
       stylistComment: '',
       consultationID: this.props.consultation._id,

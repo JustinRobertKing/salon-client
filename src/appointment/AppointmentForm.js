@@ -172,58 +172,67 @@ class AppointmentForm extends Component {
 		          <Label for="start">Start Time</Label>
 		          <Input type="select" name="start" id="start" onChange={this.handleStartChange}>
 		            <option>-:--</option>
-		            <option>8:00</option>
-		            <option>8:15</option>
-		            <option>8:30</option>
-		            <option>8:45</option>
-		            <option>9:00</option>
-		            <option>9:15</option>
-		            <option>9:30</option>
-		            <option>9:45</option>
-		            <option>10:00</option>
-		            <option>10:15</option>
-		            <option>10:30</option>
-		            <option>10:45</option>
-		            <option>11:00</option>
-		            <option>11:15</option>
-		            <option>11:30</option>
-		            <option>11:45</option>
-		            <option>12:00</option>
-		            <option>12:15</option>
-		            <option>12:30</option>
-		            <option>12:45</option>
-		            <option>13:00</option>
-		            <option>13:15</option>
-		            <option>13:30</option>
-		            <option>13:45</option>
-		            <option>14:00</option>
-		            <option>14:15</option>
-		            <option>14:30</option>
-		            <option>14:45</option>
-		            <option>15:00</option>
-		            <option>15:15</option>
-		            <option>15:30</option>
-		            <option>15:45</option>
-		            <option>16:00</option>
-		            <option>16:15</option>
-		            <option>16:30</option>
-		            <option>16:45</option>
-		            <option>17:00</option>
-		            <option>17:15</option>
-		            <option>17:30</option>
-		            <option>17:45</option>
-		            <option>18:00</option>
-		            <option>18:15</option>
-		            <option>18:30</option>
-		            <option>18:45</option>
-		            <option>19:00</option>
-		            <option>19:15</option>
-		            <option>19:30</option>
-		            <option>19:45</option>
-		            <option>20:00</option>
-		            <option>20:15</option>
-		            <option>20:30</option>
-		            <option>20:45</option>
+		            <option value="6:00">6:00 am</option>
+		            <option value="6:15">6:15 am</option>
+		            <option value="6:30">6:30 am</option>
+		            <option value="6:45">6:45 am</option>
+		            <option value="7:00">7:00 am</option>
+		            <option value="7:15">7:15 am</option>
+		            <option value="7:30">7:30 am</option>
+		            <option value="7:45">7:45 am</option>
+		            <option value="8:00">8:00 am</option>
+		            <option value="8:15">8:15 am</option>
+		            <option value="8:30">8:30 am</option>
+		            <option value="8:45">8:45 am</option>
+		            <option value="9:00">9:00 am</option>
+		            <option value="9:15">9:15 am</option>
+		            <option value="9:30">9:30 am</option>
+		            <option value="9:45">9:45 am</option>
+		            <option value="10:00">10:00 am</option>
+		            <option value="10:15">10:15 am</option>
+		            <option value="10:30">10:30 am</option>
+		            <option value="10:45">10:45 am</option>
+		            <option value="11:00">11:00 am</option>
+		            <option value="11:15">11:15 am</option>
+		            <option value="11:30">11:30 am</option>
+		            <option value="11:45">11:45 am</option>
+		            <option value="12:00">12:00 pm</option>
+		            <option value="12:15">12:15 pm</option>
+		            <option value="12:30">12:30 pm</option>
+		            <option value="12:45">12:45 pm</option>
+		            <option value="13:00">1:00 pm</option>
+		            <option value="13:15">1:15 pm</option>
+		            <option value="13:30">1:30 pm</option>
+		            <option value="13:45">1:45 pm</option>
+		            <option value="14:00">2:00 pm</option>
+		            <option value="14:15">2:15 pm</option>
+		            <option value="14:30">2:30 pm</option>
+		            <option value="14:45">2:45 pm</option>
+		            <option value="15:00">3:00 pm</option>
+		            <option value="15:15">3:15 pm</option>
+		            <option value="15:30">3:30 pm</option>
+		            <option value="15:45">3:45 pm</option>
+		            <option value="16:00">4:00 pm</option>
+		            <option value="16:15">4:15 pm</option>
+		            <option value="16:30">4:30 pm</option>
+		            <option value="16:45">4:45 pm</option>
+		            <option value="17:00">5:00 pm</option>
+		            <option value="17:15">5:15 pm</option>
+		            <option value="17:30">5:30 pm</option>
+		            <option value="17:45">5:45 pm</option>
+		            <option value="18:00">6:00 pm</option>
+		            <option value="18:15">6:15 pm</option>
+		            <option value="18:30">6:30 pm</option>
+		            <option value="18:45">6:45 pm</option>
+		            <option value="19:00">7:00 pm</option>
+		            <option value="19:15">7:15 pm</option>
+		            <option value="19:30">7:30 pm</option>
+		            <option value="19:45">7:45 pm</option>
+		            <option value="20:00">8:00 pm</option>
+		            <option value="20:15">8:15 pm</option>
+		            <option value="20:30">8:30 pm</option>
+		            <option value="20:45">8:45 pm</option>
+		            <option value="21:00">9:00 pm</option>
 		          </Input>
 		        </FormGroup>
 		        <FormGroup>
@@ -295,6 +304,14 @@ class AppointmentForm extends Component {
 		          <Label for="start">Start Time</Label>
 		          <Input type="select" name="start" id="start" onChange={this.handleStartChange}>
 		            <option>-:--</option>
+		            <option value="6:00">6:00 am</option>
+		            <option value="6:15">6:15 am</option>
+		            <option value="6:30">6:30 am</option>
+		            <option value="6:45">6:45 am</option>
+		            <option value="7:00">7:00 am</option>
+		            <option value="7:15">7:15 am</option>
+		            <option value="7:30">7:30 am</option>
+		            <option value="7:45">7:45 am</option>
 		            <option value="8:00">8:00 am</option>
 		            <option value="8:15">8:15 am</option>
 		            <option value="8:30">8:30 am</option>
