@@ -14,7 +14,7 @@ class Display extends Component {
     this.state = {
     	index: this.props.index,
       products: '',
-      apptLength: this.props.consultation[this.props.consultation.length -1].apptLength ? new Date(this.props.consultation[this.props.consultation.length -1].apptLength).toISOString().substr(11, 8).split(':') : '',
+      apptLength: this.props.consultation[this.props.index].apptLength ? new Date(this.props.consultation[this.props.index].apptLength).toISOString().substr(11, 8).split(':') : '',
       estimate: '',
       stylistComment: '',
       consultationID: this.props.consultation._id,
@@ -36,10 +36,10 @@ class Display extends Component {
   }
 
 	render() {
-		console.log('HEEEEEEEEEEEYYYYYYYY INDEX',this.state.index)
+		// console.log('HEEEEEEEEEEEYYYYYYYY INDEX',this.state.index)
 		//make sure there is a consultation
-		if (this.props.consultation){
-		console.log('HEEEEEEEEEEEYYYYYYYY WHATS THE PROPS.COSULTATION??',this.props.consultation)
+		if (this.props.consultation[this.state.index]){
+		console.log('-Display Client - this.props.consultation',this.props.consultation[this.state.index])
 			let currentPhotos = this.props.consultation[this.state.index].currentHair.map((c, i) => {
 				return (
 					<div key={i}>
@@ -82,7 +82,7 @@ class Display extends Component {
 			        	Appointment Length
 			        </FormText>
 							<p>
-								{this.state.apptLength[this.state.index] + ' hr ' + this.state.apptLength[1] + ' min'}
+								{this.state.apptLength[0] + ' hr ' + this.state.apptLength[1] + ' min'}
 							</p>
 							{/*schedule link*/}
 							{/*check if this is a past booking, draw the booking button if false*/}
@@ -161,6 +161,12 @@ class Display extends Component {
 				</div>	
 			)
 		//closes if that checks for a consultation
+		} else {
+			//if that record has been deleted, set the parents state for the start consultation button
+			
+			return (
+			<div></div>
+			)
 		}
 	//closes render	
 	}
