@@ -38,7 +38,7 @@ class Stylist extends Component {
       console.log('error', error)
     })
   }
-getConsultationsApproved = () => {
+  getConsultationsApproved = () => {
     let token = localStorage.getItem('serverToken');
     // SEND DATA TO SERVER
     axios.post(`${SERVER_URL}/landing/consultationsApproved`, { userId: this.props.user },
@@ -114,23 +114,23 @@ getConsultationsApproved = () => {
     })
 
     let appointmentRequests = this.state.appointments.map((appointment, index) => {
-      return (
-        <div key={index}>
-          <Button color="primary" id={'togglerA' + index} block style={{ border: '1px solid white', borderRadius: 0 }}>
-          {/*  {console.log("HEY",this.state.appointments[index])}
-            {this.state.appointment}*/}
-            Client Name - Appointment
-          </Button>
-          <UncontrolledCollapse toggler={'#togglerA' + index}>
-            <ApptDisplay 
-              appointment={appointment}
-              rerender={this.getAppointments}
-              setCurrentAppointment={this.setCurrentAppointment}
-              currentId={this.state.current._id}
-            />
-          </UncontrolledCollapse>
-        </div>
-      )
+      if (!appointment.approved) {
+        return (
+          <div key={index}>
+            <Button color="primary" id={'togglerA' + index} block style={{ border: '1px solid white', borderRadius: 0 }}>
+              {appointment.client.user.firstname} {appointment.client.user.lastname}
+            </Button>
+            <UncontrolledCollapse toggler={'#togglerA' + index}>
+              <ApptDisplay 
+                appointment={appointment}
+                rerender={this.getAppointments}
+                setCurrentAppointment={this.setCurrentAppointment}
+                currentId={this.state.current._id}
+              />
+            </UncontrolledCollapse>
+          </div>
+        )
+      }
     })
 
     return(
@@ -140,11 +140,11 @@ getConsultationsApproved = () => {
         <h4>Pending Consultations</h4>
         {consultationRequests}
         <hr />
+        <h4>Appointment Requests</h4>
+        {appointmentRequests ? appointmentRequests : <h5>You're all caught up!</h5>}
+        <hr />
         <h4>Approved Consultations</h4>
         {consultationRequestsApproved}
-        <hr />
-        <h4>Appointment Request</h4>
-        {appointmentRequests}
         <hr />
         <Link to="/schedule">
           <Button color="primary" block style={{ border: '1px solid white', borderRadius: 0 }}>

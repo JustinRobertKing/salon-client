@@ -34,27 +34,22 @@ class Client extends Component {
   componentDidMount() {
     this.getConsultations()
     this.getAppointments()
-     
   }
 
+  //TODO: Create callback function to change / reset the button
+  formDone = () => {
+  	console.log('this works')
+  	this.getConsultations()
+  	// this.setState({isOpen:false})
+  	window.scrollTo(0, 0)
+  	this.toggle()
 
+  	// this.setState({consultButtonStatus:{process:'pending',color:'success',text:'Review Consultation'}})
+  	// this.setState({consultProcess: 'submitted'})
 
-//TODO: Create callback function to change / reset the button
-formDone = () => {
-	console.log('this works')
-	this.getConsultations()
-	// this.setState({isOpen:false})
-	window.scrollTo(0, 0)
-	this.toggle()
-
-	// this.setState({consultButtonStatus:{process:'pending',color:'success',text:'Review Consultation'}})
-	// this.setState({consultProcess: 'submitted'})
-
-
-}
+  }
 
   getConsultations = () => {
-
   	console.log('getting consultations for: ',this.props.user)
     let token = localStorage.getItem('serverToken');
     // SEND DATA TO SERVER
@@ -78,21 +73,17 @@ formDone = () => {
 			      this.setState({consultProcess:'start'})
 			      console.log('LENGTH IS ZERO')
 			      
-
 		    	} else if(response.data[currentConsultation].approved === false){
 		    		// else if there is a consultation, grab that and show the review
 		    		console.log('NOT APPROVED')
 		    		 this.setState({consultProcess:'submitted'})
 		    		 this.setState({consultButtonStatus:{process:'pending',color:'success',text:'Review Consultation'}})
-			      
-
 
 		    	} else if(response.data[currentConsultation].approved === true && response.data[currentConsultation].scheduled === false){
 		    		// else if there is a consultation, grab that and show the review
 		    		console.log('APPROVED BUT NOT SCHEDULED')
 		    		 this.setState({consultProcess:'approved'})
 		    		 this.setState({consultButtonStatus:{process:'pending',color:'success',text:'Review & Schedule'}})
-
 
 		    	} else {
 		    		console.log('ELSE CAUGHt THIS')
