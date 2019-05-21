@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import SERVER_URL from '../constants/server';
 import { Card, CardBody, Tooltip, Button, Form, FormGroup, Label, Input, CustomInput } from 'reactstrap';
-import logo from './../chopchop.png';
+import logo from './../cutcolor.png';
 import { Link } from 'react-router-dom';
 
 

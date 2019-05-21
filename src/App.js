@@ -10,6 +10,10 @@ import Profile from './Profile';
 import Signup from './auth/Signup';
 import Week from './schedule/Week';
 import Display from './Consultation/Display';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faUserCog, faKey } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faUserCog, faKey);
 
 class App extends Component {
   constructor(props){
@@ -79,7 +83,6 @@ class App extends Component {
             </div>
           </div>
         </Router>
-        {/*<Footer />*/}
       </div>
     );
   }

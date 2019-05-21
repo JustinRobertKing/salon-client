@@ -71,7 +71,9 @@ class Display extends Component {
 		if (this.props.consultation.approved == false){
 		//approve a consultation			
 			stylistForm =(
-						
+				<Card className="clientCard">
+			      <CardBody>	
+			      <h4>Your Response</h4>	
 				<Form onSubmit={this.handleSubmit}>
 	        <FormGroup>
 	          <Label for="products">Products</Label>
@@ -138,7 +140,8 @@ class Display extends Component {
 	        </FormGroup>
 	        <Button color="success" type="submit" >Approve and Send</Button>
 	      </Form>
-
+</CardBody>
+</Card>
 			)
 
 		} else {
@@ -174,7 +177,7 @@ class Display extends Component {
 			//client notes
 
 			<div>
-        {stylistForm}
+       
 
 				<Card className="clientCard">
 			      <CardBody>
@@ -199,7 +202,7 @@ class Display extends Component {
 							</p>
 						</CardBody>
 					</Card>
-	    
+	     {stylistForm}
 			</div>
 		)
 	}

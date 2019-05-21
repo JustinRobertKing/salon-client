@@ -98,10 +98,10 @@ class Stylist extends Component {
       console.log('hey',consultation)
       return (
         <div key={index}>
-          <Button color="secondary" id={'toggler' + index} block style={{  margin: '2px', }}>
+          <Button color="secondary" id={'togglerR' + index} block style={{  margin: '2px', }}>
            		{consultation.client.user.firstname} {consultation.client.user.lastname} 
           </Button>
-          <UncontrolledCollapse toggler={'#toggler' + index}>
+          <UncontrolledCollapse toggler={'#togglerR' + index}>
             <Display 
               consultation={consultation}
               rerender={this.getConsultations}
