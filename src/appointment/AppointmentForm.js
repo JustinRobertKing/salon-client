@@ -18,7 +18,8 @@ class AppointmentForm extends Component {
 		start: 0,
 		end: 0,
 		approved: this.props.user.stylist ? true : false,
-		consultationID: ''
+		consultationID: '',
+		invalid: ''
 	}
 
 	componentDidMount(){
@@ -82,12 +83,6 @@ class AppointmentForm extends Component {
     })
   }
 
-  // getAppointments () => {
-  // 	if (this.props.user.stylist) {
-
-  // 	}
-  // }
-
 	handleClientChange = (e) => { 
 		this.setState({ client: e.target.value })
 	}
@@ -97,7 +92,8 @@ class AppointmentForm extends Component {
 		let startOffset = (timeArr[0] * 3600000) + (timeArr[1] * 60000)
 		this.setState({ 
 			start: this.state.date + startOffset, 
-			end: this.state.date + startOffset + this.state.apptLength 
+			end: this.state.date + startOffset + this.state.apptLength,
+			invalid: ''
 		})
 	}
 
@@ -117,7 +113,17 @@ class AppointmentForm extends Component {
 	}
 	handleSubmit = (e) => {
 		e.preventDefault()
-		console.log('submitting appointment', this.state)
+		let abort = false
+		this.props.appointments.forEach((a) => {
+			if ((this.state.start >= a[0] && this.state.start < a[2]) || 
+				(this.state.end >= a[0] && this.state.end < a[2])) {
+				console.log('submitting appointment', this.state)
+				this.setState({ invalid: 'That time is not available' })
+				abort = true
+				return
+		  } 
+		})
+		if (abort) {return}
     let token = localStorage.getItem('serverToken');
     // SEND DATA TO SERVER
     axios.post(`${SERVER_URL}/appointment`, this.state, {
@@ -127,6 +133,7 @@ class AppointmentForm extends Component {
     })
     .then(response => {
     	console.log('appointment response', response)
+    	this.props.toggleModal()
     })
     .catch(error => {
       console.log('error', error)
@@ -138,20 +145,11 @@ class AppointmentForm extends Component {
     })
     .then(response => {
     	console.log('consultation response', response)
-    	
-    	//close the modal
-    	this.props.toggleModal()
-    	
-    	// OR should we display a message?
-    	
-    	// OR should we redirect to home?
-    	
-    	
     })
     .catch(error => {
       console.log('error', error)
     })
-  }
+	}
 
   toTitleCase = (str) => {
     return str.replace(/\w\S*/g, (txt) => {
@@ -280,6 +278,14 @@ class AppointmentForm extends Component {
 	              <option>7:30</option>
 	              <option>7:45</option>
 	              <option>8:00</option>
+	              <option>8:15</option>
+	              <option>8:30</option>
+	              <option>8:45</option>
+	              <option>9:00</option>
+	              <option>9:15</option>
+	              <option>9:30</option>
+	              <option>9:45</option>
+	              <option>10:00</option>
 	            </Input>
 	          </FormGroup>
 		        <FormGroup>
@@ -288,6 +294,7 @@ class AppointmentForm extends Component {
 		        </FormGroup>
 		        <Button color="success" type="submit" block onClick={this.handleSubmit}>Create Appointment</Button>
 		      </Form>
+		      <div className="alert">{this.state.invalid}</div>
 		      <br />
 		      <br />
 				</div>
@@ -382,6 +389,7 @@ class AppointmentForm extends Component {
 		        </FormGroup>
 		        <Button color="success" type="submit" block onClick={this.handleSubmit}>Create Appointment</Button>
 		      </Form>
+          <div className="alert">{this.state.invalid}</div>
 		      <br />
 		      <br />
 				</div>

@@ -109,10 +109,11 @@ nav a:hover {
 
 .weekRow .card-body{
 	padding: 0;
+	margin: 0;
 }
 .hourCell{
 	background-color: hotpink;
-	height: 4rem;
+	height: 5rem;
 }
 
 .profileImg{
@@ -153,7 +154,7 @@ h1, h2, h3, h4, h5, h6, a, button, p, div{
 }
 
 .loginSingUp a {
-color: #61dafb;
+	color: #61dafb;
 }
 .inlineStuff{
 	display: inline;
@@ -176,11 +177,11 @@ color: #61dafb;
 }
 .clientCard{
 	margin-top: 1em;
-margin-bottom:1em;
+	margin-bottom:1em;
 }
 .stylistCard {
 	margin-top: 1em;
-margin-bottom:1em;
+	margin-bottom:1em;
 	/*background-color: #ffefff;*/
 	/*background-color: white;*/
 }
@@ -217,6 +218,13 @@ margin-bottom:1em;
 	background-color: #eeeeee;
 }
 
+.timeSlotH {
+	display: inline-block;
+	height: 100%;
+	width: 1%;
+	background-color: #ffffff;
+}
+
 .time {
 	display: inline-block;
 	width: 15%;
@@ -246,6 +254,13 @@ margin-bottom:1em;
 	background-color: skyblue;
 }
 
+.bookedH {
+	display: inline-block;
+	height: 100%;
+	width: 1%;
+	background-color: skyblue;
+}
+
 .slotBlock {
 	display: flex;
 	flex-wrap: wrap;
@@ -254,6 +269,14 @@ margin-bottom:1em;
 	background-color: hotpink;
 }
 
+.alert {
+	color: red;
+	text-align: right;
+}
+
+.nameIndex {
+	z-index: 4000;
+}
 
 .profilePic {
 	max-width:100%;
