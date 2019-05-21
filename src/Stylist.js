@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import Display from './Consultation/Display'
 import DisplayClient from './Consultation/DisplayClient'
 import ApptDisplay from './appointment/ApptDisplay'
+import Availability from './schedule/Availability'
 import { Link } from 'react-router-dom';
-import { UncontrolledCollapse, Button } from 'reactstrap';
+import { UncontrolledCollapse, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import axios from 'axios';
 import SERVER_URL from './constants/server';
 
@@ -22,7 +23,8 @@ class Stylist extends Component {
     current: {},
     appointments: [],
     currentAppt: {},
-    consultationsApproved:[]
+    consultationsApproved:[],
+    modal: false
   }
   
   componentDidMount() {
@@ -57,6 +59,7 @@ class Stylist extends Component {
       console.log('error', error)
     })
   }
+
   getConsultationsApproved = () => {
     let token = localStorage.getItem('serverToken');
     // SEND DATA TO SERVER
@@ -74,6 +77,7 @@ class Stylist extends Component {
       console.log('error', error)
     })
   }
+
   getAppointments = () => {
     let token = localStorage.getItem('serverToken');
     // SEND DATA TO SERVER
@@ -90,6 +94,10 @@ class Stylist extends Component {
     .catch(error => {
       console.log('error', error)
     })
+  }
+
+  toggleModal = (e) => {
+    this.setState({ modal: !this.state.modal })
   }
 
 	render() {
@@ -187,6 +195,22 @@ class Stylist extends Component {
             VIEW MY SCHEDULE
           </Button>
         </Link>
+        <Button color="primary" block onClick={this.toggleModal} style={{  margin: '2px' }}>
+          UPDATE MY AVAILABILITY 
+        </Button>
+        <Modal isOpen={this.state.modal}>
+          <ModalHeader toggle={this.toggleModal}>Update Availability</ModalHeader>
+        <ModalBody>
+          <Availability 
+            appointments={this.state.appointments}
+            user={this.props.user} 
+            toggleModal={this.toggleModal}
+          />
+        </ModalBody>
+        <ModalFooter>
+          <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
+        </ModalFooter>
+        </Modal>
         <br />
         <br />
       </div>
