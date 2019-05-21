@@ -57,6 +57,9 @@ class Week extends Component {
         	todayStamp={this.state.todayStamp} 
         	day="6"
         />
+        <br />
+        <br />
+        <br />
       </div>
     );
   }

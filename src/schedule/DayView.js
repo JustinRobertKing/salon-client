@@ -16,11 +16,13 @@ class DayView extends Component {
 		dateDisplay: new Date(this.props.todayStamp + (86400000 * parseInt(this.props.day))).toLocaleDateString(),
 		day: new Date(this.props.todayStamp + (86400000 * parseInt(this.props.day))).getDay(),
 		slotTime: 900000,
-		appointments: [['butts', 'balls']]
+		appointments: [['butts', 'balls']],
+		availability: [0,0,0,0,0,0,0]
 	}
 
 	componentDidMount() {
 		this.getAppointments()
+		this.getAvailability()
 	}
 
 	getAppointments = () => {
@@ -77,6 +79,42 @@ class DayView extends Component {
 		}
   }
 
+  getAvailability = () => {
+  	if (this.props.user.stylist) {
+	    let token = localStorage.getItem('serverToken');
+	    // SEND DATA TO SERVER
+	    axios.post(`${SERVER_URL}/appointment/availability`, { userId: this.props.user, date: this.state.dateStamp },
+	      {
+	        headers: {
+	          'Authorization' : `Bearer ${token}`}
+	      }
+	    )
+	    .then(response => {
+	      console.log('availability response', response.data)
+	      this.setState({ availability: response.data.availability})
+	    })
+	    .catch(error => {
+	      console.log('error', error)
+	    })
+		} else {
+			let token = localStorage.getItem('serverToken');
+	    // SEND DATA TO SERVER
+	    axios.post(`${SERVER_URL}/appointment/availability/client`, { userId: this.props.user, date: this.state.dateStamp },
+	      {
+	        headers: {
+	          'Authorization' : `Bearer ${token}`}
+	      }
+	    )
+	    .then(response => {
+	      console.log('availability response', response.data)
+	      this.setState({ availability: response.data.availability})
+	    })
+	    .catch(error => {
+	      console.log('error', error)
+	    })
+		}
+  }
+
 	toggleCollapse = (e) => {
     this.setState({ collapse: !this.state.collapse })
 		// this.props.setDate(this.props.day)
@@ -86,9 +124,14 @@ class DayView extends Component {
     this.setState({ modal: !this.state.modal })
   }
 
+  toTitleCase = (str) => {
+    return str.replace(/\w\S*/g, (txt) => {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    })
+  }
 	render() {
 		console.log(this.state.dateStamp)
-		console.log(this.state.appointments)
+		console.log(this.state.availability)
 		let display = []
 		let displayHoriz = []
 		let hour = []
@@ -100,13 +143,13 @@ class DayView extends Component {
 		}
 		for (let i = 0; i < 96; i++) {
 			if (this.state.appointments) {
-				let color = 'timeSlot'
-				let colorH = 'timeSlotH'
+				let color = (this.state.availability[this.state.day][1] >= i * 900000) || (this.state.availability[this.state.day][2] <= i * 900000) ? 'unavailable' : 'timeSlot'
+				let colorH = (this.state.availability[this.state.day][1] >= i * 900000) || (this.state.availability[this.state.day][2] <= i * 900000) ? 'unavailableH' : 'timeSlotH'
 				let appointmentInfo = ''			
 				this.state.appointments.forEach((a, j) => {
 					if (this.state.dateStamp + (this.state.slotTime * i) >= a[0] && 
 						this.state.dateStamp + (this.state.slotTime * i) < a[2]) {
-						console.log('hey dickhead', a[0])
+						console.log('hey dickhead', this.state.day)
 						let timeArr = new Date(a[0]).toISOString().substr(11, 8).split(':')
 						color = "booked"
 						colorH = "bookedH"
@@ -159,11 +202,11 @@ class DayView extends Component {
 			<Card className="weekRow" onClick={this.toggleCollapse}>
 	      <CardHeader>{weekday[this.state.day] + ' - ' + this.state.dateDisplay}</CardHeader>
         <CardBody>
-					<div className="timeSlotH"></div>
-					<div className="timeSlotH"></div>
+					<div className="unavailableH"></div>
+					<div className="unavailableH"></div>
         	{displayHoriz}
-					<div className="timeSlotH"></div>
-					<div className="timeSlotH"></div>
+					<div className="unavailableH"></div>
+					<div className="unavailableH"></div>
         </CardBody>
     	</Card>
 			<Collapse isOpen={this.state.collapse}>
