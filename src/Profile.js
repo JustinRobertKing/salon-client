@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import SERVER_URL from './constants/server';
+import { Link } from 'react-router-dom';
 
 class Profile extends Component {
 	state = {
@@ -73,6 +74,9 @@ componentDidMount(){
         <div className="container">
         <div>
         	<h1>Your Profile</h1>
+        </div>
+        <div>
+        	<Link to="/">&lt;-- Back</Link>
         </div>
           <div>
           	<h5 className="inlineStuff thin">First name:</h5><h4 className="inlineStuff"> {this.props.user.firstname}</h4>

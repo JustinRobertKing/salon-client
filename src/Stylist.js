@@ -195,7 +195,7 @@ class Stylist extends Component {
             VIEW MY SCHEDULE
           </Button>
         </Link>
-        <Button color="primary" block onClick={this.toggleModal} style={{  margin: '2px' }}>
+        <Button className="hotPink" block onClick={this.toggleModal} style={{  margin: '2px' }}>
           UPDATE MY AVAILABILITY 
         </Button>
         <Modal isOpen={this.state.modal}>
