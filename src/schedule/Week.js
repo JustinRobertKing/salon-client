@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import DayView from './DayView'
-import { Row, Col, Card, CardHeader, CardBody, UncontrolledCollapse, Button } from 'reactstrap';
 
 let today = new Date()
 today.setHours(0,0,0,0)
-let aDay = 86400
 
 class Week extends Component {
 	state = {

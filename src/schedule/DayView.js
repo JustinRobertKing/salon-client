@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
-import { Row, Col, Card, CardHeader, CardBody, Collapse, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
+import { Card, CardHeader, CardBody, Collapse, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import AppointmentForm from '../appointment/AppointmentForm'
-import Moment from 'react-moment'
 import axios from 'axios'
 import SERVER_URL from '../constants/server';
 
 let weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-let slotTime = 900000
 
 class DayView extends Component {
 	state = {
