@@ -188,6 +188,7 @@ h1, h2, h3, h4, h5, h6, a, button, p, div{
 .hotPink{
 	background-color: hotpink;
 	color: white;
+	border:1px solid pink;
 }
 .backLogin{
 	margin-bottom: 2em;

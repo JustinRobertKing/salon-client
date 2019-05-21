@@ -126,7 +126,7 @@ class ConsultationForm extends Component {
 								</Carousel>
 	          	</div>
          			<div id="photo-form-container">
-         				<Button onClick={this.showWidget}>Upload Photos </Button>
+         				<Button block onClick={this.showWidget}>Upload Photos </Button>
          			</div>
 	        </FormGroup>        
 	        <FormGroup>
@@ -139,11 +139,13 @@ class ConsultationForm extends Component {
 							</Carousel>
 						</div>
 	          <div id="photo-form-container2">
-         			<Button onClick={this.showWidget2}>Upload Photos </Button>
+         			<Button block onClick={this.showWidget2}>Upload Photos </Button>
          		</div>
 	        </FormGroup>
 	        <FormGroup>
-	          <Label for="exampleText">Text Area</Label>
+	          <FormText color="muted">
+	          	Description
+	          </FormText>
 	          <Input 
 	          	type="textarea" 
 	          	name="text" 
@@ -152,7 +154,7 @@ class ConsultationForm extends Component {
 	          	onChange={this.handleClientComment} 
 	          />
 	        </FormGroup>
-	        <Button >Submit</Button>
+	        <Button block className="hotPink">Submit</Button>
 	      </Form>
 			</div>
 		)

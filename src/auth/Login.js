@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import SERVER_URL from '../constants/server';
-import { Card, CardHeader, CardBody } from 'reactstrap';
+import { Card, CardHeader, CardBody, Button, Form, FormGroup, Label, Input, CustomInput } from 'reactstrap';
 import logo from './../cutcolor.png';
 
 class Login extends Component {
@@ -57,15 +57,15 @@ class Login extends Component {
 	      				<span className="normalLogin">{this.state.normalLogin}</span>	<span className="failedLogin">{this.state.error}</span>
 	      			</CardHeader>
 	      			<CardBody>
-		      			<form onSubmit={this.handleSubmit}>
+		      			<Form onSubmit={this.handleSubmit}>
 		            <div>
-		              <input name="Email" placeholder="What is your email?" value={this.state.email} onChange={this.handleEmailChange} />
+		              <Input name="Email" placeholder="What is your email?" value={this.state.email} onChange={this.handleEmailChange} />
 		            </div>
 		            <div>
-		              <input name="Password" placeholder="Enter your password." type="password" value={this.state.password} onChange={this.handlePasswordChange} />
+		              <Input name="Password" placeholder="Enter your password." type="password" value={this.state.password} onChange={this.handlePasswordChange} />
 		            </div>
-		            <input type="submit" value="Log Me In!" className="button" />
-		          </form>
+		            <Input type="submit" value="Log Me In!" className=" hotPink" />
+		          </Form>
 							</CardBody>
        		  </Card>
       	  

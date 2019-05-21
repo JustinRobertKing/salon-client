@@ -138,7 +138,7 @@ class Display extends Component {
 	          <Input type="hidden" name="approved" value="true" id="approved" />
 	          <Input type="textarea" name="stylistComment" id="stylistComment" value={this.state.stylistComment} onChange={this.handleStylistCommentChange}/>
 	        </FormGroup>
-	        <Button color="success" type="submit" >Approve and Send</Button>
+	        <Button className="hotPink" block type="submit" >Approve and Send</Button>
 	      </Form>
 </CardBody>
 </Card>

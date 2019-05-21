@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import SERVER_URL from '../constants/server';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Card, CardBody, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 // import ReactDOM from 'react-dom';
 
 class Display extends Component {
@@ -51,11 +51,15 @@ class Display extends Component {
     let lengthStamp = this.props.appointment.length
     return (
       <div>
-        This is an appointment detail stub
-        <h4>{this.props.appointment.client.user.firstname + ' ' + this.props.appointment.client.user.lastname}</h4>
-        <h4>{this.state.apptStart}</h4>
-        <h4>{this.state.apptLength[0] + ' hr ' + this.state.apptLength[1] + ' min'}</h4>
-        <Button color="success" block onClick={this.handleSubmit}>Accept</Button>
+	      <Card className="stylistCard">
+		      <CardBody>
+		        This appointment has been added to your calendar
+		        <h4>{this.props.appointment.client.user.firstname + ' ' + this.props.appointment.client.user.lastname}</h4>
+		        <h4>{this.state.apptStart}</h4>
+		        <h4>{this.state.apptLength[0] + ' hr ' + this.state.apptLength[1] + ' min'}</h4>
+		        <Button className="hotPink" block block onClick={this.handleSubmit}>Ok</Button>
+		      </CardBody>
+      	</Card>
       </div>
     )
   }

@@ -98,7 +98,7 @@ class Stylist extends Component {
       console.log('hey',consultation)
       return (
         <div key={index}>
-          <Button color="secondary" id={'togglerR' + index} block style={{  margin: '2px', }}>
+          <Button className="hotPink"  id={'togglerR' + index} block style={{  margin: '2px', }}>
            		{consultation.client.user.firstname} {consultation.client.user.lastname} 
           </Button>
           <UncontrolledCollapse toggler={'#togglerR' + index}>
@@ -151,7 +151,7 @@ class Stylist extends Component {
       if (!appointment.approved) {
         return (
           <div key={index}>
-            <Button color="primary" id={'togglerA' + index} block style={{  margin: '2px', }}>
+            <Button className="hotPink" id={'togglerA' + index} block style={{  margin: '2px', }}>
               {appointment.client.user.firstname} {appointment.client.user.lastname}
             </Button>
             <UncontrolledCollapse toggler={'#togglerA' + index}>
@@ -172,17 +172,18 @@ class Stylist extends Component {
       <div className="container">
         <h2>Stylist Page</h2>
         <hr />
-        <h4>Pending Consultations</h4>
+
+        <h4>New Consultations</h4>
         {consultationRequests}
         <hr />
-        <h4>Appointment Requests</h4>
+        <h4>New Appointments</h4>
         {appointmentRequests ? appointmentRequests : <h5>You're all caught up!</h5>}
         <hr />
         <h4>Approved Consultations</h4>
         {consultationRequestsApproved}
         <hr />
         <Link to="/schedule">
-          <Button color="primary" block style={{  margin: '2px',}}>
+          <Button className="hotPink" block style={{  margin: '2px',}}>
             VIEW MY SCHEDULE
           </Button>
         </Link>
