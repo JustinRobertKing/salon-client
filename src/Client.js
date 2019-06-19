@@ -231,7 +231,7 @@ let consultationForm
 
     return(
     	<div className="container">
-		 		<h4>Your Stylist; Catherine</h4>
+		 		<h4>Your Stylist is Catherine</h4>
 		 		<img className='profilePic'  src={profilePic} />
         <hr />
 				<div id="consultations">

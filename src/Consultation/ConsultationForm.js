@@ -156,6 +156,8 @@ class ConsultationForm extends Component {
 	        </FormGroup>
 	        <Button block className="hotPink">Submit</Button>
 	      </Form>
+	      <br />
+	      <br />
 			</div>
 		)
 	}
