@@ -1,5 +1,4 @@
 Server side repository: https://github.com/JustinRobertKing/salon-server
-Client side repository: https://github.com/JustinRobertKing/salon-client
 
 # Cut / Color
 Cut / Color is a full-service consultation and scheduling solution designed for salon professionals and is built on the MERN stack. 
