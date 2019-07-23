@@ -9,7 +9,6 @@ import profilePic from './catherineTemp.png';
 
 
 class Client extends Component {
-
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
@@ -29,7 +28,6 @@ class Client extends Component {
     consultProcess: 'start',
     isOpen: '',
     collapse: false 
-
   }
 
   componentDidMount() {
@@ -60,32 +58,25 @@ class Client extends Component {
       this.setState({ consultations: response.data})
       let currentConsultation = response.data.length - 1
       //check if there is a consultation
-      
-		      if (response.data.length === currentConsultation || response.data[currentConsultation].scheduled === true){
-		      	//if no consultation, show the button as such, with the form
-			      
-			      //i think this is redundant 
-			      this.setState({consultProcess:'start'})
-	    		  this.setState({consultButtonStatus:{process:'start',color:'primary',text:'Start Consultation'}})
-
-			      console.log('LENGTH IS ZERO')
-			      
-		    	} else if(response.data[currentConsultation].approved === false){
-		    		// else if there is a consultation, grab that and show the review
-		    		console.log('NOT APPROVED')
-		    		 this.setState({consultProcess:'submitted'})
-		    		 this.setState({consultButtonStatus:{process:'pending',color:'success',text:'Review Consultation'}})
-
-		    	} else if(response.data[currentConsultation].approved === true && response.data[currentConsultation].scheduled === false){
-		    		// else if there is a consultation, grab that and show the review
-		    		console.log('APPROVED BUT NOT SCHEDULED')
-		    		 this.setState({consultProcess:'approved'})
-		    		 this.setState({consultButtonStatus:{process:'pending',color:'success',text:'Review & Schedule'}})
-
-		    	} else {
-		    		console.log('ELSE CAUGHt THIS')
-		    	}
-		    
+      if (response.data.length === currentConsultation || response.data[currentConsultation].scheduled === true){
+      	//if no consultation, show the button as such, with the form
+	      //i think this is redundant 
+	      this.setState({consultProcess:'start'})
+  		  this.setState({consultButtonStatus:{process:'start',color:'primary',text:'Start Consultation'}})
+	      console.log('LENGTH IS ZERO')
+    	} else if(response.data[currentConsultation].approved === false){
+    		// else if there is a consultation, grab that and show the review
+    		console.log('NOT APPROVED')
+    		 this.setState({consultProcess:'submitted'})
+    		 this.setState({consultButtonStatus:{process:'pending',color:'success',text:'Review Consultation'}})
+    	} else if(response.data[currentConsultation].approved === true && response.data[currentConsultation].scheduled === false){
+    		// else if there is a consultation, grab that and show the review
+    		console.log('APPROVED BUT NOT SCHEDULED')
+    		 this.setState({consultProcess:'approved'})
+    		 this.setState({consultButtonStatus:{process:'pending',color:'success',text:'Review & Schedule'}})
+    	} else {
+    		console.log('ELSE CAUGHT THIS')
+    	}
     })
     .catch(error => {
       console.log('error', error)
@@ -109,10 +100,8 @@ class Client extends Component {
     })
   }
 
-
 	render() {
 		// make into it's own component when refactoring.  can re-use with client
-		
     let appointmentRequests = this.state.appointments.map((appointment, index) => {
       return (
         <div key={index}>
@@ -134,72 +123,64 @@ class Client extends Component {
       )
     })
 
+    let consultationProcessTitle
+    let consultationProcessText  
+    let consultationForm
 
-let consultationProcessTitle
-let consultationProcessText  
-let consultationForm
-
-    if (this.state.consultProcess === 'start'){
+    if (this.state.consultProcess === 'start') {
     	consultationProcessTitle=(<h4>Ready for a new you? </h4>)
 			consultationProcessText =( <p>Start the consultation process now.</p>)
 
    		consultationForm = (
-
    		 	<ConsultationForm 
    		 		componentReload={this.componentReload} 
    		 		user={this.props.user} 
-
    		 	/>
-   		
-
    		)
-		} else if (this.state.consultProcess === 'submitted'){ 
+		} else if (this.state.consultProcess === 'submitted') { 
 			//consultation found
 			consultationProcessTitle=(<h4>Your stylist is reviewing your consultation.</h4>)
 			consultationProcessText =( <p></p>)
-
 			console.log('WOWWWWW ->>>>>>>>> ',this.state.consultations)
 			consultationForm = (
-			//add props to display client based on how much to review
-            <DisplayClient 
-            	index = {this.state.consultations.length - 1}
-            	stylistNotes = {false}
-            	noCancel = {false}
-            	getConsultations={this.getConsultations}
-            	formDone={this.formDone}
-              consultation={this.state.consultations}
-              rerender={this.getConsultations}
-              setCurrentConsultation={this.setCurrentConsultation}
-              currentId={this.state.current._id}
-              componentReload={this.componentReload}
-            />
-   		 )
-		} else if(this.state.consultProcess === 'approved'){
-//This has been approved, but not scheduled
+        //add props to display client based on how much to review
+        <DisplayClient 
+        	index = {this.state.consultations.length - 1}
+        	stylistNotes = {false}
+        	noCancel = {false}
+        	getConsultations={this.getConsultations}
+        	formDone={this.formDone}
+          consultation={this.state.consultations}
+          rerender={this.getConsultations}
+          setCurrentConsultation={this.setCurrentConsultation}
+          currentId={this.state.current._id}
+          componentReload={this.componentReload}
+        />
+   		)
+		} else if (this.state.consultProcess === 'approved') {
+      //This has been approved, but not scheduled
 			//displayclient form with all the fields
 			consultationForm = (
-			//add props to display client based on how much to review
-            <DisplayClient 
-            	index = {this.state.consultations.length - 1}
-            	stylistNotes = {true}
-            	noCancel = {false}
-            	getConsultations={this.getConsultations}
-            	formDone={this.formDone}
-              consultation={this.state.consultations}
-              rerender={this.getConsultations}
-              setCurrentConsultation={this.setCurrentConsultation}
-              currentId={this.state.current._id}
-              componentReload={this.componentReload}
-            />
-            )
+        //add props to display client based on how much to review
+        <DisplayClient 
+        	index = {this.state.consultations.length - 1}
+        	stylistNotes = {true}
+        	noCancel = {false}
+        	getConsultations={this.getConsultations}
+        	formDone={this.formDone}
+          consultation={this.state.consultations}
+          rerender={this.getConsultations}
+          setCurrentConsultation={this.setCurrentConsultation}
+          currentId={this.state.current._id}
+          componentReload={this.componentReload}
+        />
+      )
 			consultationProcessTitle = ( <h4>Your consultation has been approved!</h4> )
 			consultationProcessText = ( <p>Please read your stylist notes, and schedule an appointment.</p>)
-			
 		}
 		let pastHeader 
-//past consultations
+    //past consultations
 		let consultationPast = this.state.consultations.slice(0).reverse().map((consultation, index) => {
-
       //do logic to make sure it's a past one
       if (consultation.scheduled === true){
       	pastHeader=(<h4>Past consultations</h4>)
@@ -208,7 +189,6 @@ let consultationForm
 	          <Button color="secondary" id={'toggler' + index} block style={{ margin: '2px',}}>
 	           		{consultation.stylist.user.firstname} {consultation.stylist.user.lastname} 
 	          </Button>
-
 	          <UncontrolledCollapse toggler={'#toggler' + index}>
 		          <DisplayClient 
 		          	index = {index}
@@ -228,7 +208,6 @@ let consultationForm
     	} 
     })
 
-
     return(
     	<div className="container">
 		 		<h4>Your Stylist is Catherine</h4>
@@ -240,11 +219,8 @@ let consultationForm
 	     			{this.state.consultButtonStatus.text}
 	    		</Button>
 	    		{consultationProcessText}
-		 	   
-		 	   <Collapse isOpen={this.state.collapse}>
-		 	    
-		 	    {consultationForm}
-		 	    
+          <Collapse isOpen={this.state.collapse}>
+		 	      {consultationForm}
   	 	    </Collapse>
 		  	</div>
 				<hr />
